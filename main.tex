@@ -1,39 +1,57 @@
-%\documentclass[a4paper,oneside,12pt]{report}
-\documentclass[a4paper,man,12pt,apacite]{apa6}
+\documentclass[a4paper,jou,12pt,apacite]{apa6}
 \usepackage[english]{babel}
 \usepackage[utf8]{inputenc}
-\usepackage{apacite}
-
-\newcommand{\revision}{\makeatletter \@@input|"git log -1 --format=%h" \makeatother}
-\newcommand{\revisiondate}{\makeatletter \@@|"git log -1 --format=%ad --date=short" \makeatother}
 
 \begin{document}
 
-\title{Random Forests Destructured}
+\title{Random Forests Destructured: Introduction, Overview, Possibilities}
+\shorttitle{Random Forests Destructured}
 \author{Tobias Ammann}
-\date{\revisiondate}
-\version{\revision}
+\keywords{ensemble methods, introduction, random forests}
+\affiliation{Literature Study at the Workgroup for Psychological Methods, Evaluation and Statistics, Department of Psychology.\\Supervised by Prof. Dr. Carolin Strobl}
 
-\keywords{AA, BB, CC}
+\abstract{Random forest are a machine learning technique that is getting some attention in psychological research lately. This paper will give an introduction to random forests and discuss some vital points.}
+\keywords{ensemble methods, introduction, random forests}
 
 \maketitle
 
 \tableofcontents
 
-\chapter{Introduction}
+\section{Introduction}
 
-\section{A few words to start.}
-Hi there, this is a test. Today is the \today, and I love it.
+\subsection{Motivation}
+Hi there, this is a test. Today is the \today, and I love it \cite{liu2005maximizing}. ...there is so much more\footnote{And more.}. Of course, let's
+not forget about the awesome work done in \cite{cutler2001pert}.
 
-\section{This isn't everything.}
-...there is so much more\footnote{And more.}.
+\subsection{Potential Benefits}
 
-\chapter{Conclusion}
+\section{Random Forests}
 
-\section{The End}
+\subsection{Machine Learning}
+
+\subsubsection{Life Cycle}
+
+\subsubsection{Classification}
+
+\subsubsection{Regression}
+
+\subsection{Ensembles}
+
+\subsection{Classifier}
+
+\subsection{Parameters}
+
+\subsection{Randomness}
+
+\section{Method}
+
+\subsection{Selection of Papers}
+
+\section{Conclusion}
+
+\subsection{The End}
 Bye.
 
-\bibliographystyle{apacite}
 \bibliography{references}
 
 \end{document}
