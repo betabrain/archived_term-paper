@@ -1,4 +1,4 @@
-\documentclass[a4paper,jou,12pt,apacite]{apa6}
+\documentclass[a4paper,man,12pt,apacite]{apa6} % man => jou
 \usepackage[english]{babel}
 \usepackage[utf8]{inputenc}
 
@@ -20,34 +20,73 @@
 \section{Introduction}
 
 \subsection{Motivation}
-Hi there, this is a test. Today is the \today, and I love it \cite{liu2005maximizing}. ...there is so much more\footnote{And more.}. Of course, let's
-not forget about the awesome work done in \cite{cutler2001pert}.
-
-\subsection{Potential Benefits}
+Hi there, this is a test. Today is the \today, and I this is working
+somewhat \cite{liu2005maximizing}. There is so much more\footnote{And more.}
+to say, but of course, let's not forget about the awesome work done
+in \cite{cutler2001pert}.
 
 \section{Random Forests}
 
 \subsection{Machine Learning}
 
 \subsubsection{Life Cycle}
+Here I'll discuss the difference between machine learning and traditional
+statistical methods. Terminology.
 
 \subsubsection{Classification}
+The classification problem. Terminology.
 
 \subsubsection{Regression}
+A short discussion of regression, the why and how, and the difference
+between classical regression and regression in machine learning.
+Terminology.
+
+\subsubsection{Randomness}
+Warn about fluctuations in modell outputs. Seeds.
 
 \subsection{Ensembles}
+A short introduction to ensembles and their properties. Terminology.
+Weak and strong learners.
 
-\subsection{Classifier}
+\subsubsection{Bootstrapping}
+Sampling the data.
 
-\subsection{Parameters}
+\subsubsection{Random Subspaces}
+Sampling the variables.
 
-\subsection{Randomness}
+\subsection{Classifiers}
+
+\subsubsection{Decision Trees}
+This is the basis.
+
+\subsubsection{Fuzzy Trees}
+...but trees can be more than simple trees.
+
+\subsection{Putting them together}
+
+\subsubsection{Random Forests}
+Breiman
+
+\subsubsection{Alternative: Dynamic Random Forests}
+Boosting random forests.
+
+\subsubsection{Alternative: Rotation Forest}
+Massaging features before growing trees.
+
+\subsubsection{Parameters and Biases}
+
+\subsubsection{Alternative: PERT}
+Random variables and random splits.
 
 \section{Method}
 
 \subsection{Selection of Papers}
+PsychARTICLES, PsychINFO, Google Scholar
 
 \section{Conclusion}
+State of the art? Not really. They are not yet properly understood, and
+many comparisons and lots of the advantages might be accidential.
+Strong dependance on parameters, with no rationally pleasing way to set them.
 
 \subsection{The End}
 Bye.
