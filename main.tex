@@ -1,6 +1,7 @@
 \documentclass[a4paper,man,12pt,apacite]{apa6} % man => jou
 \usepackage[english]{babel}
 \usepackage[utf8]{inputenc}
+\usepackage{mathtools}
 
 \begin{document}
 
@@ -53,28 +54,73 @@ vital to use good statistical methods, because that is the only parameter
 remaining for the researcher to tweak in his favour.
 Recently researchers in psychology began to turn to a new breed of
 statistical methods, in hope of ever better results. This new breed of
-statistical methods is called machine learning and has it's origins in
-artificial intelligence.
+statistical methods is called \emph{machine learning} and has it's origins in
+\emph{artificial intelligence}.
 
 This report will discuss a rather new machine learning algorithm called
 \emph{random forest}, it's qualities, and a brush over a small number of
 improvements that have been tried.
+\emph{Random forests} are getting a lot of attention outside of psychology
+at the moment, and it would be nice to spread the fever within psychology too.
+However, it is important to keep in mind that \emph{random forests} are
+relatively unstudied, but this hasn't hindered a lot of people to suggest
+improvements. I'll discuss possible ways to mend the situation, and briefly
+illustrate how a more practically guided understanding of the method might
+lead to better use.
 
 \section{Random Forests}
 
 \subsection{Machine Learning}
+In order to understand \emph{random forests}, it might be useful to set
+the stange by shortly discussing \emph{machine learning} in general.
+\emph{Machine Learning} is both a part of the field of
+\emph{predictive statistics} and \emph{artificial intelligence}.
+
+\emph{Predictive statistics} is a subfield of \emph{statistics} that is
+concerned with making predictions based on past observations.
+It's probably most widely known method is \emph{linear regression} that
+associates two variables in the form of \(y = \alpha * x + \beta \).
+\emph{Predictive statistics} is widely used in psychology because it
+allows the researcher to look at the unobservable by making
+assumptions of the form \(reaction = mind * stimulus + variation\).
+This is the standard approach in personality questionaires.
+
+\emph{Artificial intelligence} is a field commonly associated with the
+computer sciences, where it began with the advent of higher-order
+programming languages based on mathematical foundations in the \emph{1970-ies}.
+It's aim is to give computers human-like capabilites, so that they can assist
+us by combining intelligence, with perfect logic and super-human knowledge.
+It includes things like \emph{logic programming}, \emph{expert systems},
+\emph{databases} and \emph{neural networks}, that all represent some form of
+storing and querying knowledge.
+Unfortunately, computers back then didn't have the capabilities required
+to push the envelope far enough, and the field was deemed dead.
+Only the rather recent coexistance of powerful computers and massive amounts
+of stored data revived artificial intelligence.
+\emph{Machine learning} is that part of \emph{artificial intelligence} that
+is concerned with the automatic learning of facts about the world in order
+that they can be stored and eventually queried.
+As such it is concernded with making statements based on past observations,
+and a part of \emph{predictive statistics}. 
+
 
 \subsubsection{Life Cycle}
 Here I'll discuss the difference between machine learning and traditional
 statistical methods. Terminology.
 
 \subsubsection{Classification}
-The classification problem. Terminology.
+The \emph{classification problem} is the problem classifying new data based
+on a set of example data, but without the explicit ruleset that guided its
+classification.
+Unlike in \emph{regression}, the result here is one of many given classes
+and not a value.
+One might describe classification as regression with discreet output values.
+Output variables are commonly called \emph{classes}
 
 \subsubsection{Regression}
 A short discussion of regression, the why and how, and the difference
 between classical regression and regression in machine learning.
-Terminology.
+Terminology. Classification with continuous classes.
 
 \subsubsection{Randomness}
 Warn about fluctuations in modell outputs. Seeds.
