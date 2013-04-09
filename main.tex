@@ -11,7 +11,17 @@
 \keywords{ensemble methods, introduction, random forests}
 \affiliation{Literature Study at the Workgroup for Psychological Methods, Evaluation and Statistics, Department of Psychology.\\Supervised by Prof. Dr. Carolin Strobl}
 
-\abstract{Random forest are a machine learning technique that is getting some attention in psychological research lately. This paper will give an introduction to random forests and discuss some vital points.}
+\abstract{This report will discuss a rather new machine learning algorithm called
+\emph{random forest}, it's qualities, and a brush over a small number of
+improvements that have been tried.
+\emph{Random forests} are getting a lot of attention outside of psychology
+at the moment, and it would be nice to spread the fever within psychology too.
+However, it is important to keep in mind that \emph{random forests} are
+relatively unstudied, but this hasn't hindered a lot of people to suggest
+improvements. I'll discuss possible ways to mend the situation, and briefly
+illustrate how a more practically guided understanding of the method might
+lead to better use.}
+
 \keywords{ensemble methods, introduction, random forests}
 
 \maketitle
@@ -21,65 +31,59 @@
 \section{Introduction}
 
 \subsection{Motivation}
-Modern psychological research has to provide more than just good theories
-and interesting case studies, because modern psychological research is
-scientific. It has to follow the scientific method, which is to
-provide good data and show that this data supports the assumption, hence
-making it more likely to be the true. No theory is ever true, firstly,
-because it wouldn't be called a theory any longer, and secondly, because
-positive proof is impossible unless we are omniscient
-(which we obviously are not).
+Modern psychological research has to provide more than the interesting
+case studies and adventurous theories, that psychology consisted of when
+Freud was alive.
+Psychology has become a science, thus psychological research has to follow
+the \emph{scientific method}, according to which positive proof is an
+impossibility unless we have complete knowledge, and could eliminate all
+alternative theories.
+Since we won't ever have complete knowledge, this isn't what
+research is all about.
+Research works under the assumption, that if we disprove just enough
+alternative theories, we can eventually tell which theory is probably
+true.
+So, the scientific method really is nothing but the use of spades of
+attempts to disprove alternative theories, until only a single such theory
+remains.
 
-Basically, the scientific method is the series of continuous attempts to
-disprove alternative possibilities, until only a single theory remains.
 Since this is an unweildly number of theories to disprove, and every
 researcher likes to see the result of his work during his lifetime, a
-more speedy method is employed, although this cheat comes with a caveat.
-This speedier method has the researcher pit his favored theory against
-the null hypothesis, a fancy word for chance. This certainly is
-way more efficient. The caveat, commonly called confirmation bias, is that
-the result only has significance in the experimental setup being tested.
-On the greater scale of things, i.e. in the field or reality, the resuls
-might well be completely bogus.
-
-However, many of the things being studied are constant or change
-predictably enough to allow a generalization from the experiment to the world
-that is likely to be true. This likelihood depends on the size of the
-effect in the experiment, the number of times it was observed, and on
-the properties of the test involved.
-
+more speedy method is usually employed, although this comes with a caveat.
+The speedier method has the researcher pit his favored theory against
+the null hypothesis, a fancy word for chance.
+This certainly is way more efficient than comparing the thousands of
+theories that researchers have come up with, and continue to come up with.
+The caveat, commonly called confirmation bias, is that the result only
+has significance in the experimental setup being tested.
+On the greater scale of things, i.e. reality, the results might well be
+completely bogus.
+Thankfully, most of the things being studied are constant or change
+predictably enough to allow researchers to generalize from the results
+of an experiment to the world at large, and likely be correct.
+This likelihood depends on the size of the effects measured in the
+experiment, the number of measurements, and on the properties of the
+statistical methods involved.
 In psychological research, where large effects are freakishly rare and
 experiments usually study only a handful of psychology students, it is
 vital to use good statistical methods, because that is the only parameter
 remaining for the researcher to tweak in his favour.
-Recently researchers in psychology began to turn to a new breed of
-statistical methods, in hope of ever better results. This new breed of
-statistical methods is called \emph{machine learning} and has it's origins in
-\emph{artificial intelligence}.
 
-This report will discuss a rather new machine learning algorithm called
-\emph{random forest}, it's qualities, and a brush over a small number of
-improvements that have been tried.
-\emph{Random forests} are getting a lot of attention outside of psychology
-at the moment, and it would be nice to spread the fever within psychology too.
-However, it is important to keep in mind that \emph{random forests} are
-relatively unstudied, but this hasn't hindered a lot of people to suggest
-improvements. I'll discuss possible ways to mend the situation, and briefly
-illustrate how a more practically guided understanding of the method might
-lead to better use.
-
-\section{Random Forests}
+Recently, researchers in psychology began to turn to a new breed of
+statistical methods, in hope for ever better results. This new breed of
+statistical methods is called \emph{machine learning}.
 
 \subsection{Machine Learning}
 In order to understand \emph{random forests}, it might be useful to set
-the stange by shortly discussing \emph{machine learning} in general.
-\emph{Machine Learning} is both a part of the field of
-\emph{predictive statistics} and \emph{artificial intelligence}.
+the stage by shortly discussing \emph{machine learning} in general.
+\emph{Machine Learning} is both a part of \emph{predictive statistics}
+and the \emph{artificial intelligence} branch of computer science.
 
-\emph{Predictive statistics} is a subfield of \emph{statistics} that is
+\emph{Predictive statistics} is the subfield of \emph{statistics} that is
 concerned with making predictions based on past observations.
 It's probably most widely known method is \emph{linear regression} that
-associates two variables in the form of \(y = \alpha * x + \beta \).
+associates two variables \(y\) and \(x\) in such a way that they describe
+a straight line: \(y = \alpha * x + \beta \).
 \emph{Predictive statistics} is widely used in psychology because it
 allows the researcher to look at the unobservable by making
 assumptions of the form \(reaction = mind * stimulus + variation\).
@@ -87,28 +91,28 @@ This is the standard approach in personality questionaires.
 
 \emph{Artificial intelligence} is a field commonly associated with the
 computer sciences, where it began with the advent of higher-order
-programming languages based on mathematical foundations in the \emph{1970-ies}.
+programming languages based on mathematical foundations around the \emph{1970-ies}.
 It's aim is to give computers human-like capabilites, so that they can assist
 us by combining intelligence, with perfect logic and super-human knowledge.
 It includes things like \emph{logic programming}, \emph{expert systems},
 \emph{databases} and \emph{neural networks}, that all represent some form of
 storing and querying knowledge.
-Unfortunately, computers back then didn't have the capabilities required
+Unfortunately, computers back then didn't have the speed and memory required
 to push the envelope far enough, and the field was deemed dead.
 Only the rather recent coexistance of powerful computers and massive amounts
-of stored data revived artificial intelligence.
+of stored data revived artificial intelligence as an important field of
+research.
 \emph{Machine learning} is that part of \emph{artificial intelligence} that
 is concerned with the automatic learning of facts about the world in order
-that they can be stored and eventually queried.
+that they can be stored and subsequently queried later on.
 As such it is concernded with making statements based on past observations,
-and a part of \emph{predictive statistics}. 
+and therefore close to \emph{predictive statistics}. 
 
-
-\subsubsection{Life Cycle}
+\subsection{The Machine Learning Life Cycle}
 Here I'll discuss the difference between machine learning and traditional
 statistical methods. Terminology.
 
-\subsubsection{Classification}
+\subsection{Classification}
 The \emph{classification problem} is the problem classifying new data based
 on a set of example data, but without the explicit ruleset that guided its
 classification.
@@ -117,15 +121,17 @@ and not a value.
 One might describe classification as regression with discreet output values.
 Output variables are commonly called \emph{classes}
 
-\subsubsection{Regression}
+\subsection{Regression}
 A short discussion of regression, the why and how, and the difference
 between classical regression and regression in machine learning.
 Terminology. Classification with continuous classes.
 
-\subsubsection{Randomness}
+\subsection{Randomness}
 Warn about fluctuations in modell outputs. Seeds.
 
-\subsection{Ensembles}
+\section{Random Forests}
+
+\subsection{Ensemble Methods}
 A short introduction to ensembles and their properties. Terminology.
 Weak and strong learners.
 
@@ -135,29 +141,29 @@ Sampling the data.
 \subsubsection{Random Subspaces}
 Sampling the variables.
 
-\subsection{Classifiers}
+\subsubsection{Boosting}
+Weighing the sample.
+
+\subsection{Trees and forests}
 
 \subsubsection{Decision Trees}
 This is the basis.
 
-\subsubsection{Fuzzy Trees}
-...but trees can be more than simple trees.
-
-\subsection{Putting them together}
-
 \subsubsection{Random Forests}
 Breiman
+
+\subsection{In Search of the Super-Tree}
 
 \subsubsection{Alternative: Dynamic Random Forests}
 Boosting random forests.
 
+\subsubsection{Alternative: PERT}
+Random variables and random splits.
+
 \subsubsection{Alternative: Rotation Forest}
 Massaging features before growing trees.
 
-\subsubsection{Parameters and Biases}
-
-\subsubsection{Alternative: PERT}
-Random variables and random splits.
+\subsubsection{Alternative: Fuzzy Random Forests}
 
 \section{Method}
 
@@ -166,29 +172,31 @@ I have started my research on \emph{random forests} by reading the
 introductory paper suggested by my supervisor titled
 \emph{An introduction to recursive partitioning: Rationale, application
 and characteristics of classification and regression trees, bagging and
-random forests \cite{strobl2009introduction}}. I then searched
-the research databases \emph{PsychARTICLES} and \emph{PsychINFO}
-querying for \emph{random forest} and limiting my results to the last
-two years.
-I only considered papers that discuss \emph{random forests} and dismissed
-every paper where \emph{random forests} are merely used as a research
-method. I also used \emph{Google Scholar} to look for more technical
-publications outside the field of psychology. I searched for combinations
-of \emph{random forest}, \emph{comparison}, \emph{analysis},
-and \emph{ensemble}. I also included keywords seen in interesting titles,
-like \emph{fuzzy}, \emph{perfect}, \emph{full}, \emph{balanced},
-\emph{extremely}, and \emph{rotation}.
+random forests} \cite{strobl2009introduction}.
+I then searched the research databases \emph{PsychARTICLES} and
+\emph{PsychINFO} querying for \emph{random forest} and limiting my results
+to the last two years.
+I only considered papers that mainly discusses \emph{random forests} and
+dismissed every paper where \emph{random forests} are merely used as a
+research method.
+I also used \emph{Google Scholar} to look for more technical
+publications outside the field of psychology.
+I searched for combinations of \emph{random forest}, \emph{comparison},
+\emph{analysis}, and \emph{ensemble}.
+I also included keywords seen in interesting titles, like \emph{fuzzy},
+\emph{perfect}, \emph{full}, \emph{balanced}, \emph{extremely}, and
+\emph{rotation}.
 I also queried for some of the referenced publications while I read the
 found material, but only included \cite{strobl2008conditional}, because
 it was referenced multiple times, and co-authored by my supervisor.
 
-The final criteria for inclusion were the online availability of a freely
-downloadable PDF-file, which often extremely easy thanks to
-\emph{Google Scholar}'s simple interface, and my decision on the topic of
+The final criteria for inclusion was the online availability of a freely
+downloadable PDF-file, which thanks to \emph{Google Scholar} often turned
+out to be no problem at all, and my decision on the topic of
 this report.
 
 \section{Conclusion}
-State of the art? Not really. They are not yet properly understood, and
+State of the art? Well... They are not yet properly understood, and
 many comparisons and lots of the advantages might be accidential.
 Strong dependance on parameters, with no rationally pleasing way to set them.
 
