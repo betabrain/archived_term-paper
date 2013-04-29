@@ -11,16 +11,16 @@
 \keywords{ensemble methods, introduction, random forests}
 \affiliation{Literature Study at the Workgroup for Psychological Methods, Evaluation and Statistics, Department of Psychology.\\Supervised by Prof. Dr. Carolin Strobl}
 
-\abstract{This report will discuss a rather new machine learning algorithm called
-\emph{random forest}, it's qualities, and a brush over a small number of
+\abstract{This report discusses a rather new machine learning algorithm called
+\emph{random forest}, it's qualities, use, problems, and a small number of
 improvements that have been tried.
 \emph{Random forests} are getting a lot of attention outside of psychology
-at the moment, and it would be nice to spread the fever within psychology too.
+at the moment, and it would be nice to spread that fever within psychology too.
 However, it is important to keep in mind that \emph{random forests} are
-relatively unstudied, but this hasn't hindered a lot of people to suggest
-improvements. I'll discuss possible ways to mend the situation, and briefly
-illustrate how a more practically guided understanding of the method might
-lead to better use.}
+relatively unstudied. This hasn't hindered a number of people to suggest
+improvements. This paper introduces the reader to frandom forests, and
+tries to give the reader a more practically guided understanding of the
+method, which hopefully leads to a better use of random forests.}
 
 \keywords{ensemble methods, introduction, random forests}
 
@@ -162,12 +162,36 @@ Keeping with the reference to nature, the word \emph{forest} denotes a
 collection of trees.
 
 \subsubsection{Decision Trees}
-...
+A \emph{decision tree} is a tree that sketches a decision process: every
+node stands for a criterion, and leaf nodes denote outcomes.
+To use a decision tree, one starts at the root node, and follows the path
+along nodes whose criteria one affirms to a leaf node, i.e. the outcome of
+the decision process.
+
+Here is a short example to clarify the idea of decision trees, to decode
+on where one should eat lunch.
+The first criterion is hunger, hence we let the root node to encode that
+\( hunger > snack \), and decode against eating if this is false and abort.
+If we are hungry however, we proceed to the next node \( cash > price \).
+We decide to eat if we can afford it, and abort if we can't.
+
+The advantage of decision trees is, that they can be constructed by an
+algorithm, but still provide meaningful information to a human reader.
 
 \subsubsection{Random Forests}
 Breiman
 
+\emph{Learning and Predicting}
+
+\emph{Variable Importance}
+
 \subsection{In Search of the Super-Tree}
+The fact that the random forest method is still being studied, that its
+optimal parameter settings are still being debated, and that it's results
+are not always better than other methods, led to the development of
+variants.
+Every variant tries to address a specific problem, tries to increase the
+learning efficiency or tries to better prevent overfitting.
 
 \subsubsection{Alternative: Dynamic Random Forests}
 Boosting random forests.
@@ -191,7 +215,7 @@ random forests} \cite{strobl2009introduction}.
 I then searched the research databases \emph{PsychARTICLES} and
 \emph{PsychINFO} querying for \emph{random forest} and limiting my results
 to the last two years.
-I only considered papers that mainly discusses \emph{random forests} and
+I only considered papers that focuss on \emph{random forests} and
 dismissed every paper where \emph{random forests} are merely used as a
 research method.
 I also used \emph{Google Scholar} to look for more technical
@@ -205,10 +229,26 @@ I also queried for some of the referenced publications while I read the
 found material, but only included \cite{strobl2008conditional}, because
 it was referenced multiple times, and co-authored by my supervisor.
 
-The final criteria for inclusion was the online availability of a freely
+The final criteria for inclusion were the online availability of a freely
 downloadable PDF-file, which thanks to \emph{Google Scholar} often turned
 out to be no problem at all, and my decision on the topic of
 this report.
+
+\subsection{Aim and Structure of the Paper}
+I had a couple of obvious possibilities of where to take this topic, which
+was given to me in form of the above mentioned introductory paper.
+These possibilities were the presentation of examplary uses of random
+forests, the discussion of strengths and weaknesses, and any of the more
+specialized variants.
+During my research I got the impression, that there were serious
+differences in the understanding of random forests among researchers,
+and even among designers of improved variants.
+A study comparing different decision tree ensemble techniques also pointed
+this out by saying that many of the commonly used methods of comparison
+weren't robust enough for use with random forests \cite{banfield2007comparison}.
+
+Because of this fuzziness, I decided for a different focus, and to write
+a very broad - big picture - introduction to random forests.
 
 \section{Conclusion}
 State of the art? Well... They are not yet properly understood, and
