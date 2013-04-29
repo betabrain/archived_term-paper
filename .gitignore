@@ -4,6 +4,7 @@
 *.aux*
 *.bbl
 *.blg
+*.cookie
 *.d
 *.dvi
 *.fdb_latexmk

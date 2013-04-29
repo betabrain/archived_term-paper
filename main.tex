@@ -127,7 +127,15 @@ between classical regression and regression in machine learning.
 Terminology. Classification with continuous classes.
 
 \subsection{Randomness}
-Warn about fluctuations in modell outputs. Seeds.
+Many machine learning algorithms use random numbers in different places.
+While computer generated random numbers are not truly random, they still
+cause the outcome of the algorithm to change slightly between different
+executions.
+Which might unnerve a novice, but doesn't change the outcome of the
+algorithm significantly.
+Still, for publication purposes it can make sense to set and publish the
+random number generator's \emph{seed}, though doing so during the experiment
+this should never be done.
 
 \section{Random Forests}
 
@@ -145,9 +153,16 @@ Sampling the variables.
 Weighing the sample.
 
 \subsection{Trees and forests}
+The \emph{trees} computer scientists refer to are artificial constructs that
+branch out starting from a single point, called \emph{root node}.
+A common \emph{fan-out factor} is two, meaning that every node in the tree
+as two branches connecting it to two other nodes.
+Nodes without \emph{child nodes} of their own are called \emph{leaf nodes}.
+Keeping with the reference to nature, the word \emph{forest} denotes a
+collection of trees.
 
 \subsubsection{Decision Trees}
-This is the basis.
+...
 
 \subsubsection{Random Forests}
 Breiman
