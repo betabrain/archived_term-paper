@@ -196,18 +196,22 @@ Terminology. Classification with continuous classes.
 Many machine learning algorithms use random numbers in different places.
 While computer generated random numbers are not truly random, they still
 cause the outcome of the algorithm to change slightly between different
-executions.
-Which might unnerve a novice, but doesn't change the outcome of the
+executions, due to the fact that they are customarily initialized with
+the current time at the start of the program.
+These changes might unnerve a novice, but don't change the outcome of the
 algorithm significantly.
 Still, for publication purposes it can make sense to set and publish the
 random number generator's \emph{seed}, though doing so during the experiment
-this should never be done.
+is a serious mistake.
+Instead, it is good practice to run the analysis multiple times to ensure
+that these random variations don't change the outcome.
 
 \section{Random Forests}
 
 \subsection{Ensemble Methods}
 A short introduction to ensembles and their properties. Terminology.
-Weak and strong learners.
+Weak and strong learners. \cite{dietterich2000experimental}
+\cite{bauer1999empirical}
 
 \subsubsection{Bootstrapping}
 Sampling the data.
