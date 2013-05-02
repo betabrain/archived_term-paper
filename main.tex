@@ -2,6 +2,7 @@
 \usepackage[english]{babel}
 \usepackage[utf8]{inputenc}
 \usepackage{mathtools}
+\usepackage{url}
 
 \begin{document}
 
@@ -124,6 +125,8 @@ and therefore close to predictive statistics.
 \subsection{The Machine Learning Life Cycle}
 Here I'll discuss the difference between machine learning and traditional
 statistical methods. Terminology.
+The following section heavily relies on information found in Wikipedia, as
+well as what I learned during statistics lectures in the past years.
 
 Traditionally, the statistical methods that are being used in psychology
 take a model of how the world works, and a bunch of data, and return one of
@@ -134,10 +137,12 @@ researcher suggested. They then check how much better the predicted values
 fit the actual values than the mean value of the actual values.
 Finally, the method outputs the probability with which this improvement in
 prediction could happen by chance.
+Based on \cite{wpRA}.
 The methods called \emph{analysis of variance methods} partition the dataset
 according to all but one variable. They then calculate the probability with
 which the variation in the one variable among the groups could be due to
 random variations in the dataset.
+Based on \cite{wpAOV}.
 These probabilities that the methods output are what statisticians call the
 significance. Usually they define a target significance level, e.g. 5\%, and
 compare it to the output of their statistical calculations. If the
@@ -170,6 +175,7 @@ they mean.
 Therefore, it is very important to find ways to condense this complexity
 into something that can be more easily interpreted.
 The variable importance measure of random forests is one such way.
+Based on \cite{wpML}.
 
 \subsection{Classification}
 The \emph{classification problem} is the problem classifying new data based
@@ -238,7 +244,9 @@ The advantage of decision trees is, that they can be constructed by an
 algorithm, but still provide meaningful information to a human reader.
 
 \subsubsection{Random Forests}
-Breiman
+Random forests were invented by Leo Breiman.
+The following description is based on his original publication in the
+journal \emph{Machine Learning} in 2001 \cite{breiman2001random}.
 
 \emph{Learning and Predicting}
 
