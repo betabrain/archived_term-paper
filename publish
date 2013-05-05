@@ -1,3 +1,4 @@
 make
+cp main.pdf "renderings/`date +"main_%y-%m-%d_%H-%M.pdf"`"
 evince main.pdf &
 
