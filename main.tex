@@ -237,23 +237,25 @@ The \emph{trees} computer scientists refer to are artificial constructs that
 branch out starting from a single point, called \emph{root node}.
 A common \emph{fan-out factor} is two, meaning that every node in the tree
 as two branches connecting it to two other nodes.
-Nodes without \emph{child nodes} of their own are called \emph{leaf nodes}.
+These two nodes are called \emph{child nodes}.
+Nodes without child nodes of their own are called \emph{leaf nodes}.
 Keeping with the reference to nature, the word \emph{forest} denotes a
-collection of trees.
+collection of trees \cite{wpTREE}.
 
 \subsubsection{Decision Trees}
-A \emph{decision tree} is a tree that sketches a decision process: every
-node stands for a criterion, and leaf nodes denote outcomes.
+A \emph{decision tree} is a tree structure that sketches a decision process:
+every node stands for a criterion, and leaf nodes denote outcomes.
 To use a decision tree, one starts at the root node, and follows the path
-along nodes whose criteria one affirms to a leaf node, i.e. the outcome of
-the decision process.
+along those nodes whose criteria are met, until a leaf node is reached, i.e.
+the outcome of the decision process.
 
-\\Decision tree from an economics context \cite{wpDT}.
+A decision tree from an economics context as an example \cite{wpDT}.
 \includegraphics[width=0.4\textwidth]{WikipediaMDT.jpg}
 \\
 
 The advantage of decision trees is, that they can be constructed by an
 algorithm, but still provide meaningful information to a human reader.
+The reader can easily see which criteria lead to which decision.
 
 \subsubsection{Random Forests}
 Random forests were invented by Leo Breiman.
@@ -266,7 +268,7 @@ journal \emph{Machine Learning} in 2001 \cite{breiman2001random}.
 
 \subsection{In Search of the Super-Tree}
 The fact that the random forest method is still being studied, that its
-optimal parameter settings are still being debated, and that it's results
+optimal parameter settings are still being debated, and that its results
 are not always better than other methods, led to the development of
 variants.
 Every variant tries to address a specific problem, tries to increase the
@@ -286,7 +288,7 @@ Massaging features before growing trees.
 \section{Method}
 
 \subsection{Selection of Papers}
-I have started my research on \emph{random forests} by reading the
+I started my research on \emph{random forests} by reading the
 introductory paper suggested by my supervisor titled
 \emph{An introduction to recursive partitioning: Rationale, application
 and characteristics of classification and regression trees, bagging and
@@ -294,7 +296,7 @@ random forests} \cite{strobl2009introduction}.
 I then searched the research databases \emph{PsychARTICLES} and
 \emph{PsychINFO} querying for \emph{random forest} and limiting my results
 to the last two years.
-I only considered papers that focuss on \emph{random forests} and
+I only considered papers that focus on \emph{random forests} and
 dismissed every paper where \emph{random forests} are merely used as a
 research method.
 I also used \emph{Google Scholar} to look for more technical
@@ -306,7 +308,8 @@ I also included keywords seen in interesting titles, like \emph{fuzzy},
 \emph{rotation}.
 I also queried for some of the referenced publications while I read the
 found material, but only included \cite{strobl2008conditional}, because
-it was referenced multiple times, and co-authored by my supervisor.
+it was referenced multiple times, and co-authored by this paper's
+supervisor.
 
 The final criteria for inclusion were the online availability of a freely
 downloadable PDF-file, which thanks to \emph{Google Scholar} often turned
@@ -315,24 +318,23 @@ this report.
 
 A lot of the information in the fields of computer science, artificial
 intelligence, machine learning, databases, and especially programming
-has been acquired through different means in the last ten years.
-Since I can't remember the original sources, I took to include the pages
+I acquired through different means in the last ten years.
+As I couldn't remember the original sources, I can only include the pages
 on Wikipedia, which I used to refresh my memories.
 
 \subsection{Aim and Structure of the Paper}
-I had a couple of obvious possibilities of where to take this topic, which
-was given to me in form of the above mentioned introductory paper.
-These possibilities were the presentation of examplary uses of random
+Possible options for this topic were the presentation of
+exemplary uses of random
 forests, the discussion of strengths and weaknesses, and any of the more
 specialized variants.
-During my research I got the impression, that there were serious
+During my research I had the impression, that there were serious
 differences in the understanding of random forests among researchers,
 and even among designers of improved variants.
-A study comparing different decision tree ensemble techniques also pointed
-this out by saying that many of the commonly used methods of comparison
+A study comparing different decision tree ensemble techniques also confirmed
+this expression by saying that many of the commonly used methods of comparison
 weren't robust enough for use with random forests \cite{banfield2007comparison}.
 
-Because of this fuzziness, I decided for a different focus, and to write
+Because of this fuzziness, I decided on a different focus, and to write
 a very broad - big picture - introduction to random forests.
 
 \section{Conclusion}
