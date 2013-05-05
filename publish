@@ -1,4 +1,6 @@
-make
+make -j 4
 cp main.pdf "renderings/`date +"main_%y-%m-%d_%H-%M.pdf"`"
-evince main.pdf &
+evince main.pdf &>/dev/null &
+sleep 2
+make clean
 
