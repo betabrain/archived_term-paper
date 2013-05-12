@@ -1,0 +1,34 @@
+\documentclass{article}
+\usepackage{tikz}
+%%%<
+\usepackage{verbatim}
+\usepackage[active,tightpage]{preview}
+\PreviewEnvironment{tikzpicture}
+\setlength{\PreviewBorder}{10pt}%
+%%%>
+\usetikzlibrary{arrows}
+
+\tikzset{
+  treenode/.style = {align=center, inner sep=2pt, text centered,
+    font=\sffamily, minimum size=0.5cm},
+  arn_c/.style = {treenode, rectangle, draw=black},
+  arn_d/.style = {treenode, circle, draw=black}
+}
+
+\begin{document}
+\begin{tikzpicture}[level/.style={sibling distance = 4cm/#1}]
+\node [arn_d] {a}
+    child{ node [arn_c] {r = 0} edge from parent node[left] {\(a \le 4.56\)} }
+    child{ node [arn_d] {b}
+        child{ node [arn_d] {d}
+            child{ node [arn_c] {r = 1} edge from parent node[left] {\(d \le 9.11\)} }
+            child{ node [arn_c] {r = 2} edge from parent node[right] {\(d > 9.11\)} }
+            edge from parent node[left] {\(b \le 3.1\)}
+        }
+        child{ node [arn_c] {r = 3} edge from parent node[right] {\(b > 3.1\)} }
+        edge from parent node[right] {\(a > 4.56\)}
+    }
+
+; 
+\end{tikzpicture}
+\end{document}
