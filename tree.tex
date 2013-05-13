@@ -6,7 +6,6 @@
 \PreviewEnvironment{tikzpicture}
 \setlength{\PreviewBorder}{10pt}%
 %%%>
-\usetikzlibrary{arrows}
 
 \tikzset{
   treenode/.style = {align=center, inner sep=2pt, text centered,
@@ -18,6 +17,7 @@
 \begin{document}
 \begin{tikzpicture}[level/.style={sibling distance = 5cm/#1}]
 \usetikzlibrary{shapes}
+\usetikzlibrary{arrows}
 \node [arn_d] {feature a}
     child{ node [arn_c] {class = w} edge from parent node[left] {\(a \le 4.56\)} }
     child{ node [arn_d] {feature b}
