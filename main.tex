@@ -3,6 +3,14 @@
 \usepackage[utf8]{inputenc}
 \usepackage{mathtools}
 \usepackage{url}
+\usepackage{tikz}
+
+\tikzset{
+  treenode/.style = {align=center, inner sep=2pt, text centered,
+    font=\sffamily, minimum size=0.5cm},
+  arn_c/.style = {treenode, rectangle, draw=black},
+  arn_d/.style = {treenode, ellipse, draw=black}
+}
 
 \begin{document}
 
@@ -408,9 +416,25 @@ mismatch, and each leaf node an outcome of the represented decision tree.
 Tree data structures are typically drawn from top to bottom.
 For example, the following decision tree takes three numeric features
 \texttt{a}, \texttt{b}, \texttt{c} to predict a discreet output variable
-with four possible values.
+\texttt{class} with four possible values.
 
-… 
+\begin{tikzpicture}[level/.style={sibling distance = 7cm/#1}]
+\usetikzlibrary{shapes}
+\usetikzlibrary{arrows}
+\node [arn_d] {feature a}
+    child{ node [arn_c] {class = w} edge from parent node[left] {\(a \le 4.56\)} }
+    child{ node [arn_d] {feature b}
+        child{ node [arn_d] {feature c}
+            child{ node [arn_c] {class = x} edge from parent node[left] {\(d \le 9.11\)} }
+            child{ node [arn_c] {class = y} edge from parent node[right] {\(d > 9.11\)} }
+            edge from parent node[left] {\(b \le 3.1\)}
+        }
+        child{ node [arn_c] {class = z} edge from parent node[right] {\(b > 3.1\)} }
+        edge from parent node[right] {\(a > 4.56\)}
+    }
+
+;
+\end{tikzpicture}
 
 The decision trees used by random forests are constructed by randomly
 selecting a certain number of input variables as configured by the parameter
