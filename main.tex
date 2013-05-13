@@ -216,72 +216,9 @@ is a serious mistake.
 Indeed, it is good practice to run the analysis multiple times to ensure
 that these random variations don't change the outcome.
 
-\section{Random Forests}
+% start of odt import
 
-\subsection{Ensemble Methods}
-A short introduction to ensembles and their properties. Terminology.
-Weak and strong learners. \cite{dietterich2000experimental}
-\cite{bauer1999empirical}
-
-\subsubsection{Bootstrapping}
-Sampling the data.
-
-\subsubsection{Random Subspaces}
-Sampling the variables.
-
-\subsubsection{Boosting}
-Weighing the sample.
-
-\subsection{Trees and forests}
-The \emph{trees} computer scientists refer to are artificial constructs that
-branch out starting from a single point, called \emph{root node}.
-A common \emph{fan-out factor} is two, meaning that every node in the tree
-as two branches connecting it to two other nodes.
-These two nodes are called \emph{child nodes}.
-Nodes without child nodes of their own are called \emph{leaf nodes}.
-Keeping with the reference to nature, the word \emph{forest} denotes a
-collection of trees \cite{wpTREE}.
-
-\subsubsection{Decision Trees}
-A \emph{decision tree} is a tree structure that sketches a decision process:
-every node stands for a criterion, and leaf nodes denote outcomes.
-To use a decision tree, one starts at the root node, and follows the path
-along those nodes whose criteria are met, until a leaf node is reached, i.e.
-the outcome of the decision process.
-
-...
-
-The advantage of decision trees is, that they can be constructed by an
-algorithm, but still provide meaningful information to a human reader.
-The reader can easily see which criteria lead to which decision.
-
-\subsubsection{Random Forests}
-Random forests were invented by Leo Breiman.
-The following description is based on his original publication in the
-journal \emph{Machine Learning} in 2001 \cite{breiman2001random}.
-
-\emph{Learning and Predicting}
-
-\emph{Variable Importance}
-
-\subsection{In Search of the Super-Tree}
-The fact that the random forest method is still being studied, that its
-optimal parameter settings are still being debated, and that its results
-are not always better than other methods, led to the development of
-variants.
-Every variant tries to address a specific problem, tries to increase the
-learning efficiency or tries to better prevent overfitting.
-
-\subsubsection{Alternative: Dynamic Random Forests}
-Boosting random forests.
-
-\subsubsection{Alternative: PERT}
-Random variables and random splits.
-
-\subsubsection{Alternative: Rotation Forest}
-Massaging features before growing trees.
-
-\subsubsection{Alternative: Fuzzy Random Forests}
+% end of odt import
 
 \section{Method}
 
