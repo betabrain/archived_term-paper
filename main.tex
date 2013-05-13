@@ -340,6 +340,112 @@ because they rely on other simpler classifier algorithms,
 and it is theoretically possible to create an ensemble learner for any
 supervised learning algorithm. \cite{wpEL} \cite{Polikar:2009}
 
+\subsubsection{Bagging}
+
+The ensemble learning algorithm that most prominently underlies
+random forests is bagging. Bagging stands for bootstrap aggregation.
+Bootstrapping is a term that was used to describe
+“[...] the process by which lumberjacks hoist themselves up trees [...]”
+\cite{wpBOOT}.
+In statistics it refers to the process of deriving additional samples
+by resampling the original sample,
+essentially simulating drawing additional samples from the population.
+Bootstrap aggregation is an ensemble learning algorithm,
+which trains each of its underlying weak classifiers on a different set
+of input data created by bootstrapping.
+It is another algorithm developed by Leo Breiman \cite{breiman1996bagging}.
+
+Bagging is typically uses bootstrapping with replacement,
+which leads the inclusion of on average two thirds of the original sample
+in the derived sample.
+Random forests uses the remaining third as out-of-bag data
+\cite{breiman2001random}.
+
+\subsubsection{Boosting}
+
+Boosting is an ensemble method, where every weak classifiers gets to train
+on the original sample, but the sample is improved with importance weights.
+These weights are different for every weak classifier.
+They are lower for records in the dataset that are correctly predicted by
+the classifiers already in the ensemble,
+and higher for records that classified wrongly.
+In short, boosting focuses on eliminating one classification error after
+another all data is classified correctly,
+or a targeted ensemble size is reached.
+This behavior makes boosting algorithms very fast learners,
+but susceptible to errors in the dataset \cite{long2010random}.
+Boosting isn't used in random forests as introduced by \cite{breiman2001random},
+but there are variants who do, e.g.
+dynamic random forests \cite{bernard2012dynamic}.
+Adaboost \cite{freund1995decision} is probably the most popular
+boosting algorithm, and the algorithm random forests in most commonly
+compared to in terms of performance, e.g. \cite{breiman2001random},
+\cite{banfield2007comparison} and \cite{rodriguez2006rotation}.
+
+A large study \cite{banfield2007comparison} compared eight ensemble of
+decision tree classifiers on 57 publicly available datasets and concluded
+“[...] that boosting, random forests and randomized trees are
+statistically significantly better than bagging.”
+
+\subsection{Decision Trees}
+
+The underlying algorithm of random forests is the decision tree classifier,
+which is either a regression tree, or a classification tree.
+The difference between the two types of trees is the type of output produced.
+Classifications trees work with discreet output values,
+while regression trees output a continuous numeric value.
+For classification the most commonly chosen output value among an ensemble
+of decision trees is assumed to be the right prediction.
+For regression purposes the output of the ensemble is calculated by averaging
+the outcomes the single trees.
+As the name indicates, a decision tree is a tree data structure, i.e.
+a set of nodes that are connected in a forward manner allowing branching,
+but not cross links and circles.
+Decision trees usually are binary trees, meaning that each node either has
+two child nodes, or is a leaf node.
+Each node represents a decision criterion, each edge a criterion match or
+mismatch, and each leaf node an outcome of the represented decision tree.
+Tree data structures are typically drawn from top to bottom.
+For example, the following decision tree takes three numeric features
+\texttt{a}, \texttt{b}, \texttt{c} to predict a discreet output variable
+with four possible values.
+
+… 
+
+The decision trees used by random forests are constructed by randomly
+selecting a certain number of input variables as configured by the parameter
+\texttt{mtry} for each node.
+The algorithm then selects the best threshold among these input
+variables as the node's criterion.
+This process is repeated for every child node until a node is reached
+which only matches records in the dataset with the same output value.
+This node becomes a leaf node.
+This is described as growing a tree maximally.
+This ensures that each decision tree has a high strength,
+meaning no decision tree outputs wrong predictions for the subsets of data
+it matches. \cite{breiman2001random}
+
+As a component classifier to an ensemble learning algorithm,
+every decision tree should be different from the other decision trees in
+the ensemble, i.e. the decision trees should be unstable,
+to cover a wide range of possible interactions between the input data,
+i.e. hypotheses.
+This is commonly described as the trees being uncorrelated.
+Tree strength and inter-tree correlation are what the prediction accuracy
+of random forests depends on. \cite{breiman2001random}
+
+The procedure by which decision trees are grown is modified by some
+variants of random forests.
+PERT \cite{cutler2001pert} for example doesn't perform a search for
+the best split on a random selection of input variables,
+but selects variable and threshold at random, while RFW \cite{maudes2012random}
+searches all variables but attaches random weights to them,
+and DRF \cite{bernard2012dynamic} influences the decision tree creation
+by a procedure inspired by boosting.
+Other variants, e.g. \cite{van2012accelerating}, change this procedure to
+grow smaller or more balanced trees, to meet performance or
+hardware requirements.
+
 % end of odt import
 
 \section{Method}
