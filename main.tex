@@ -218,6 +218,94 @@ that these random variations don't change the outcome.
 
 % start of odt import
 
+\section{Random Forests}
+
+\subsection{Introduction}
+This part of the paper discusses random forests.
+“Random forests are a combination of tree predictors such that each tree
+depends on the values of a random vector sampled independently and with
+the same distribution for all trees in the forest” \cite{breiman2001random}.
+Leo Breiman developed random forests with Adele Cutler, building on work
+by Ho, Amit, Geman, and Dietterich \cite{wpRF}.
+
+Although the name random forests is usually taken to refer to the random
+forests as defined by \cite{breiman2001random}, the large number of
+variants that have been derived from the original forests, e.g.
+Forest-rk \cite{bernard2008forest}, RFW \cite{maudes2012random},
+DRF \cite{bernard2012dynamic}, Fuzzy random forests \cite{bonissone2008fuzzy},
+Rotation forest \cite{rodriguez2006rotation}, random forests that are
+more random \cite{geurts2006extremely}, \cite{liu2005maximizing},
+\cite{cutler2001pert}, and various other improvements, e.g. by
+\cite{banfield2007comparison}, \cite{robnik2004improving},
+\cite{strobl2009introduction}, \cite{zhang2012bias}, make it so that it
+is better to think of random forests as being a framework instead of being
+a single method \cite{wpRF}.
+To understand this framework, it is best to look at the different aspects
+of random forests, first in a top-down view, and later part by part.
+The top-down view is strictly based on \cite{breiman2001random},
+while the part by part discussion will also go into tweaking random forests.
+
+Random forests is an ensemble learning method where the ensemble consists
+of decision trees.
+Every decision tree is constructed on a sample of the input dataset,
+that is selected using bootstrapping with replacement from the original
+dataset and equally large.
+Every node split in the decision tree is an optimal two-way split selected
+from a random subset of all input variables.
+The number of randomly selected variables for each split is commonly called
+\texttt{mtry}.
+If the number of input variables is small, additional input variables can be
+derived as linear combinations of input variables.
+The decision trees are grown maximally without pruning,
+and new trees are generated until the ensemble of decision trees reaches its
+target size, usually called \texttt{ntree}.
+Random forests features error estimates using out-of-bag data.
+Out-of-bag data are the records in the dataset that were not selected during
+the bootstrap aggregation, and make up approximately one third of the dataset.
+Random forests also features variable importance measures,
+which are calculated by reclassifying the out-of-bag data,
+but randomizing the variable under consideration.
+The variable importance of the randomized variable is the increase of
+misclassifications.
+
+The the reference implementation of random forests is written in Fortran,
+but a package for the statistical software framework R \cite{rproject2012},
+is called \texttt{randomForest} \cite{liaw2002classification}.
+An alternative, which includes improvements to correct a bias in variable
+importance measures is available under the name \texttt{party}
+\cite{strobl2008conditional}.
+For illustration purposes I include a source code example and the
+corresponding output taken from \cite{strobl2008conditional}:
+
+\begin{verbatim}
+> load("dat_smoking.rda")
+> library("party")
+> myctree <- ctree(intention_to_smoke ~ ., data = dat_smoking)
+> class(dat_smoking$intention_to_smoke)
+> plot(myctree)
+\end{verbatim}
+
+The use case for random forests is quite wide.
+Random forests has been used in applications from psychology and
+computational biology as is outlined in \cite{strobl2009introduction},
+to customer churn prediction \cite{xie2009customer},
+to software testing \cite{guo2004robust} and internet security
+\cite{zhang2005network}.
+The reasons why random forests is such a widely used method,
+are its prediction accuracy, which is comparable to other state-of-the-art
+machine learning algorithms like Adaboost \cite{breiman2001random},
+its ability to handle “small n large p” datasets \cite{strobl2009introduction},
+its practical built in error estimates, and its variable importance measures.
+The last of which, random forests' variable importance measures,
+might be its most useful feature.
+Many domains don't require accurate predictions as much as a model that can
+be understood by humans.
+While ensemble methods are unsuitably complex,
+random forests' variable importance measures can be used to select variables
+for use in simpler models, e.g.
+generalized linear models, logit and probit models,
+which are more easily interpreted \cite{strobl2009introduction}.
+
 % end of odt import
 
 \section{Method}
