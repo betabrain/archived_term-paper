@@ -306,6 +306,40 @@ for use in simpler models, e.g.
 generalized linear models, logit and probit models,
 which are more easily interpreted \cite{strobl2009introduction}.
 
+\subsection{Ensemble Learning Methods}
+As mentioned above, random forests build on quite a rich collection of
+previous work, most of which also concerns ensemble learning methods.
+In fact, random forests can be seen as a composition of elements from
+different other ensemble learning methods, e.g.
+random subspaces \cite{ho1998random} and bagging \cite{breiman1996bagging}.
+Although detailed knowledge of these methods is not a requirement to
+understand random forests, it is important to understand what
+ensemble learning is.
+Again, this paper will first give an abstract definition and then look at
+examples in detail.
+
+Ensemble learning is a supervised learning algorithm: its task is to take
+an example of input and output data, and find a hypothesis that connects
+the two.
+This hypothesis can then be used to predict the output data that
+corresponds to new input data.
+In theory this problem can be solved by a construct called
+Bayes optimal classifier, which considers every possible hypothesis,
+but, which unfortunately can't be implemented except for trivial problems.
+However, the principle that the combination of possible hypotheses becomes
+a stronger hypothesis, because it can represent more functions that every
+component hypothesis could, holds.
+In short, ensemble methods rely on the principle that the ensemble is more
+than the sum of its parts.
+The usual wording of this is, that ensemble learning turns a set of
+\emph{weak classifiers} into one \emph{strong classifier}.
+Weak also stands for unstable, meaning that the underlying classifier is
+susceptible to even small variations in the input data.
+Ensemble learning methods can be called meta algorithm,
+because they rely on other simpler classifier algorithms,
+and it is theoretically possible to create an ensemble learner for any
+supervised learning algorithm. \cite{wpEL} \cite{Polikar:2009}
+
 % end of odt import
 
 \section{Method}
