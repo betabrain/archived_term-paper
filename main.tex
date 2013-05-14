@@ -484,7 +484,9 @@ it doesn't and usually shouldn't be specified.
 The following is an exemplary implementation of random forest following the
 original version by \cite{breiman2001random}.
 
-...
+\begin{verbatim}
+TODO: Implementation of Random Forests
+\end{verbatim}
 
 \subsubsection{Parameters}
 The two parameters random forests depends on, are problematic,
@@ -568,6 +570,106 @@ same thing as a genuine test dataset.
 Depending on the size of the dataset, and the ensemble size, the downsides
 of bootstrapping might shine through, and lead to an underestimation of
 the prediction accuracy.
+
+\subsubsection{Variable Importance}
+As has been mentioned above, random forests have a built in variable
+importance measure, which is calculated, by permutating the input variable
+in the out-of-bag data of every tree, and calculating a new error estimate.
+The difference between the out-of-bag error estimates with and without
+randomly permutated input variable is the variable importance.
+The more important a variable is, the more drastically the prediction error
+increases when the variable is being randomized.
+The variable is sometimes scaled, i.e. z-standardized,
+but because it strongly depends on the parameter of random forests,
+it's not possible to compare these variable importances across studies,
+hence there is little use in doing so \cite{strobl2009introduction}.
+
+The idea behind this way of calculating variable importances is,
+that one would like to compare a prediction model with and without a
+particular input variable to measure the variable's impact.
+Obviously, one can't ignore all trees that incorporate a variable,
+because each tree incorporates multiple input variables, and their impact
+on the prediction would be modified too.
+By randomly permutating the values of an input variable,
+the variable's characteristics don't change, but the connection to the
+output variable is broken.
+However, according to \cite{strobl2007bias} the variable importance might
+still depend on which variable is being measured, because this
+variable importance measure is biased towards variables with many categories
+and variables with many missing values.
+Numeric variable usually have as many different values as there are records
+in the dataset, meaning that their importance measure is greatly biased due
+to the large number of “categories”.
+Fortunately, this can be fixed, but “Only when subsamples drawn without
+replacement, instead of bootstrap samples, in combination with unbiased
+split selection criteria, are used in constructing the forest, can the
+resulting permutation importance be interpreted reliably”
+\cite{strobl2007bias}, although correlated input variables still are
+problematic.
+The R package party includes two functions, \texttt{ctree} and
+\texttt{cforest}, that are not affected by this bias, due to
+yet another variable importance termed “conditional variable importance”
+\cite{strobl2008conditional}.
+Correlated variables can be problematic, because trees that include a
+pair of correlated input variables are less affected by the random
+permutation of one of them.
+Conditional variable importance considers these correlations.
+However, \cite{gromping2009variable} argues, that this can't be avoided
+as long as \texttt{mtry} is smaller than the number of input variables,
+and that considering all input variables, i.e. bagging,
+“might already go a long way” towards remedying the problem,
+although due to the “large p small n case”, “unbiased estimation of all
+coefficients is impossible” in any case.
+
+Another problem that the variable importance measure can be affected by,
+is that some variables might not be well represented in a random forest.
+This can be due to a small setting for \texttt{mtry} and or \texttt{ntree}
+in the presence of many irrelevant input variables, as often is the case
+in genetics datasets, or if variables show perfect higher order effects,
+i.e. interaction effects, but no main effects.
+The latter is called the XOR problem.
+It is important to note, that random forests with a different split selection
+algorithm don't have to be affected by this, e.g. PERT \cite{cutler2001pert}.
+
+Last but no least, both \cite{strobl2009introduction} and
+\cite{gromping2009variable} see one of the advantages of random forests in
+their variable importance measure.
+\cite{gromping2009variable} compares linear variable importance measures
+with the one built into random forests, and finds that the latter are
+heavily dependent on the mtry parameter.
+The larger \texttt{mtry} is, the better the importance estimates become.
+Variable importance measures are used to select input variables for a simpler
+model, e.g. a generalized liner model, which is more interpretable than a
+forest of decision trees \cite{strobl2009introduction}.
+Variable importance measures are also the probably only simple way to
+“shed some light into the black box of random forests”
+\cite{gromping2009variable}.
+A alternative, but rather naive way to estimate variable importance is to count
+the occurance of a variable over all trees \cite{strobl2009introduction}.
+Other imaginable ways to estimate variable importance would be to use
+algorithms that analyze the structure of each decision tree.
+Another interesting point to make, is that random perturbation of an input
+variable could in theory be used as part of many other models, including but
+not limited to generalized linear models.
+
+The way variable selection based on the variable importance measure is
+being done, is by finding variables whose randomization led to an improvement
+in prediction accuracy.
+These improvements are just random effects, and function as an indicator
+for which variable importances are within the random fluctuations,
+and which are true indicators for important variables.
+
+\subsubsection{Regression}
+Random forest can not only be used for classification, but also for regression.
+To produce the numeric output values necessary in regression,
+the vote on the most popular output class in the forest is replaced by an
+average calculation over all tree outputs.
+One problem with regression using random forests is that more decision trees
+end up covering the middle of the range of values of an output variable.
+This means, that the prediction accuracy is good in the middle of the range
+of values, but the predictions for extremer values become more and more
+inaccurate \cite{zhang2012bias}.
+The same paper also suggests five ways to estimate and reduce this bias.
 
 % end of odt import
 
