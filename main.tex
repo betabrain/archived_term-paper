@@ -278,10 +278,13 @@ misclassifications.
 
 The the reference implementation of random forests is written in Fortran,
 but a package for the statistical software framework R \cite{rproject2012},
-is called \texttt{randomForest} \cite{liaw2002classification}.
-An alternative, which includes improvements to correct a bias in variable
+is called \texttt{randomForest} \cite{liaw2002classification} exists.
+An alternative within the R framework, which includes improvements
+to correct a bias in variable
 importance measures is available under the name \texttt{party}
 \cite{strobl2008conditional}.
+A third implementation using Java is available in the WEKA machine learning
+suite \cite{hall2009weka}.
 For illustration purposes I include a source code example and the
 corresponding output taken from \cite{strobl2008conditional}:
 
@@ -469,6 +472,98 @@ by a procedure inspired by boosting.
 Other variants, e.g. \cite{van2012accelerating}, change this procedure to
 grow smaller or more balanced trees, to meet performance or
 hardware requirements.
+
+\subsection{Random Forests}
+As has been described in the sections on ensemble learning and decision trees,
+random forests build up ensembles of decision trees.
+This process depends on two parameters: the ensemble size, commonly called
+\texttt{ntree}, and the randomization parameter \texttt{mtry}.
+Actually, random forests depend on another parameter,
+the state of a random number generator, but being random,
+it doesn't and usually shouldn't be specified.
+The following is an exemplary implementation of random forest following the
+original version by \cite{breiman2001random}.
+
+...
+
+\subsubsection{Parameters}
+The two parameters random forests depends on, are problematic,
+in that users set them according to one recommendation or another,
+or just use the default setting, which again can differ from implementation
+to implementation.
+Furthermore, not every dataset is best learned by random forests using the
+same setting.
+This lack of a standard way to determine the parameter values makes it hard
+to compare the accuracy of different methods.
+The comparative study by \cite{banfield2007comparison} gives a nice overview
+over the datasets used in previous publications,
+among which are \cite{breiman2001random} and \cite{dietterich2000ensemble},
+that each used ensemble sizes of 50-200, and applied the algorithms being
+compared to 18-27 datasets.
+In each case the authors concluded that their method was superior to the
+other methods in the study.
+However, the more recent study by \cite{banfield2007comparison} found
+“no stat. sig. improvement over bagging in 38 of 57 data sets”
+when ensemble sizes of up to 1000 trees where used.
+The study also concludes that bagging with an ensemble size of 1000 and
+random forests with the randomization parameter set to the
+binary logarithm of the number of input variables were the best methods.
+The study by \cite{banfield2007comparison} also suggests a mechanism
+to determine the best size of the ensemble automatically.
+Methodologically, this would be a welcome improvement, because it takes
+away one way researchers can fiddle with the outcome of their calculations,
+and because it would ensure better results due to the usually larger
+ensemble sizes.
+In defense of older studies, like those by \cite{breiman2001random} and
+\cite{dietterich2000ensemble}, one has to consider that the average
+computer back then weren't as powerful.
+\cite{breiman2001random} mentions run times for random forests of 4 minutes
+and 3 hours for Adaboost when building ensembles of size 100,
+while I can execute all examples in \cite{strobl2009introduction}
+in well under 30 seconds.
+
+The second parameter of random forests is the randomization parameter
+\texttt{mtry} which controls how many variables are being selected randomly
+at each decision tree node to search for an optimal split.
+If \texttt{mtry} is set to 1, random forests acts like a linear combination
+of the input variables.
+If \texttt{mtry} is set to the number of variables, random forest becomes
+bagging as proposed by \cite{breiman1996bagging}.
+Common choices for \texttt{mtry} are 1, 2, and other small values in
+older studies, e.g. \cite{breiman2001random}, and the square root of n,
+or the binary logarithm of n, with n being the number of input variables,
+becoming increasingly popular in newer literature, e.g.
+\cite{strobl2009introduction}.
+As mentioned above, using the binary logarithm of the number of
+input variables is indeed the best choice for most datasets
+\cite{banfield2007comparison}.
+However, depending on the dataset and the ensemble size, \texttt{mtry}
+needs to be chosen differently.
+For example in studies of genetics, where the dataset often includes many
+irrelevant input variables in addition to the dataset being a
+“small n large p case”, it is necessary to use a larger value
+for \textt{mtry}, else some variables might never be used in the ensemble
+at all \cite{strobl2009introduction}.
+It might be interesting to consider choosing \texttt{mtry} automatically,
+and two obvious suggestions for that would be to choose a random \texttt{mtry}
+value for every decision tree being grown, or to use a function of the
+number of input variables satisfying some statistical distribution criterion.
+The only suggestion the author has seen in the literature is a greedy search.
+
+\subsubsection{Out-of-bag Data}
+Because random forests is based on bagging and uses bootstrapped samples,
+each tree has a set of approximately one third of the original dataset
+that has not been used to grow the tree.
+This set can be used to test the prediction accuracy of each tree,
+and the prediction accuracy of all trees can then be averaged to give an
+error estimation of the entire random forest.
+This out-of-bag error estimation is more precise than the standard error
+estimate, which is using all of the dataset \cite{strobl2009introduction}.
+This said, one should not forget that out-of-bag data isn't the
+same thing as a genuine test dataset.
+Depending on the size of the dataset, and the ensemble size, the downsides
+of bootstrapping might shine through, and lead to an underestimation of
+the prediction accuracy.
 
 % end of odt import
 
