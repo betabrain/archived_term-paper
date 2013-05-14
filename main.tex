@@ -548,7 +548,11 @@ It might be interesting to consider choosing \texttt{mtry} automatically,
 and two obvious suggestions for that would be to choose a random \texttt{mtry}
 value for every decision tree being grown, or to use a function of the
 number of input variables satisfying some statistical distribution criterion.
-The only suggestion the author has seen in the literature is a greedy search.
+According to \cite{bernard2008forest} a greedy search or choosing one of
+the values discussed above is the usual approach in the literature.
+The same paper shows, that this doesn't have to be the case, by demonstrating
+a "push-button" method that automatically derives a suitable value for
+\texttt{mtry} and "is at least as statistically significant as the original".
 
 \subsubsection{Out-of-bag Data}
 Because random forests is based on bagging and uses bootstrapped samples,
