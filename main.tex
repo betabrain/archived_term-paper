@@ -671,6 +671,73 @@ of values, but the predictions for extremer values become more and more
 inaccurate \cite{zhang2012bias}.
 The same paper also suggests five ways to estimate and reduce this bias.
 
+\subsubsection{Overfitting}
+Overfitting \cite{wpOF} is the situation where an algorithm learns the
+example dataset well enough to not only reproduce the underlying rules,
+but to also reproduce the random errors in the dataset.
+This is also called \emph{generalization error}, since the algorithm
+generalizes errors in the data by deriving rules for them.
+Random forests grow optimal decision trees, meaning they try to represent
+their bootstrapped sample perfectly.
+Except for the case where different records in the sample have the same
+values in their input variables, but different values in their output variable,
+this leads to decision trees which represent the sample perfectly,
+including all errors.
+The advantage of ensemble learning is that by combining decision trees
+for different samples, and constructed using different random split selections,
+this errors are canceled out.
+However, this also means that there is an upper bound on how accurate
+random forests can become depending on the noise present in the dataset.
+Of course, this only applies if the trees in an ensemble are reasonably
+diverse, i.e. uncorrelated \cite{breiman2001random}.
+An analysis by \cite{liu2005maximizing} showed that the generalization error
+is at its lowest when the tree ensemble is maximally diverse,
+and that bootstrapping tends to limit tree diversity.
+
+Different variants of random forests try to grow random forests on data
+that is less prone to noise.
+FRF stands for \emph{Fuzzy random forests}, and is a method described by
+\cite{bonissone2008fuzzy}.
+FRF use what are called Fuzzy Sets to represent the data in the dataset,
+and build their decision trees on top.
+The advantages of this approach are that the resulting FRF are more immune
+to noise, and \cite{cadenas2012extending} extend this framework to
+handle missing data too.
+Another attempt to construct random forests on higher quality data are
+rotation forests by \cite{rodriguez2006rotation}, which use
+principal component analysis, or PCA, to find derived input variables that
+separate the input dimensions better.
+Although linear combinations of input dimensions aren't the same thing
+as noise, since the dataset is of a limited size, the decision trees
+might well fail to tease out the interactions between all pairs of input
+variables, which will end up looking like noise.
+Because better input dimensions lead to better splits, and to more
+uncorrelated random variable selections, rotation forests are more accurate
+than random forests \cite{rodriguez2006rotation}.
+
+\subsubsection{Optimality Criterion}
+Random forests construct the underlying decision trees by selecting the
+best split at each node from a number of randomly selected variables.
+To compare the different possible splits, an optimality criterion gets
+calculated for each split.
+The most commonly used criterion is the Gini index.
+The gini index is “a measure of statistical dispersion developed by the
+Italian statistician and sociologist Corrado Gini” \cite{wpGINI}.
+As has been mentioned in the section on variable importance, the fact that
+the Gini index is biased towards variables with many different values
+is problematic.
+Another common optimality criterion is entropy, although it suffers from
+the same bias towards variables with many different values.
+The point of using an optimality criterion in the first place is,
+to grow trees using an impurity reduction algorithm, i.e. to select the split
+which returns the least dispersed subsets is selected recursively at each node.
+
+A huge disadvantage of using an optimality criterion is the computational cost
+one has to pay.
+Trees who use random splits are much faster to grow, e.g. PERT ensembles
+are claimed to be two orders of magnitude faster than the classical
+random forests \cite{cutler2001pert}.
+
 % end of odt import
 
 \section{Method}
