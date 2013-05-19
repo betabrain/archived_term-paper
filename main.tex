@@ -1,4 +1,4 @@
-\documentclass[a4paper,man,12pt,apacite]{apa6} % man => jou
+\documentclass[a4paper,man,12pt,apacite,floatsintext,draftfirst]{apa6} % man => jou
 \usepackage[english]{babel}
 \usepackage[utf8]{inputenc}
 \usepackage{mathtools}
@@ -17,27 +17,27 @@
   arn_d/.style = {treenode, ellipse, draw=black}
 }
 
-\begin{document}
-
 \title{Random Forests: Introduction, Parts, Variants}
 \shorttitle{Random Forests: Introduction, Parts, Variants}
 \author{Tobias Ammann}
+\authornote{Tobias Ammann\\Alte Landstrasse 39\\8802 Kilchberg\\tag@adnm.ch}
 \keywords{ensemble methods, introduction, random forests}
 \affiliation{Literature Study at the Workgroup for Psychological Methods,\\Evaluation and Statistics, Department of Psychology.\\Supervised by Prof. Dr. Carolin Strobl}
-
-\abstract{This report a rather new machine learning algorithm called
-"Random Forests", its qualities, use, problems, and a small number of
-improvements that have been tried.
-Random forests are getting a lot of attention outside of psychology,
-and it would be nice to encourage their application within psychology too.
-However, it is important to keep in mind that random forests are
-relatively unstudied. This hasn't hindered a number of people to suggest
-improvements. This paper tries to give the reader a practical
-understanding of the method, which hopefully leads to a better
-application random forests.}
-
+\note{DRAFT Version: \today}
 \keywords{ensemble methods, introduction, random forests}
 
+\abstract{This report looks at a machine learning algorithms called
+random forests, their structure, problems, and a number of suggested
+improvements, to give the reader a more big-picture introduction.
+The topics discussed are the origins of machine learning, machine learning
+vs traditional statistics, ensemble learning, bagging, boosting, 
+decision trees, random forests, parameters, out-of-bag data, error estimates,
+variable importance, regression, overfitting, optimality criterion,
+the random forest variants PERT, fuzzy random forests, and rotation forests.
+This report puts forward a few ideas on how to make random forests better
+and more user-friendly.}
+
+\begin{document}
 \maketitle
 
 \tableofcontents
@@ -260,11 +260,11 @@ of random forests, first in a top-down view, and later part by part.
 The top-down view is strictly based on \cite{breiman2001random},
 while the part by part discussion will also go into tweaking random forests.
 
-Random forests is an ensemble learning method where the ensemble consists
+Random forests are ensemble learning methods where the ensemble consists
 of decision trees.
 Every decision tree is constructed on a sample of the input dataset,
-that is selected using bootstrapping with replacement from the original
-dataset and equally large.
+that has been selected using bootstrapping with replacement from the original
+dataset and is equally large.
 Every node split in the decision tree is an optimal two-way split selected
 from a random subset of all input variables.
 The number of randomly selected variables for each split is commonly called
@@ -274,26 +274,26 @@ derived as linear combinations of input variables.
 The decision trees are grown maximally without pruning,
 and new trees are generated until the ensemble of decision trees reaches its
 target size, usually called \texttt{ntree}.
-Random forests features error estimates using out-of-bag data.
+Random forests feature error estimates using out-of-bag data.
 Out-of-bag data are the records in the dataset that were not selected during
 the bootstrap aggregation, and make up approximately one third of the dataset.
-Random forests also features variable importance measures,
+Random forests also feature variable importance measures,
 which are calculated by reclassifying the out-of-bag data,
 but randomizing the variable under consideration.
 The variable importance of the randomized variable is the increase of
 misclassifications.
 
-The the reference implementation of random forests is written in Fortran,
+The reference implementation of random forests is written in Fortran,
 but a package for the statistical software framework R \cite{rproject2012},
-is called \texttt{randomForest} \cite{liaw2002classification} exists.
+exists under the name \texttt{randomForest} \cite{liaw2002classification}.
 An alternative within the R framework, which includes improvements
-to correct a bias in variable
+to correct a bias found in variable
 importance measures is available under the name \texttt{party}
 \cite{strobl2008conditional}.
 A third implementation using Java is available in the WEKA machine learning
 suite \cite{hall2009weka}.
-For illustration purposes I include a source code example and the
-corresponding output taken from \cite{strobl2008conditional}:
+For illustration purposes I include a source code example taken from
+\cite{strobl2008conditional}:
 
 \begin{framed}
 \begin{verbatim}
@@ -306,16 +306,17 @@ corresponding output taken from \cite{strobl2008conditional}:
 \end{framed}
 
 The use case for random forests is quite wide.
-Random forests has been used in applications from psychology and
+Random forests have been used in applications from psychology and
 computational biology as is outlined in \cite{strobl2009introduction},
 to customer churn prediction \cite{xie2009customer},
 to software testing \cite{guo2004robust} and internet security
 \cite{zhang2005network}.
-The reasons why random forests is such a widely used method,
-are its prediction accuracy, which is comparable to other state-of-the-art
-machine learning algorithms like Adaboost \cite{breiman2001random},
-its ability to handle “small n large p” datasets \cite{strobl2009introduction},
-its practical built in error estimates, and its variable importance measures.
+The reasons why random forests are such a widely used method,
+are their prediction accuracy, which is comparable to other state-of-the-art
+machine learning algorithms like Adaboost as demonstrated
+in \cite{breiman2001random},
+their ability to handle “small n large p” datasets \cite{strobl2009introduction},
+their practical built in error estimate, and their variable importance measures.
 The last of which, random forests' variable importance measures,
 might be its most useful feature.
 Many domains don't require accurate predictions as much as a model that can
@@ -345,17 +346,17 @@ This hypothesis can then be used to predict the output data that
 corresponds to new input data.
 In theory this problem can be solved by a construct called
 Bayes optimal classifier, which considers every possible hypothesis,
-but, which unfortunately can't be implemented except for trivial problems.
+but which unfortunately can't be implemented except for trivial problems.
 However, the principle that the combination of possible hypotheses becomes
-a stronger hypothesis, because it can represent more functions that every
-component hypothesis could, holds.
+a stronger hypothesis, because the ensemble can represent more functions
+than every component hypothesis could holds.
 In short, ensemble methods rely on the principle that the ensemble is more
 than the sum of its parts.
 The usual wording of this is, that ensemble learning turns a set of
 \emph{weak classifiers} into one \emph{strong classifier}.
 Weak also stands for unstable, meaning that the underlying classifier is
 susceptible to even small variations in the input data.
-Ensemble learning methods can be called meta algorithm,
+Ensemble learning methods can be called meta algorithms,
 because they rely on other simpler classifier algorithms,
 and it is theoretically possible to create an ensemble learner for any
 supervised learning algorithm. \cite{wpEL} \cite{Polikar:2009}
@@ -375,42 +376,42 @@ which trains each of its underlying weak classifiers on a different set
 of input data created by bootstrapping.
 It is another algorithm developed by Leo Breiman \cite{breiman1996bagging}.
 
-Bagging is typically uses bootstrapping with replacement,
-which leads the inclusion of on average two thirds of the original sample
+Bagging typically uses bootstrapping with replacement,
+which leads to the inclusion of on average two thirds of the original sample
 in the derived sample.
-Random forests uses the remaining third as out-of-bag data
+Random forests use the remaining third as out-of-bag data
 \cite{breiman2001random}.
 
 \subsubsection{Boosting}
 
 Boosting is an ensemble method, where every weak classifiers gets to train
 on the original sample, but the sample is improved with importance weights.
-These weights are different for every weak classifier.
+These weights are different for every instance of the weak classifier.
 They are lower for records in the dataset that are correctly predicted by
 the classifiers already in the ensemble,
-and higher for records that classified wrongly.
+and higher for records that are classified wrongly.
 In short, boosting focuses on eliminating one classification error after
-another all data is classified correctly,
+another, until all data is being classified correctly,
 or a targeted ensemble size is reached.
 This behavior makes boosting algorithms very fast learners,
 but susceptible to errors in the dataset \cite{long2010random}.
 Boosting isn't used in random forests as introduced by \cite{breiman2001random},
 but there are variants who do, e.g.
 dynamic random forests \cite{bernard2012dynamic}.
+
 Adaboost \cite{freund1995decision} is probably the most popular
-boosting algorithm, and the algorithm random forests in most commonly
+boosting algorithm, and the algorithm random forests are most commonly
 compared to in terms of performance, e.g. \cite{breiman2001random},
 \cite{banfield2007comparison} and \cite{rodriguez2006rotation}.
-
-A large study \cite{banfield2007comparison} compared eight ensemble of
-decision tree classifiers on 57 publicly available datasets and concluded
+The latter compared eight ensemble of decision tree classifiers in a
+large study on 57 publicly available datasets and concluded
 “[...] that boosting, random forests and randomized trees are
 statistically significantly better than bagging.”
 
 \subsection{Decision Trees}
 
 The underlying algorithm of random forests is the decision tree classifier,
-which is either a regression tree, or a classification tree.
+which can be either a regression tree, or a classification tree.
 The difference between the two types of trees is the type of output produced.
 Classifications trees work with discreet output values,
 while regression trees output a continuous numeric value.
@@ -419,7 +420,7 @@ of decision trees is assumed to be the right prediction.
 For regression purposes the output of the ensemble is calculated by averaging
 the outcomes the single trees.
 As the name indicates, a decision tree is a tree data structure, i.e.
-a set of nodes that are connected in a forward manner allowing branching,
+a set of nodes that are connected in a forward manner allowing branching
 but not cross links and circles.
 Decision trees usually are binary trees, meaning that each node either has
 two child nodes, or is a leaf node.
@@ -430,6 +431,8 @@ For example, the following decision tree takes three numeric features
 \texttt{a}, \texttt{b}, \texttt{c} to predict a discreet output variable
 \texttt{class} with four possible values.
 
+\begin{framed}
+\begin{center}
 \begin{tikzpicture}[level/.style={sibling distance = 7cm/#1}]
 \usetikzlibrary{shapes}
 \usetikzlibrary{arrows}
@@ -437,54 +440,56 @@ For example, the following decision tree takes three numeric features
     child{ node [arn_c] {class = w} edge from parent node[left] {\(a \le 4.56\)} }
     child{ node [arn_d] {feature b}
         child{ node [arn_d] {feature c}
-            child{ node [arn_c] {class = x} edge from parent node[left] {\(d \le 9.11\)} }
+            child{ node [arn_c] {class = x} edge from parent node[left] {\(c \le 9.11\)} }
             child{ node [arn_c] {class = y} edge from parent node[right] {\(d > 9.11\)} }
             edge from parent node[left] {\(b \le 3.1\)}
         }
-        child{ node [arn_c] {class = z} edge from parent node[right] {\(b > 3.1\)} }
+        child{ node [arn_c] {class = z} edge from parent node[right] {\(c > 3.1\)} }
         edge from parent node[right] {\(a > 4.56\)}
     }
 
 ;
 \end{tikzpicture}
+\end{center}
+\end{framed}
 
 The decision trees used by random forests are constructed by randomly
 selecting a certain number of input variables as configured by the parameter
 \texttt{mtry} for each node.
 The algorithm then selects the best threshold among these input
-variables as the node's criterion.
+variables as the node's criterion, using what is called an optimality criterion.
 This process is repeated for every child node until a node is reached
 which only matches records in the dataset with the same output value.
 This node becomes a leaf node.
 This is described as growing a tree maximally.
-This ensures that each decision tree has a high strength,
+It ensures that each decision tree has a high strength,
 meaning no decision tree outputs wrong predictions for the subsets of data
 it matches. \cite{breiman2001random}
 
 As a component classifier to an ensemble learning algorithm,
 every decision tree should be different from the other decision trees in
-the ensemble, i.e. the decision trees should be unstable,
+the ensemble, i.e. the decision trees should be diverse,
 to cover a wide range of possible interactions between the input data,
 i.e. hypotheses.
 This is commonly described as the trees being uncorrelated.
 Tree strength and inter-tree correlation are what the prediction accuracy
 of random forests depends on. \cite{breiman2001random}
 
-The procedure by which decision trees are grown is modified by some
+The procedure by which decision trees are grown is modified in some
 variants of random forests.
-PERT \cite{cutler2001pert} for example doesn't perform a search for
-the best split on a random selection of input variables,
-but selects variable and threshold at random, while RFW \cite{maudes2012random}
-searches all variables but attaches random weights to them,
-and DRF \cite{bernard2012dynamic} influences the decision tree creation
-by a procedure inspired by boosting.
+The PERT algorithm \cite{cutler2001pert} for example doesn't perform a
+search for the best split on a random selection of input variables,
+but selects variable and threshold at random.
+RFW \cite{maudes2012random} searches all variables but attaches random
+weights to them, and DRF \cite{bernard2012dynamic} influences the
+decision tree creation by a procedure inspired by boosting.
 Other variants, e.g. \cite{van2012accelerating}, change this procedure to
 grow smaller or more balanced trees, to meet performance or
 hardware requirements.
 
 \subsection{Random Forests}
 As has been described in the sections on ensemble learning and decision trees,
-random forests build up ensembles of decision trees.
+random forests build ensembles of decision trees.
 This process depends on two parameters: the ensemble size, commonly called
 \texttt{ntree}, and the randomization parameter \texttt{mtry}.
 Actually, random forests depend on another parameter,
@@ -494,7 +499,7 @@ The following is an exemplary implementation of random forest following the
 original version by \cite{breiman2001random}, but with limited features and
 with entropy instead of the gini index as optimality criterion.
 In reference to the higher level programming languages mentioned
-in the introduction, the following code was written using a Lisp
+in the introduction, the following code uses a Lisp
 dialect called Clojure \cite{wpCLOJURE}.
 
 \newpage
@@ -619,12 +624,14 @@ dialect called Clojure \cite{wpCLOJURE}.
 \end{framed}
 
 \subsubsection{Parameters}
-The two parameters random forests depends on, are problematic,
+The two parameters random forests depends on, the size of the forest
+\texttt{ntree} and the number of randomly selected variables at each node
+\texttt{mtry}, are problematic,
 in that users set them according to one recommendation or another,
-or just use the default setting, which again can differ from implementation
+or just use the default settings, which again can differ from implementation
 to implementation.
 Furthermore, not every dataset is best learned by random forests using the
-same setting.
+same settings.
 This lack of a standard way to determine the parameter values makes it hard
 to compare the accuracy of different methods.
 The comparative study by \cite{banfield2007comparison} gives a nice overview
@@ -647,8 +654,8 @@ away one way researchers can fiddle with the outcome of their calculations,
 and because it would ensure better results due to the usually larger
 ensemble sizes.
 In defense of older studies, like those by \cite{breiman2001random} and
-\cite{dietterich2000ensemble}, one has to consider that the average
-computer back then weren't as powerful.
+\cite{dietterich2000ensemble}, one has to mention that
+computers back then weren't as powerful.
 \cite{breiman2001random} mentions run times for random forests of 4 minutes
 and 3 hours for Adaboost when building ensembles of size 100,
 while I can execute all examples in \cite{strobl2009introduction}
@@ -677,8 +684,8 @@ irrelevant input variables in addition to the dataset being a
 for \texttt{mtry}, else some variables might never be used in the ensemble
 at all \cite{strobl2009introduction}.
 It might be interesting to consider choosing \texttt{mtry} automatically,
-and two obvious suggestions for that would be to choose a random \texttt{mtry}
-value for every decision tree being grown, or to use a function of the
+and two obvious suggestions for this would be to choose a random \texttt{mtry}
+value for every decision tree being grown, or to define it via a function of the
 number of input variables satisfying some statistical distribution criterion.
 According to \cite{bernard2008forest} a greedy search or choosing one of
 the values discussed above is the usual approach in the literature.
@@ -687,7 +694,7 @@ a "push-button" method that automatically derives a suitable value for
 \texttt{mtry} and "is at least as statistically significant as the original".
 
 \subsubsection{Out-of-bag Data}
-Because random forests is based on bagging and uses bootstrapped samples,
+Because random forests are based on bagging and use bootstrapped samples,
 each tree has a set of approximately one third of the original dataset
 that has not been used to grow the tree.
 This set can be used to test the prediction accuracy of each tree,
@@ -697,7 +704,8 @@ This out-of-bag error estimation is more precise than the standard error
 estimate, which is using all of the dataset \cite{strobl2009introduction}.
 This said, one should not forget that out-of-bag data isn't the
 same thing as a genuine test dataset.
-Depending on the size of the dataset, and the ensemble size, the downsides
+Depending on the size of the dataset, and the size of the ensemble,
+the downsides
 of bootstrapping might shine through, and lead to an underestimation of
 the prediction accuracy.
 
