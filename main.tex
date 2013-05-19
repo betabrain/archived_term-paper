@@ -46,15 +46,12 @@ and more user-friendly.}
 \section{Introduction}
 
 \subsection{Motivation}
-Psychology has become a science, thus psychological research has to follow
-the \emph{scientific method}, according to which positive proof is an
-impossibility unless we have complete knowledge, and could eliminate all
-alternative theories.
-However, we won't ever have complete knowledge, therefore scientific isn't
-about proofs, but probabilities.
-Research works under the assumption that if we disprove just enough
+Psychology has come a long way as a science, with psychological research
+more and more following
+the \emph{scientific method}.
+Research works by the assumption that if we only disprove just enough
 alternative theories, we can eventually tell which theory is probably
-true.
+true, despite positive proof being impossible without complete knowledge.
 So, the scientific method really is nothing but the use of countless
 attempts to disprove alternative theories, until only a single such theory
 remains.
@@ -66,37 +63,39 @@ The speedier method has the researcher pit his favored theory against
 the null hypothesis, a fancy word for chance.
 This is way more efficient than comparing the thousands of
 theories that researchers have come up with, and continue to come up with.
-The caveat, commonly called confirmation bias, is that the result only
-has significance in the experimental set-up being tested.
+The caveat, commonly called confirmation bias, because researchers focus
+on immunizing their theory instead of disproving those of others.
+Therefore, the result only has significance in the experimental set-up
+being tested.
 In the greater scale of things, i.e. reality, the results might well be
 completely bogus.
 Nonetheless, most of the subjects being studied are sufficiently constant
 or change predictably enough to allow researchers to generalize from the
 results of an experiment to the world at large, and likely remain correct.
 This likelihood depends on the size of the effects measured in the
-experiment, the number of experimental subjects, and on the properties of the
-statistical methods involved.
-In psychological research, where large effects are rare and
-experiments usually study only a handful of psychology students, it is
+experiment, the amount of experimental data collected,
+and on the properties of the statistical methods involved.
+In psychological research, where large effects are freakishly rare and
+experiments often only study a handful of psychology students, who
+notwithstanding research ethics are often forced to participate, it is
 vital to use good statistical methods, because that is the only parameter
-remaining for the researcher to tweak in his favour.
+remaining for researchers to tweak in their favour.
 
 Recently, researchers in psychology began to turn to a new breed of
 statistical methods, in hope of ever better results. This new breed of
 statistical methods is called \emph{machine learning}.
 
 In this paper, I aim to introduce the reader to \emph{random forests},
-which are just one family of algorithms.
-I intend to do this in a way that gives every reader a chance to understand
-this method without prior knowledge. I also intend to present the reader
-with some context around random forests, in hope that they will benefit
-from a more big-picture view.
+which are just one family of machine learning algorithms.
+I present to the reader some context to random forests, in hope that a more
+big-picture view will be beneficial.
 
 In the next sections I introduce the reader to machine learning,
-the differences between the traditional statistical and this new
-machine learning approach, random forests in particular, and finally delve
-into some improvements to random forests that have been suggested in the
-literature.
+the differences between the traditional statistical approach and the
+machine learning approach, and random forests in particular.
+I then delve into some improvements to random forests that have been
+suggested in the literature, call for a new random forest variant, and finish
+with a few words on the method of writing this paper, and a discussion.
 
 \subsection{Machine Learning}
 In order to understand random forests, it might be useful to set
@@ -111,29 +110,35 @@ It's probably most widely known method is \emph{linear regression}
 that they describe a straight line: \(y = \alpha * x + \beta \).
 Predictive statistics is widely used in psychology because it
 allows the researcher to look at the unobservable by making
-assumptions of the form \(reaction = mind * stimulus + variation\).
+assumptions of the form \(reaction = mind * stimulus + measurement\ error \).
 This is the standard approach in personality questionaires.
 
 \emph{Artificial intelligence} is a field commonly associated with the
 computer sciences, where it began with the advent of higher-order
 programming languages based on mathematical foundations around the \emph{1960s} \cite{wpHOPL}.
-Its aim is to give computers human-like capabilites, so that they can assist
-us by combining intelligence, with flawless logic and super-human knowledge.
+Its ultimate aim is to give computers human-like capabilites,
+so that they can assist us with human intelligence, better rationality
+and knowledge that surpasses that of every human being.
 It includes things like \emph{logic programming} \cite{wpLP},
 \emph{expert systems} \cite{wpES}, \emph{databases} \cite{wpDB} and
 \emph{neural networks} \cite{wpNN}, that all represent some form of
 storing and querying knowledge.
 Unfortunately, early computers back then didn't have the speed and memory
-required to push the envelope far enough, and the field was deemed dead.
+required to push the envelope far enough, and the field has been
+largely dormant since.
 Only the rather recent coexistance of powerful computers and massive amounts
 of stored data, sometimes called \emph{big data}, revived artificial
 intelligence as an important field of research.
+In fact, the revival and spread of machine learning has made their application
+commonplace enough that I could listen to a banker telling a friend how
+he uses random forests for algorithmic Bitcoin trading in his leisure time
+in Starbucks.
 
 \emph{Machine learning} is that part of artificial intelligence that
 is concerned with the computer's learning of facts about the world.
 These facts can then be stored and subsequently queried later on.
-As such machine learning is concerned with making statements based
-on past observations, and, is therefore, close to predictive statistics
+As such, machine learning is concerned with making statements based
+on past observations, and is therefore close to predictive statistics
 \cite{wpML}.
 
 \subsection{The Machine Learning Life Cycle}
@@ -153,21 +158,24 @@ observed at random.
 \emph{Regression methods} try to derive the values of
 one variable from the other variables in the dataset using a formula the
 researcher specifies.
-They then compare the actual values and the prediction my the model with
+They then compare the actual values and the prediction of the model with
 different inputs, and calculate how probable an improvement in this
 comparison is to show up due to random variations \cite{wpRA}.
 
 \emph{Analysis of variance methods} partition the dataset
 according to all but one variable. They then calculate the probability with
 which the variation in the one variable among the groups could be due to
-random variations in the dataset \cite{wpAOV}.
+random variations in the dataset.
+The aim is of course to show that a variation is more likely to show up in
+certain groups \cite{wpAOV}.
 
 The probabilities the methods output are what statisticians call the
-significance. Statisticians usually define a target significance level,
-e.g. 5\%, and compare it to the output of their statistical calculations.
-If the calculated probability is less than the targeted significance level the
-measured effects are said to he significant at the chosen significance level.
-For example, a result that is significant at 5\%, we know that it is less
+\emph{significance}.
+Statisticians usually define a target \emph{significance level},
+e.g. 5\%, and compare the output of their statistical calculations to it.
+If the calculated probability is less than the targeted significance level,
+the measured effects are said to he significant at the significance level.
+For example, a result that is significant at 5\%, we is less
 likely to show up at random than in 5\% of all experiments.
 
 The most striking difference between traditional statistical methods and
@@ -178,36 +186,44 @@ Because of this, machine learning algorithms are sometimes described as
 \emph{black boxes}, meaning that the user can only see what's going into the
 algorithm, and what is coming out.
 This is unlike the statistical methods, where the researcher supplies a
-formula, because in machine learning, algorithms derive the model on their own.
-This is what the learning in machine learning means.
+formula, because in machine learning, algorithms derive the formula on their own.
+This is what "learning" in machine learning means.
 The second difference is what the algorithms return.
 Since machine learning algorithms represent the model, what they output is
 not a percentage, i.e. significance, but the model itself.
 In short, machine learning provides the researcher with a generic model
 that adapts to the world.
 The prediction of such a model can then be calculated for data for which
-the values of the output variable are known, but that hasn't
-been included in the learning phase, to calculate the significance.
+the values of the output variable are known, but that haven't
+been included during the learning phase,
+to calculate the \emph{prediction accuracy}.
 The problem with this flexibility is, that one cannot really tell what the
 model looks like, that is, the model is not in a human-readable form.
 As will be pointed out later, decision trees, the underlying mechanism in
 random forests, are quite easily understandable, but random forests
 consist of dozens to thousands of such trees, so that a human can hardly
 tell what they mean.
-Therefore, it is very important to find ways to condense this complexity
+It is therefore very important to find ways to condense this complexity
 into something that can be more easily interpreted.
 The variable importance measure of random forests, which will be introduced
 later, is one such way.
 
-\subsection{Classification}
-The \emph{classification problem} is the problem of classifying new data based
-on a set of example data, but without the explicit set of rules that guided the
-classification of the example data.
-Unlike in \emph{regression}, the result here is one of many given classes
-and not a numeric value.
-One might describe classification as regression with discreet output values.
+\subsection{Classification and Regression}
+The \emph{classification problem} is the problem of classifying new data,
+i.e. grouping it based on some criteria.
+It is called a "problem", because in statistics and machine learning the
+rules to do so are unknown, and have to be inferred from an example dataset.
+The \emph{regression problem} is the related problem, where an
+\emph{output variable} has to be calculated based on \emph{input variables}.
+For practical purposes, the difference is just the type of the output variable.
+Classification usually uses linguistic labels, e.g. "high", "medium" and "low,
+while regression returns a numeric value of arbitrary precision.
+One might describe classification as regression with discreet output values,
+and regression as classification with an infinite number of labels.
 Output variables are commonly called \emph{classes}, while input variables
-are commonly called \emph{features} independent of the type of problem.
+are called \emph{features}.
+Other descriptions are also common, but usually depend on what the dataset
+represents \cite{strobl2009introduction}.
 
 \subsection{Regression}
 A short discussion of regression, the why and how, and the difference
@@ -218,17 +234,17 @@ Terminology. Classification with continuous classes.
 Many machine learning algorithms consume random numbers in different places.
 While computer generated random numbers are not truly random, they still
 cause the outcome of the algorithm to change slightly between different
-executions, due to the fact that they are customarily initialized with
-the current time at the start of the program.
+executions, due to the fact that random number generators are customarily
+initialized with the current time at the start of the program.
 These changes might unnerve a novice, but don't change the outcome of the
-algorithm significantly.
+algorithm significantly, as long as the algorithm is used correctly.
 Still, for publication purposes it can make sense to set and publish the
 random number generator's \emph{seed}, i.e. the value the generator is being
 initialized with.
 However, doing so during the experiment
 is a serious mistake.
 Indeed, it is good practice to run the analysis multiple times to ensure
-that these random variations don't change the outcome.
+that these random variations don't change the outcome unexpectedly.
 
 \newpage
 \section{Random Forests}
