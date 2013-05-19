@@ -1106,12 +1106,101 @@ a very broad - big picture - introduction to random forests.
 
 \newpage
 \section{Discussion}
-State of the art? Well... They are not yet properly understood, and
-many comparisons and lots of the advantages might be accidential.
-Strong dependance on parameters, with no rationally pleasing way to set them.
+\subsection{Random forests}
+Random forests are diverse.
+There is no “the random forest” method, but rather a wide spectrum of
+methods that all use similar principles.
+Random forests are accurate, and very powerful in that they can be used
+on almost any dataset.
+The way a random forest is grown lends itself to parallelization, as the
+small example implementation demonstrates, which is an important criterion
+for everyone who wants to analyze large datasets.
+On top of that, they are easy to implement and don't require a sophisticated
+mathematical understanding.
+In fact, a lot of the random forest variants have been developed by combining
+known concepts and later proving the viability using  a comparison of methods
+study on real-world and simulated datasets.
 
-\subsection{The End}
-Bye.
+However, it has to be said that random forests are problematic,
+because they appear as easy to use methods, but expose a lot of their
+inner workings to the user.
+The user shouldn't have to worry about parameters, and how they interact
+with a dataset to introduce bias in error estimates and
+variable importance measures.
+In studies where only small ensembles are used, one has to wonder if the
+researcher didn't just get lucky with his random number generator's seed value.
+In some ways \cite{banfield2007comparison} also ask this question,
+because many of the significantly better results just disappeared when
+the comparisons are more rigorously conducted.
+
+The very ease with which random forests can be implemented and changed,
+should lead to a more thorough study of its qualities,
+and the qualities of its variants, but this seems not to be the case.
+Most comparisons still pitch a newly introduced variant against random forests
+\cite{breiman2001random}, bagging \cite{breiman1996bagging}
+and Adaboost \cite{freund1995decision}.
+One of the factors for this I believe to be the lack of a standardized
+and automatic testing infrastructure, which would simplify the development
+and testing of new algorithms.
+
+\subsection{Methods research}
+If the datasets and protocols for measuring and comparing algorithms were
+developed first and standardized, new algorithms could be measured by the
+push of a button, and authors wouldn't have to use half of their publication
+to describe the datasets used in a comparison.
+Furthermore, by combining the knowledge of the particularities of a dataset,
+especially real-world datasets, authors would have access to immediate
+feedback on why their method might be particularly good or bad when applied
+to a certain type of data.
+Such a standardized test repository would also lighten the load of all the
+researchers just using random forests as a tool.
+They wouldn't have to explain why they choose a particular variant based on
+their incomplete knowledge of machine learning, but could just refer to
+a standard.
+This certainly is beneficial for research in general, but one doesn't have
+to stop there.
+By standardizing research methods, their development and comparison
+in general, it also becomes easier to replicate a study's results using
+different methods on the same input data, and the datasets of a study can
+be included in the corpus of testsets for future testing of methods.
+
+The “Methods” section of a study and the research methods mentioned in it,
+shouldn't be separate, because relying on a particular version of a particular
+tool to decide over the significance of findings is not very scientific.
+Unfortunately, this is what happens:
+Researchers are very careful when selecting theories from their own field,
+but sometimes flagrantly refer to "default settings" with no further detail,
+when they use an implementation of a method,
+just because software or random forests are not their field.
+Default values in implementations do change, and this change sometimes
+happens for a reason.
+It should be possible to check if a study is affected by this change,
+and reevaluate it if necessary.
+In keeping with the artificial intelligence origins of machine learning,
+one can envision an display of a huge dependencies graph with
+red and green lights representing the state of research fields.
+Computers would do the automated rechecking of past studies as soon as
+new datasets or new methods become available, and notify researchers
+when the premises of their work or field of study were refuted.
+Computers could also publish requests for dataset and new methods,
+when they detect methodical weaknesses and other “anomalies”.
+
+Obviously, this is quite a different topic than random forests, but the
+field of research on random forests nicely illustrates how some of the
+problems play out.
+Just because \cite{breiman2001random} uses certain parameters for the
+comparison, doesn't mean that the parameters are a good choice when
+demonstrating the powers of a new random forest variant.
+Since random forests all roughly take the same format of input data and
+parameters, it should be trivial to cross-validate all findings with all
+datasets and all variants, but as it stands this won't be done anytime soon,
+and since one doesn't know if another study like \cite{banfield2007comparison}
+overturns random forests in the near future, for most researchers in other
+fields it's a safer bet to stick to traditional methods,
+to ignore problems with many input variables, or to not dare to invent
+models with complex interactions that are difficult to represent using
+traditional methods.
+
 
 \bibliography{references}
 
