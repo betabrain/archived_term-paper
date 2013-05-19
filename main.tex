@@ -230,8 +230,6 @@ is a serious mistake.
 Indeed, it is good practice to run the analysis multiple times to ensure
 that these random variations don't change the outcome.
 
-% start of odt import
-
 \newpage
 \section{Random Forests}
 
@@ -310,7 +308,8 @@ Random forests have been used in applications from psychology and
 computational biology as is outlined in \cite{strobl2009introduction},
 to customer churn prediction \cite{xie2009customer},
 to software testing \cite{guo2004robust} and internet security
-\cite{zhang2005network}.
+\cite{zhang2005network}, to natural language applications \cite{xu2004random}
+and \cite{kobylinski2008definition}.
 The reasons why random forests are such a widely used method,
 are their prediction accuracy, which is comparable to other state-of-the-art
 machine learning algorithms like Adaboost as demonstrated
@@ -881,6 +880,11 @@ are claimed to be two orders of magnitude faster than the classical
 random forests \cite{cutler2001pert}.
 
 \subsection{In Search of the Super-Forest}
+The following section will look at some of the random forest variants that
+have already been mentioned above. It concludes by calling for a more
+user-friendly random forest variant, which combines many of the features of
+the proposed variants, and is tailored to the less technically adept users
+in the social sciences.
 
 \subsubsection{Alternative: PERT}
 PERT, a variant in the random forests framework was developed
@@ -923,14 +927,14 @@ On the one hand, bagging is not required, because PERT doesn't depend on
 randomness introduced through bootstrapping.
 On the other hand, bagging is necessary if one requires out-of-bag
 error estimates or variable importance measures.
-As \cite{liu2005maximizing} has indicated, using bootstrapping might lead
+As \cite{liu2005maximizing} have indicated, bootstrapping might lead
 to less diverse trees, thus it should not be used unless one requires
 these features.
 
 The advantage of PERT over random forests is speed.
-\cite{cutler2001pert} compares the different runtimes of classical random
-forests construction as described in \cite{breiman2001random}, and PERT,
-and finds the latter to be faster by two orders of magnitude,
+\cite{cutler2001pert} compare the different runtimes of classical random
+forests construction, as described in \cite{breiman2001random}, and PERT
+to find the latter to be faster by two orders of magnitude,
 while providing similar accuracy in prediction.
 Of course, there are other advantages too:
 The absence of a variable selection criterion means that PERT doesn't suffer
@@ -938,13 +942,14 @@ from the bias introduced by it, thus, variable importance estimates are less
 affected.
 An instance where the use of a selection criterion is especially problematic
 is the XOR problem mentioned above in the section on variable importance.
-Since PERT forests don't depend on an optimality criterion to select its
-splits, it has the advantage of being able to deal with perfect
+Since PERT forests don't depend on an optimality criterion to select their
+splits, PERT has the advantage of being able to deal with perfect
 interaction effects.
-A disadvantage might be that PERT is even more difficult to interpret than
-the classical random forests, but since this is rarely tried,
+A disadvantage is that PERT forests are even more difficult to interpret than
+the classical random forests, but since this is rarely tried anyway,
 it probably doesn't matter much in practice.
-It is important to mention that PERT can only be used for classification,
+It is important to mention however, that PERT can only be used for
+classification,
 since its base learner fits the training data perfectly, applying PERT to
 regression would “drastically overfit the data” \cite{cutler2001pert}.
 
@@ -953,18 +958,18 @@ algorithm for growing trees.
 \cite{geurts2006extremely} suggested what they call extremely randomized trees.
 Despite their name, extremely randomized trees are actually closer to the
 trees of random forests by \cite{breiman2001random} than PERT.
-Extremely randomized trees allow to configure the randomness of the
+Extremely randomized trees allow the user to configure the randomness of the
 constructed decision trees through an additional parameter in order to adapt
-the random forest algorithm to the problem domain of the dataset.
+the random forest algorithm to the problem domain of the dataset at hand.
 
 \subsubsection{Alternative: Fuzzy random forests}
 Fuzzy random forests by \cite{bonissone2008fuzzy} use input variables
 encoded as fuzzy sets.
-Fuzzy sets \cite{wpFS} model membership by a value between one and zero,
-while fuzzy logic \cite{wpFL} allows to reason using fuzzy data:
-For example, a day with a temperature of 45 degrees Celsius is to 100% a
-hot day, and to 0% a cold day, while a day with 15 degrees Celsius might
-belong to the label cold day by 40% and to hot day by 60%.
+Fuzzy sets \cite{wpFS} model membership to a category by a value between
+one and zero, while fuzzy logic \cite{wpFL} allows to reason using fuzzy data:
+For example, a day with a temperature of 45 degrees Celsius is to 100\% a
+hot day, and to 0\% a cold day, while a day with 15 degrees Celsius might
+belong to the label cold day by 40\% and to hot day by 60\%.
 The advantage of using fuzzy sets is the added flexibility of representing
 uncertainty.
 \cite{cadenas2012extending} extended fuzzy random forests to handle
@@ -991,33 +996,31 @@ The transformation of the input data leads to less correlation between trees,
 and to improved prediction accuracy, which \cite{rodriguez2006rotation}
 demonstrate with the help of diversity-error diagrams.
 
-% end of odt import
-
 \section{Method}
 
 \subsection{Selection of Papers}
-I started my research on \emph{random forests} by reading the
+I started my research on random forests by reading the
 introductory paper suggested by my supervisor titled
 \emph{An introduction to recursive partitioning: Rationale, application
 and characteristics of classification and regression trees, bagging and
 random forests} \cite{strobl2009introduction}.
 I then searched the research databases \emph{PsychARTICLES} and
-\emph{PsychINFO} querying for \emph{random forest} and limiting my results
+\emph{PsychINFO} querying for random forest and limiting my results
 to the last two years.
-I only considered papers that focus on \emph{random forests} and
-dismissed every paper where \emph{random forests} are merely used as a
+I only considered papers that focus on random forests and
+dismissed almost all papers where random forests are merely used as a
 research method.
-I also used \emph{Google Scholar} to look for more technical
+I also used \emph{Google Scholar} to look for the more technical
 publications outside the field of psychology.
 I searched for combinations of \emph{random forest}, \emph{comparison},
 \emph{analysis}, and \emph{ensemble}.
 I also included keywords seen in interesting titles, like \emph{fuzzy},
 \emph{perfect}, \emph{full}, \emph{balanced}, \emph{extremely}, and
 \emph{rotation}.
-I also queried for some of the referenced publications while I read the
-found material, but only included \cite{strobl2008conditional}, because
-it was referenced multiple times, and co-authored by this paper's
-supervisor.
+I the looked for some of the referenced publications I found reading the
+papers found as mentioned above, and included \cite{strobl2008conditional},
+\cite{ho1998random}, \cite{breiman1996bagging}, \cite{freund1995decision},
+and \cite{long2010random}.
 
 The final criteria for inclusion were the online availability of a freely
 downloadable PDF-file, which thanks to \emph{Google Scholar} often turned
@@ -1027,7 +1030,7 @@ this report.
 A lot of the information in the fields of computer science, artificial
 intelligence, machine learning, databases, and especially programming
 I acquired through different means in the last ten years.
-As I couldn't remember the original sources, I can only include the pages
+As I can't remember the original sources, I include the pages
 on Wikipedia, which I used to refresh my memories.
 
 \subsection{Aim and Structure of the Paper}
