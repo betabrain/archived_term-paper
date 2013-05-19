@@ -1,5 +1,5 @@
 make -j 4
-targetpath="renderings/`date +"main_%Y-%m-%d_%H-%M.pdf"`"
+targetpath="pdfs/`date +"main_%Y-%m-%d_%H-%M.pdf"`"
 cp -v main.pdf "$targetpath"
 git add "$targetpath"
 git commit -m "newly rendered pdf: $targetpath"
