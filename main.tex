@@ -996,6 +996,52 @@ The transformation of the input data leads to less correlation between trees,
 and to improved prediction accuracy, which \cite{rodriguez2006rotation}
 demonstrate with the help of diversity-error diagrams.
 
+\subsubsection{Alternative: Unknown}
+The different algorithms in the random forest framework have been developed
+iteratively, with each improvement or variation picking up one problem to
+improve on.
+The criterion for success has been beating the base algorithm.
+Similar to the how the scientific method has become a competition between
+researcher and randomness, the field of research on random forests seems
+to be plagued by comparisons between the old and the new forests.
+It might be worth the effort to step back from the specifics for a moment
+and look at the principle behind random forests.
+
+Every variant in the random forests framework is an ensemble of trees.
+Beyond that there seems to be nothing that may not be changed.
+Three questions that naturally follow from this are:
+
+\begin{APAenumerate}
+\item Can a random forest incorporate all of the developed features?
+\item How does one prioritize the different features and problems?
+\item Is there a different and stronger representation for random forests?
+\end{APAenumerate}
+
+Most of the suggested improvements and variants have taken the original
+random forest algorithm and changed some part of it. Since the changes of
+the different variants discussed in this report don't overlap, combining
+them is certainly possible.
+The third question is the hardest to answer, and it's only possible to say
+that time will tell.
+The most interesting question is the second.
+This report has mentioned many problems of random forests, for example the
+problem of the parameters.
+To increase the reach of random forests in general, and particularly in
+the social sciences, the parameter situation needs to be resolved, because
+not every researcher can include a simulation study just to show that his
+methods are not flawed.
+By including the suggestions of \cite{banfield2007comparison} regarding
+\texttt{ntree} and \cite{bernard2008forest} regarding \texttt{mtry}
+a new random forest variant could be completely parameterless.
+Alternatively, a new random variant could use PERT to get rid of both, the
+parameter \texttt{mtry} and some of the bias in the variable importance
+measure.
+
+Obviously, there is no single best solution, but this doesn't make unifying
+random forest variants a futile task.
+The simpler and safer a method is to use, the wider it will spread, and by
+spreading a good method, all of scientific research will benefit.
+
 \section{Method}
 
 \subsection{Selection of Papers}
