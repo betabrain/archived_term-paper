@@ -643,8 +643,8 @@ Furthermore, not every dataset is best learned by random forests using the
 same settings.
 This lack of a standard way to determine the parameter values makes it hard
 to compare the accuracy of different methods.
-The comparative study by \cite{banfield2007comparison} gives a nice overview
-over the datasets used in previous publications,
+The comparative study by \cite{banfield2007comparison} gives an
+illustrative overview over the datasets used in previous publications,
 among which are \cite{breiman2001random} and \cite{dietterich2000ensemble},
 that each used ensemble sizes of 50-200, and applied the algorithms being
 compared to 18-27 datasets.
@@ -798,9 +798,10 @@ Other imaginable ways to estimate variable importance would be to use
 algorithms that analyze the structure of each decision tree.
 Another interesting point to make is, that random perturbation of an input
 variable could in theory be used as part of many other models, including but
-not limited to generalized linear models.
-Obviously this isn't very useful in the case of generalized linear models, but
-the point is, that it can be done.
+not limited to generalized linear models, because although
+this isn't very useful in the case of generalized linear models,
+many other complex models are similarly difficult to tease apart, e.g.
+neural networks.
 
 The way variable selection based on variable importance measures is
 being done, is by finding variables whose randomization led to an improvement
@@ -885,7 +886,7 @@ which returns the least dispersed subsets is selected recursively at each node.
 
 A huge disadvantage of using an optimality criterion is the computational cost
 one has to pay.
-Trees who use random splits are much faster to grow, e.g. PERT ensembles
+Trees which use random splits are much faster to grow, e.g. PERT ensembles
 are claimed to be two orders of magnitude faster than the classical
 random forests \cite{cutler2001pert}.
 
@@ -899,7 +900,7 @@ in the social sciences.
 \subsubsection{Alternative: PERT}
 PERT, a variant in the random forests framework was developed
 by \cite{cutler2001pert}.
-The nice thing about PERT, is that its strong reliance on randomness gives
+The nice quality of PERT, is that its strong reliance on randomness gives
 it a simple structure that is easier to describe and implement than the
 classical random forests by \cite{breiman2001random}.
 In fact, PERT is simple enough that its algorithm is completely described
@@ -1073,7 +1074,7 @@ I searched for combinations of \emph{random forest}, \emph{comparison},
 I also included keywords seen in interesting titles, like \emph{fuzzy},
 \emph{perfect}, \emph{full}, \emph{balanced}, \emph{extremely}, and
 \emph{rotation}.
-I the looked for some of the referenced publications I found reading the
+I then looked for some of the referenced publications I read about in the
 papers found as mentioned above, and included \cite{strobl2008conditional},
 \cite{ho1998random}, \cite{breiman1996bagging}, \cite{freund1995decision},
 and \cite{long2010random}.
@@ -1101,7 +1102,7 @@ A study comparing different decision tree ensemble techniques also confirmed
 this expression by saying that many of the commonly used methods of comparison
 weren't robust enough for use with random forests \cite{banfield2007comparison}.
 
-Because of this fuzziness, I decided on a different focus, and to write
+Because of this fuzziness, I decided on a different focus, to write
 a very broad - big picture - introduction to random forests.
 
 \newpage
@@ -1110,7 +1111,7 @@ a very broad - big picture - introduction to random forests.
 Random forests are diverse.
 There is no “the random forest” method, but rather a wide spectrum of
 methods that all use similar principles.
-Random forests are accurate, and very powerful in that they can be used
+Random forests are accurate, and very powerful, because they can be used
 on almost any dataset.
 The way a random forest is grown lends itself to parallelization, as the
 small example implementation demonstrates, which is an important criterion
@@ -1131,7 +1132,7 @@ In studies where only small ensembles are used, one has to wonder if the
 researcher didn't just get lucky with his random number generator's seed value.
 In some ways \cite{banfield2007comparison} also ask this question,
 because many of the significantly better results just disappeared when
-the comparisons are more rigorously conducted.
+the comparisons are conducted more rigorously.
 
 The very ease with which random forests can be implemented and changed,
 should lead to a more thorough study of its qualities,
