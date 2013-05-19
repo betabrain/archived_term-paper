@@ -711,16 +711,17 @@ the prediction accuracy.
 
 \subsubsection{Variable Importance}
 As has been mentioned above, random forests have a built in variable
-importance measure, which is calculated, by permutating the input variable
+importance measure, which is calculated, by permutating one input variable
 in the out-of-bag data of every tree, and calculating a new error estimate.
 The difference between the out-of-bag error estimates with and without
 randomly permutated input variable is the variable importance.
 The more important a variable is, the more drastically the prediction error
 increases when the variable is being randomized.
-The variable is sometimes scaled, i.e. z-standardized,
+The variable importance measure is sometimes scaled, i.e. z-standardized,
 but because it strongly depends on the parameter of random forests,
 it's not possible to compare these variable importances across studies,
-hence there is little use in doing so \cite{strobl2009introduction}.
+hence there is little use in doing so, and the practice only encourages
+problematic comparisons across studies \cite{strobl2009introduction}.
 
 The idea behind this way of calculating variable importances is,
 that one would like to compare a prediction model with and without a
@@ -732,7 +733,7 @@ By randomly permutating the values of an input variable,
 the variable's characteristics don't change, but the connection to the
 output variable is broken.
 However, according to \cite{strobl2007bias} the variable importance might
-still depend on which variable is being measured, because this
+still depend on which variable is being measured, because the
 variable importance measure is biased towards variables with many categories
 and variables with many missing values.
 Numeric variable usually have as many different values as there are records
@@ -742,17 +743,17 @@ Fortunately, this can be fixed, but “Only when subsamples drawn without
 replacement, instead of bootstrap samples, in combination with unbiased
 split selection criteria, are used in constructing the forest, can the
 resulting permutation importance be interpreted reliably”
-\cite{strobl2007bias}, although correlated input variables still are
+\cite{strobl2007bias}, and correlated input variables still are
 problematic.
-The R package party includes two functions, \texttt{ctree} and
-\texttt{cforest}, that are not affected by this bias, due to
+The R package \texttt{party} includes two functions, \texttt{ctree} and
+\texttt{cforest}, that are not affected by this bias, due to their use
 yet another variable importance termed “conditional variable importance”
 \cite{strobl2008conditional}.
 Correlated variables can be problematic, because trees that include a
 pair of correlated input variables are less affected by the random
 permutation of one of them.
 Conditional variable importance considers these correlations.
-However, \cite{gromping2009variable} argues, that this can't be avoided
+However, \cite{gromping2009variable} argues, that this problem can't be avoided
 as long as \texttt{mtry} is smaller than the number of input variables,
 and that considering all input variables, i.e. bagging,
 “might already go a long way” towards remedying the problem,
@@ -779,33 +780,35 @@ The larger \texttt{mtry} is, the better the importance estimates become.
 Variable importance measures are used to select input variables for a simpler
 model, e.g. a generalized liner model, which is more interpretable than a
 forest of decision trees \cite{strobl2009introduction}.
-Variable importance measures are also the probably only simple way to
+Variable importance measures also are the probably only simple way to
 “shed some light into the black box of random forests”
 \cite{gromping2009variable}.
 A alternative, but rather naive way to estimate variable importance is to count
 the occurance of a variable over all trees \cite{strobl2009introduction}.
 Other imaginable ways to estimate variable importance would be to use
 algorithms that analyze the structure of each decision tree.
-Another interesting point to make, is that random perturbation of an input
+Another interesting point to make is, that random perturbation of an input
 variable could in theory be used as part of many other models, including but
 not limited to generalized linear models.
+Obviously this isn't very useful in the case of generalized linear models, but
+the point is, that it can be done.
 
-The way variable selection based on the variable importance measure is
+The way variable selection based on variable importance measures is
 being done, is by finding variables whose randomization led to an improvement
 in prediction accuracy.
 These improvements are just random effects, and function as an indicator
-for which variable importances are within the random fluctuations,
+for which variable importances are within the band of random fluctuations,
 and which are true indicators for important variables.
 
 \subsubsection{Regression}
 Random forest can not only be used for classification, but also for regression.
-To produce the numeric output values necessary in regression,
-the vote on the most popular output class in the forest is replaced by an
-average calculation over all tree outputs.
+To produce the numeric output values necessary for regression,
+the vote on the most popular output class in the forest is replaced by the
+calculation of an average over all tree outputs.
 One problem with regression using random forests is that more decision trees
-end up covering the middle of the range of values of an output variable.
-This means, that the prediction accuracy is good in the middle of the range
-of values, but the predictions for extremer values become more and more
+end up covering the middle range of values of output variable.
+This means that the prediction accuracy is good in the middle of the range
+of values, but that the predictions for extremer values become more and more
 inaccurate \cite{zhang2012bias}.
 The same paper also suggests five ways to estimate and reduce this bias.
 
@@ -816,14 +819,14 @@ but to also reproduce the random errors in the dataset.
 This is also called \emph{generalization error}, since the algorithm
 generalizes errors in the data by deriving rules for them.
 Random forests grow optimal decision trees, meaning they try to represent
-their bootstrapped sample perfectly.
+each bootstrapped sample perfectly.
 Except for the case where different records in the sample have the same
 values in their input variables, but different values in their output variable,
 this leads to decision trees which represent the sample perfectly,
 including all errors.
-The advantage of ensemble learning is that by combining decision trees
+The advantage of ensemble learning is that by combining decision trees grown
 for different samples, and constructed using different random split selections,
-this errors are canceled out.
+these errors are canceled out.
 However, this also means that there is an upper bound on how accurate
 random forests can become depending on the noise present in the dataset.
 Of course, this only applies if the trees in an ensemble are reasonably
@@ -836,22 +839,23 @@ Different variants of random forests try to grow random forests on data
 that is less prone to noise.
 FRF stands for \emph{Fuzzy random forests}, and is a method described by
 \cite{bonissone2008fuzzy}.
-FRF use what are called Fuzzy Sets to represent the data in the dataset,
-and build their decision trees on top.
+FRF use what are called \emph{fuzzy sets} to represent the data in the dataset,
+and to build their decision trees on top.
 The advantages of this approach are that the resulting FRF are more immune
 to noise, and \cite{cadenas2012extending} extend this framework to
 handle missing data too.
-Another attempt to construct random forests on higher quality data are
+Another attempt at constructing random forests on higher quality data are
 rotation forests by \cite{rodriguez2006rotation}, which use
 principal component analysis, or PCA, to find derived input variables that
-separate the input dimensions better.
+represent the input dimensions better.
 Although linear combinations of input dimensions aren't the same thing
-as noise, since the dataset is of a limited size, the decision trees
+as noise, since datasets are of a limited size, and decision trees
 might well fail to tease out the interactions between all pairs of input
-variables, which will end up looking like noise.
+variables, they will look like noisy input data if the decision trees
+don't catch on.
 Because better input dimensions lead to better splits, and to more
-uncorrelated random variable selections, rotation forests are more accurate
-than random forests \cite{rodriguez2006rotation}.
+uncorrelated random variable selections, rotation forests are often more
+accurate than random forests \cite{rodriguez2006rotation}.
 
 \subsubsection{Optimality Criterion}
 Random forests construct the underlying decision trees by selecting the
