@@ -1,8 +1,21 @@
+echo "generating diff to provisional version..."
+rcs-latexdiff --clean main.tex provisional HEAD
+
+echo "compiling tex files..."
 make -j 4
-targetpath="pdfs/`date +"main_%Y-%m-%d_%H-%M.pdf"`"
+
+echo "commiting pdf versions..."
+rendername="`date +"_%Y-%m-%d_%H-%M.pdf"`"
+targetpath="pdfs/main$rendername"
+diffpath="pdfs/diff$rendername"
+echo "main: $targetpath"
+echo "diff: $diffpath"
 cp -v main.pdf "$targetpath"
+cp -v diff.pdf "$diffpath"
 git add "$targetpath"
-git commit -m "newly rendered pdf: $targetpath"
+git add "$diffpath"
+git commit -m "newly rendered pdfs: $targetpath $diffpath"
 evince "$targetpath" &>/dev/null &
 make clean
+rm diff.tex
 
