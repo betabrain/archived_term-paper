@@ -1,3 +1,6 @@
+echo "archiving last pdf files..."
+git mv pdfs/*.pdf pdfs/legacy/
+
 echo "generating diff to provisional version..."
 rcs-latexdiff --clean main.tex provisional HEAD
 
