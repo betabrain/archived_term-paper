@@ -1,0 +1,1 @@
+ispell -t -d british-insane main.tex
