@@ -82,13 +82,13 @@ The null hypothesis is either an alternative theory or a chance effect.
 This is way more efficient than comparing the thousands of
 theories that researchers have come up with, and continue to come up with.
 The caveat is commonly called confirmation bias, because researchers focus
-on immunizing their theory instead of disproving those of others.
+on immunising their theory instead of disproving those of others.
 Therefore, the result only has significance in the experimental set-up
 being tested.
 In the greater scale of things, i.e. reality, the results might well be
 completely bogus.
 Nonetheless, most of the subjects being studied are sufficiently constant
-or change predictably enough to allow researchers to generalize from the
+or change predictably enough to allow researchers to generalise from the
 results of an experiment to the world at large, and likely remain correct.
 This likelihood depends on the size of the effects measured in the
 experiment, the amount of experimental data collected,
@@ -248,12 +248,12 @@ Many machine learning algorithms consume random numbers in different places.
 While computer generated random numbers are not truly random, they still
 cause the outcome of the algorithm to change slightly between different
 executions, due to the fact that random number generators are customarily
-initialized with the current time at the start of the program.
+initialised with the current time at the start of the program.
 These changes might unnerve a novice, but don't change the outcome of the
 algorithm significantly, as long as the algorithm is used correctly.
 Still, for publication purposes it can make sense to set and publish the
 random number generator's \emph{seed}, i.e. the value the generator is being
-initialized with.
+initialised with.
 However, doing so during the experiment
 is a serious mistake.
 Indeed, it is good practice to run the analysis multiple times to ensure
@@ -306,8 +306,8 @@ Out-of-bag data are the records in the dataset that were not selected during
 the bootstrap aggregation, and make up approximately one third of the dataset.
 Random forests also feature variable importance measures,
 which are calculated by reclassifying the out-of-bag data,
-but randomizing the variable under consideration.
-The variable importance of the randomized variable is the increase of
+but randomising the variable under consideration.
+The variable importance of the randomised variable is the increase of
 misclassifications.
 
 The reference implementation of random forests is written in Fortran,
@@ -353,7 +353,7 @@ be understood by humans.
 While ensemble methods are unsuitably complex,
 random forests' variable importance measures can be used to select variables
 for use in simpler models, e.g.
-generalized linear models, logit and probit models,
+generalised linear models, logit and probit models,
 which are more easily interpreted \cite{strobl2009introduction}.
 
 \subsection{Ensemble Learning Methods}
@@ -434,7 +434,7 @@ compared to in terms of performance, e.g. \cite{breiman2001random},
 \cite{banfield2007comparison} and \cite{rodriguez2006rotation}.
 The latter compared eight ensemble of decision tree classifiers in a
 large study on 57 publicly available datasets and concluded
-“[...] that boosting, random forests and randomized trees are
+“[...] that boosting, random forests and randomised trees are
 statistically significantly better than bagging.”
 
 \subsection{Decision Trees}
@@ -521,13 +521,13 @@ hardware requirements.
 As has been described in the sections on ensemble learning and decision trees,
 random forests build ensembles of decision trees.
 This process depends on two parameters: the ensemble size, commonly called
-\texttt{ntree}, and the randomization parameter \texttt{mtry}.
+\texttt{ntree}, and the randomisation parameter \texttt{mtry}.
 Actually, random forests depend on another parameter,
 the state of a random number generator, but being random,
 it doesn't and usually shouldn't be specified.
 The following is an exemplary implementation of random forest following the
 original version by \cite{breiman2001random}, but with limited features and
-with entropy instead of the gini index as optimality criterion.
+with entropy instead of the Gini index as optimality criterion.
 In reference to the higher level programming languages mentioned
 in the introduction, the following code uses a Lisp
 dialect called Clojure \cite{wpCLOJURE}.
@@ -674,7 +674,7 @@ However, the more recent study by \cite{banfield2007comparison} found
 “no stat. sig. improvement over bagging in 38 of 57 data sets”
 when ensemble sizes of up to 1000 trees where used.
 The study also concludes that bagging with an ensemble size of 1000 and
-random forests with the randomization parameter set to the
+random forests with the randomisation parameter set to the
 binary logarithm of the number of input variables were the best methods.
 The study by \cite{banfield2007comparison} also suggests a mechanism
 to determine the best size of the ensemble automatically.
@@ -690,7 +690,7 @@ and 3 hours for Adaboost when building ensembles of size 100,
 while I can execute all examples in \cite{strobl2009introduction}
 in well under 30 seconds.
 
-The second parameter of random forests is the randomization parameter
+The second parameter of random forests is the randomisation parameter
 \texttt{mtry} which controls how many variables are being selected randomly
 at each decision tree node to search for an optimal split.
 If \texttt{mtry} is set to 1, random forests acts like a linear combination
@@ -745,8 +745,8 @@ in the out-of-bag data of every tree, and calculating a new error estimate.
 The difference between the out-of-bag error estimates with and without
 randomly permutated input variable is the variable importance.
 The more important a variable is, the more drastically the prediction error
-increases when the variable is being randomized.
-The variable importance measure is sometimes scaled, i.e. z-standardized,
+increases when the variable is being randomised.
+The variable importance measure is sometimes scaled, i.e. z-standardised,
 but because it strongly depends on the parameter of random forests,
 it's not possible to compare these variable importances across studies,
 hence there is little use in doing so, and the practice only encourages
@@ -807,7 +807,7 @@ with the one built into random forests, and finds that the latter are
 heavily dependent on the mtry parameter.
 The larger \texttt{mtry} is, the better the importance estimates become.
 Variable importance measures are used to select input variables for a simpler
-model, e.g. a generalized liner model, which is more interpretable than a
+model, e.g. a generalised liner model, which is more interpretable than a
 forest of decision trees \cite{strobl2009introduction}.
 Variable importance measures also are the probably only simple way to
 “shed some light into the black box of random forests”
@@ -815,16 +815,16 @@ Variable importance measures also are the probably only simple way to
 A alternative, but rather naive way to estimate variable importance is to count
 the occurrence of a variable over all trees \cite{strobl2009introduction}.
 Other imaginable ways to estimate variable importance would be to use
-algorithms that analyze the structure of each decision tree.
+algorithms that analyse the structure of each decision tree.
 Another interesting point to make is, that random perturbation of an input
 variable could in theory be used as part of many other models, including but
-not limited to generalized linear models, because although
-this isn't very useful in the case of generalized linear models,
+not limited to generalised linear models, because although
+this isn't very useful in the case of generalised linear models,
 many other complex models are similarly difficult to tease apart, e.g.
 neural networks.
 
 The way variable selection based on variable importance measures is
-being done, is by finding variables whose randomization led to an improvement
+being done, is by finding variables whose randomisation led to an improvement
 in prediction accuracy.
 These improvements are just random effects, and function as an indicator
 for which variable importances are within the band of random fluctuations,
@@ -846,8 +846,8 @@ The same paper also suggests five ways to estimate and reduce this bias.
 Overfitting \cite{wpOF} is the situation where an algorithm learns the
 example dataset well enough to not only reproduce the underlying rules,
 but to also reproduce the random errors in the dataset.
-This is also called \emph{generalization error}, since the algorithm
-generalizes errors in the data by deriving rules for them.
+This is also called \emph{generalisation error}, since the algorithm
+generalises errors in the data by deriving rules for them.
 Random forests grow optimal decision trees, meaning they try to represent
 each bootstrapped sample perfectly.
 Except for the case where different records in the sample have the same
@@ -856,12 +856,12 @@ this leads to decision trees which represent the sample perfectly,
 including all errors.
 The advantage of ensemble learning is that by combining decision trees grown
 for different samples, and constructed using different random split selections,
-these errors are canceled out.
+these errors are cancelled out.
 However, this also means that there is an upper bound on how accurate
 random forests can become depending on the noise present in the dataset.
 Of course, this only applies if the trees in an ensemble are reasonably
 diverse, i.e. uncorrelated \cite{breiman2001random}.
-An analysis by \cite{liu2005maximizing} showed that the generalization error
+An analysis by \cite{liu2005maximizing} showed that the generalisation error
 is at its lowest when the tree ensemble is maximally diverse,
 and that bootstrapping tends to limit tree diversity.
 
@@ -984,12 +984,12 @@ classification,
 since its base learner fits the training data perfectly, applying PERT to
 regression would “drastically overfit the data” \cite{cutler2001pert}.
 
-PERT isn't the only random forest variant that emphasizes randomness in its
+PERT isn't the only random forest variant that emphasises randomness in its
 algorithm for growing trees.
-\cite{geurts2006extremely} suggested what they call extremely randomized trees.
-Despite their name, extremely randomized trees are actually closer to the
+\cite{geurts2006extremely} suggested what they call extremely randomised trees.
+Despite their name, extremely randomised trees are actually closer to the
 trees of random forests by \cite{breiman2001random} than PERT.
-Extremely randomized trees allow the user to configure the randomness of the
+Extremely randomised trees allow the user to configure the randomness of the
 constructed decision trees through an additional parameter in order to adapt
 the random forest algorithm to the problem domain of the dataset at hand.
 
@@ -1044,7 +1044,7 @@ Three questions that naturally follow from this are:
 
 \begin{APAenumerate}
 \item Can a random forest incorporate all of the developed features?
-\item How does one prioritize the different features and problems?
+\item How does one prioritise the different features and problems?
 \item Is there a different and stronger representation for random forests?
 \end{APAenumerate}
 
@@ -1114,7 +1114,7 @@ on Wikipedia, which I used to refresh my memories.
 Possible options for this topic were the presentation of
 exemplary uses of random
 forests, the discussion of strengths and weaknesses, and any of the more
-specialized variants.
+specialised variants.
 During my research I had the impression, that there were serious
 differences in the understanding of random forests among researchers,
 and even among designers of improved variants.
@@ -1133,9 +1133,9 @@ There is no “the random forest” method, but rather a wide spectrum of
 methods that all use similar principles.
 Random forests are accurate, and very powerful, because they can be used
 on almost any dataset.
-The way a random forest is grown lends itself to parallelization, as the
+The way a random forest is grown lends itself to parallelisation, as the
 small example implementation demonstrates, which is an important criterion
-for everyone who wants to analyze large datasets.
+for everyone who wants to analyse large datasets.
 On top of that, they are easy to implement and don't require a sophisticated
 mathematical understanding.
 In fact, a lot of the random forest variants have been developed by combining
@@ -1160,30 +1160,30 @@ and the qualities of its variants, but this seems not to be the case.
 Most comparisons still pitch a newly introduced variant against random forests
 \cite{breiman2001random}, bagging \cite{breiman1996bagging}
 and Adaboost \cite{freund1995decision}.
-One of the factors for this I believe to be the lack of a standardized
+One of the factors for this I believe to be the lack of a standardised
 and automatic testing infrastructure, which would simplify the development
 and testing of new algorithms.
 
 \subsection{Methods research}
 If the datasets and protocols for measuring and comparing algorithms were
-developed first and standardized, new algorithms could be measured by the
+developed first and standardised, new algorithms could be measured by the
 push of a button, and authors wouldn't have to use half of their publication
 to describe the datasets used in a comparison.
 Furthermore, by combining the knowledge of the particularities of a dataset,
 especially real-world datasets, authors would have access to immediate
 feedback on why their method might be particularly good or bad when applied
 to a certain type of data.
-Such a standardized test repository would also lighten the load of all the
+Such a standardised test repository would also lighten the load of all the
 researchers just using random forests as a tool.
 They wouldn't have to explain why they choose a particular variant based on
 their incomplete knowledge of machine learning, but could just refer to
 a standard.
 This certainly is beneficial for research in general, but one doesn't have
 to stop there.
-By standardizing research methods, their development and comparison
+By standardising research methods, their development and comparison
 in general, it also becomes easier to replicate a study's results using
 different methods on the same input data, and the datasets of a study can
-be included in the corpus of testsets for future testing of methods.
+be included in the corpus of test-sets for future testing of methods.
 
 The “Methods” section of a study and the research methods mentioned in it,
 shouldn't be separate, because relying on a particular version of a particular
