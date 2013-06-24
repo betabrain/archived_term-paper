@@ -51,7 +51,7 @@ and more user-friendly.}
 \section{Declaration of Independence}
 Hiermit versichere ich, dass ich die vorgelegte Arbeit selbständig und
 ohne  unerlaubte Hilfsmittel verfasst habe.
-Andere als die angegebenen Hilfsmittel habe ich nicht verwendet.
+Andere als die angegebenen Hilfsmittel habe ich nicht verwendet. \todo{Sign}
 \\[3cm]
 
 Tobias Ammann\\Datum: \today
@@ -73,14 +73,15 @@ So, the scientific method really is nothing but the use of countless
 attempts to disprove alternative theories, until only a single such theory
 remains.
 
-Since there is an unweildly number of theories to disprove, and every
-researcher likes to see the result of his work during his lifetime, a
+Since there is a large number of theories to disprove, and every
+researcher likes to see the result of his work as soon as possible, a
 more speedy method is usually employed, although this comes with a caveat.
-The speedier method has the researcher pit his favored theory against
-the null hypothesis, a fancy word for chance.
+The speedier method has the researcher compare his favored theory against
+the null hypothesis and show the superiority of his favored theory.
+The null hypothesis is either an alternative theory or a chance effect.
 This is way more efficient than comparing the thousands of
 theories that researchers have come up with, and continue to come up with.
-The caveat, commonly called confirmation bias, because researchers focus
+The caveat is commonly called confirmation bias, because researchers focus
 on immunizing their theory instead of disproving those of others.
 Therefore, the result only has significance in the experimental set-up
 being tested.
@@ -92,11 +93,11 @@ results of an experiment to the world at large, and likely remain correct.
 This likelihood depends on the size of the effects measured in the
 experiment, the amount of experimental data collected,
 and on the properties of the statistical methods involved.
-In psychological research, where large effects are freakishly rare and
+In psychological research, where large effects are rare and
 experiments often only study a handful of psychology students, who
 notwithstanding research ethics are often forced to participate, it is
-vital to use good statistical methods, because that is the only parameter
-remaining for researchers to tweak in their favour.
+vital to use powerful statistical methods, because this is the only parameter
+remaining for researchers to tweak in their favor.
 
 Recently, researchers in psychology began to turn to a new breed of
 statistical methods, in hope of ever better results. This new breed of
@@ -128,12 +129,12 @@ that they describe a straight line: \(y = \alpha * x + \beta \).
 Predictive statistics is widely used in psychology because it
 allows the researcher to look at the unobservable by making
 assumptions of the form \(reaction = mind * stimulus + measurement\ error \).
-This is the standard approach in personality questionaires.
+This is the standard approach in personality questionnaires.
 
 \emph{Artificial intelligence} is a field commonly associated with the
 computer sciences, where it began with the advent of higher-order
 programming languages based on mathematical foundations around the \emph{1960s} \cite{wpHOPL}.
-Its ultimate aim is to give computers human-like capabilites,
+Its ultimate aim is to give computers human-like capabilities,
 so that they can assist us with human intelligence, better rationality
 and knowledge that surpasses that of every human being.
 It includes things like \emph{logic programming} \cite{wpLP},
@@ -143,7 +144,7 @@ storing and querying knowledge.
 Unfortunately, early computers back then didn't have the speed and memory
 required to push the envelope far enough, and the field has been
 largely dormant since.
-Only the rather recent coexistance of powerful computers and massive amounts
+Only the rather recent coexistence of powerful computers and massive amounts
 of stored data, sometimes called \emph{big data}, revived artificial
 intelligence as an important field of research.
 In fact, the revival and spread of machine learning has made their application
@@ -812,7 +813,7 @@ Variable importance measures also are the probably only simple way to
 “shed some light into the black box of random forests”
 \cite{gromping2009variable}.
 A alternative, but rather naive way to estimate variable importance is to count
-the occurance of a variable over all trees \cite{strobl2009introduction}.
+the occurrence of a variable over all trees \cite{strobl2009introduction}.
 Other imaginable ways to estimate variable importance would be to use
 algorithms that analyze the structure of each decision tree.
 Another interesting point to make is, that random perturbation of an input
@@ -892,7 +893,7 @@ best split at each node from a number of randomly selected variables.
 To compare the different possible splits, an optimality criterion gets
 calculated for each split.
 The most commonly used criterion is the Gini index.
-The gini index is “a measure of statistical dispersion developed by the
+The Gini index is “a measure of statistical dispersion developed by the
 Italian statistician and sociologist Corrado Gini” \cite{wpGINI}.
 As has been mentioned in the section on variable importance, the fact that
 the Gini index is biased towards variables with many different values
@@ -930,7 +931,7 @@ The perfect random tree ensemble, PERT, is so named because the PERT base
 learner is a random tree classifier that fits the training data perfectly.
 The PERT base learner is constructed by first placing all data points in
 the root node.
-At each step of the tree construction, each nonterminal node is split by
+At each step of the tree construction, each non-terminal node is split by
 randomly choosing two data points from the node until these two belong to
 different classes.
 Let \( x = (x_{1} , . . . , x_{p} ) \) and \( z = (z_{1} , . . . , z_{p} ) \).
