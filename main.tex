@@ -58,6 +58,7 @@ Tobias Ammann\\Datum: \today
 
 \listoftodos
 \todo{Remove list of todos}
+\todo{cite vs citeA}
 
 \newpage
 \section{Introduction}
@@ -169,40 +170,47 @@ on past observations, and is therefore close to predictive statistics
 
 \subsection{The Machine Learning Life Cycle}
 This section discusses the difference between machine learning and traditional
-statistical methods. Terminology.
-The following section heavily relies on information found in Wikipedia, as
-well as what I learned in statistics lectures in the past years.
-A good introductory article is \cite{wpML}.
+statistical methods, and commonly used terminology.
 
 Traditionally, the statistical methods used in psychology
-take a model of how the world works, and a set of data, and return one of
-two things.
+take a model (or a family of models) of how the world works, and a set of data, and return one of
+the following things.
 They either return a probability of how likely an improvement in prediction
 can be observed at random, or how likely a difference in measurement can be
-observed at random.
+observed at random, or an estimate of what might be observed in different data,
+or, building on the first two, the model in a family of models that best fits the data.
 
 \emph{Regression methods} try to derive the values of
 one variable from the other variables in the dataset using a formula the
 researcher specifies.
 They then compare the actual values and the prediction of the model with
 different inputs, and calculate how probable an improvement in this
-comparison is to show up due to random variations \cite{wpRA}.
+comparison is to show up due to random variations.
+These calculations are called \emph{tests}, and can be calculated for the
+entire model, as well as for individual coefficients. \cite{wpRA}
 
 \emph{Analysis of variance methods} partition the dataset
 according to all but one variable. They then calculate the probability with
 which the variation in the one variable among the groups could be due to
 random variations in the dataset.
-The aim is of course to show that a variation is more likely to show up in
-certain groups \cite{wpAOV}.
+The aim is of course to show that a difference in the values of the outcome
+variable is unlikely due to chance, and hence dependent on certain
+input values \cite{wpAOV}.
 
-The probabilities the methods output are what statisticians call the
-\emph{significance}.
+The probabilities the methods output are usually called \(p\).
 Statisticians usually define a target \emph{significance level},
-e.g. 5\%, and compare the output of their statistical calculations to it.
-If the calculated probability is less than the targeted significance level,
-the measured effects are said to be significant at the significance level.
-For example, a result that is significant at 5\%, we is less
-likely to show up at random than in 5\% of all experiments.
+e.g. 5\%, and compare it with \(p\).
+If \(p\) is less than the targeted significance level, then
+the outcomes predicted by the model and the outcomes predicted by chance
+differ significantly.
+For example, a model with \(p \le 5\%\) is better than chance and its
+predictions will only show up at random in 5\% of all experiments.
+However, it is important to distinguish between \(p\) and \(\hat{p}\).
+The first denotes the probability found in the dataset, while the latter
+indicates an estimation for \(p\).
+In most cases the dataset represents a sample of a population and not the
+population itself, thus the error probability can only be estimated,
+hence \(\hat{p}\).
 
 The most striking difference between traditional statistical methods and
 machine learning methods is that the researcher can't specify his model of
@@ -215,8 +223,9 @@ This is unlike the statistical methods, where the researcher supplies a
 formula, because in machine learning, algorithms derive the formula on their own.
 This is what "learning" in machine learning means.
 The second difference is what the algorithms return.
-Since machine learning algorithms represent the model, what they output is
-not a percentage, i.e. significance, but the model itself.
+Since machine learning algorithms build their models,
+they don't just output coefficients and probabilities for a given model,
+but also the model itself.
 In short, machine learning provides the researcher with a generic model
 that adapts to the world.
 The prediction of such a model can then be calculated for data for which
@@ -258,7 +267,7 @@ cause the outcome of the algorithm to change slightly between different
 executions, due to the fact that random number generators are customarily
 initialised with the current time at the start of the program.
 These changes might unnerve a novice, but don't change the outcome of the
-algorithm significantly, as long as the algorithm is used correctly.
+algorithm systematically, as long as the algorithm is used correctly.
 Still, for publication purposes it can make sense to set and publish the
 random number generator's \emph{seed}, i.e. the value the generator is being
 initialised with.
