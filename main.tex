@@ -125,11 +125,18 @@ artificial intelligence branch of computer science.
 concerned with making predictions based on past observations.
 It's probably most widely known method is \emph{linear regression}
 \cite{borzlinreg} that associates two variables \(y\) and \(x\) in such a way
-that they describe a straight line: \(y = \alpha \cdot x + \beta \).
-Predictive statistics is widely used in psychology because it
-allows the researcher to look at the unobservable by making
-assumptions of the form \(reaction = mind * stimulus + measurement\ error \).
-This is the standard approach in personality questionnaires.
+that they describe a straight line: \(y = \alpha \cdot x + \beta \), but
+linear regression isn't limited to two variables.
+Linear regression is widely used in psychology because it
+allows the researcher to tease apart the influence of a number of variables on an
+outcome variable by making assumptions of the form
+\( Y = \alpha + \beta \cdot X + \epsilon \), where \(Y\) is a vector of
+the outcomes for participants, \(\alpha\) is a constant,
+\(\beta\) is a vector of weights, \(X\) is a matrix of influence variables for
+every participant, and \(\epsilon\) is a vector of random differences.
+Sometimes this is written as an equation for a single participant:
+\( y_{i} = \beta_{0} + \beta_{1} \cdot x_{i1} + \dotsb + \beta_{n} \cdot x_{in} + \epsilon \).
+This is a standard approach in personality questionnaires.
 
 \emph{Artificial intelligence} is a field commonly associated with the
 computer sciences, where it began with the advent of higher-order
@@ -137,13 +144,14 @@ programming languages based on mathematical foundations around the \emph{1960s} 
 Its ultimate aim is to give computers human-like capabilities,
 so that they can assist us with human intelligence, better rationality
 and knowledge that surpasses that of every human being.
-It includes things like \emph{logic programming} \cite{wpLP},
-\emph{expert systems} \cite{wpES}, \emph{databases} \cite{wpDB} and
-\emph{neural networks} \cite{wpNN}, that all represent some form of
+It includes things like \emph{logic programming} \cite{wpLP, qai},
+\emph{expert systems} \cite{wpES, qai}, \emph{database management systems} \cite{wpDB} and
+\emph{neural networks} \cite{haykin, qai}, that all represent some form of
 storing and querying knowledge.
 Unfortunately, early computers back then didn't have the speed and memory
-required to push the envelope far enough, and the field has been
-largely dormant since.
+required for artificial intelligence to solve many real problems.
+This and overly optimistic predictions led to disappointment and the abandonement of AI research,
+and the field has been largely dormant since, a state widely called \emph{AI winter} \cite{qai}.
 Only the rather recent coexistence of powerful computers and massive amounts
 of stored data, sometimes called \emph{big data}, revived artificial
 intelligence as an important field of research.
