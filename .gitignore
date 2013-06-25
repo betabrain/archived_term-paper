@@ -1,4 +1,5 @@
-rf/target/stale/dependencies
+rf/target/
+*.lein-repl-history
 *.acn
 *.acr
 *.alg
