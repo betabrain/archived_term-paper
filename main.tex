@@ -156,7 +156,7 @@ storing and querying knowledge.
 Unfortunately, early computers back then didn't have the speed and memory
 required for artificial intelligence to solve many real problems.
 This and overly optimistic predictions led to disappointment and the abandonment of AI research,
-and the field has been largely dormant since, a state widely called \emph{AI winter} \cite{qai}.
+and the field has been largely dormant since, a state widely called \emph{AI winter} \cite{qai, wpHOAI}.
 Only the rather recent coexistence of powerful computers and massive amounts
 of stored data, sometimes called \emph{big data}, revived artificial
 intelligence as an important field of research.
@@ -756,45 +756,44 @@ Furthermore, not every dataset is best learned by random forests using the
 same settings.
 This lack of a standard way to determine the parameter values makes it hard
 to compare the accuracy of different methods.
-The comparative study by \cite{banfield2007comparison} gives an
+The comparative study by \citeA{banfield2007comparison} gives an
 illustrative overview over the datasets used in previous publications,
-among which are \cite{breiman2001random} and \cite{dietterich2000ensemble},
+among which are \citeA{breiman2001random} and \citeA{dietterich2000ensemble},
 that each used ensemble sizes of 50-200, and applied the algorithms being
 compared to 18-27 datasets.
 In each case the authors concluded that their method was superior to the
 other methods in the study.
-However, the more recent study by \cite{banfield2007comparison} found
+However, the more recent study by \citeA{banfield2007comparison} found
 “no stat. sig. improvement over bagging in 38 of 57 data sets”
 when ensemble sizes of up to 1000 trees where used.
 The study also concludes that bagging with an ensemble size of 1000 and
 random forests with the randomisation parameter set to the
 binary logarithm of the number of input variables were the best methods.
-The study by \cite{banfield2007comparison} also suggests a mechanism
+The study by \citeA{banfield2007comparison} also suggests a mechanism
 to determine the best size of the ensemble automatically.
 Methodologically, this would be a welcome improvement, because it takes
 away one way researchers can fiddle with the outcome of their calculations,
 and because it would ensure better results due to the usually larger
 ensemble sizes.
-In defense of older studies, like those by \cite{breiman2001random} and
-\cite{dietterich2000ensemble}, one has to mention that
+In defense of older studies, like those by \citeA{breiman2001random} and
+\citeA{dietterich2000ensemble}, one has to mention that
 computers back then weren't as powerful.
-\cite{breiman2001random} mentions run times for random forests of 4 minutes
+\citeA{breiman2001random} mentions run times for random forests of 4 minutes
 and 3 hours for Adaboost when building ensembles of size 100,
-while I can execute all examples in \cite{strobl2009introduction}
-in well under 30 seconds.
+while I can execute all examples in the paper by \citeA{strobl2009introduction}
+in well under 10 seconds on one core running at 3.40 GHz, consuming about 180 Mb
+of memory.
 
 The second parameter of random forests is the randomisation parameter
 \texttt{mtry} which controls how many variables are being selected randomly
 at each decision tree node to search for an optimal split.
-If \texttt{mtry} is set to 1, random forests acts like a linear combination
-of the input variables.
 If \texttt{mtry} is set to the number of variables, random forest becomes
-bagging as proposed by \cite{breiman1996bagging}.
+bagging as proposed by \citeA{breiman1996bagging}.
 Common choices for \texttt{mtry} are 1, 2, and other small values in
-older studies, e.g. \cite{breiman2001random}, and the square root of n,
+older studies, e.g. \citeA{breiman2001random}, and the square root of n,
 or the binary logarithm of n, with n being the number of input variables,
 becoming increasingly popular in newer literature, e.g.
-\cite{strobl2009introduction}.
+\citeA{strobl2009introduction}.
 As mentioned above, using the binary logarithm of the number of
 input variables is indeed the best choice for most datasets
 \cite{banfield2007comparison}.
@@ -805,15 +804,15 @@ irrelevant input variables in addition to the dataset being a
 “small n large p case”, it is necessary to use a larger value
 for \texttt{mtry}, else some variables might never be used in the ensemble
 at all \cite{strobl2009introduction}.
-It might be interesting to consider choosing \texttt{mtry} automatically,
-and two obvious suggestions for this would be to choose a random \texttt{mtry}
-value for every decision tree being grown, or to define it via a function of the
-number of input variables satisfying some statistical distribution criterion.
-According to \cite{bernard2008forest} a greedy search or choosing one of
+It might be interesting to consider choosing \texttt{mtry} automatically.
+One way to do this, is to systematically try different values for \texttt{mtry}
+and choose the best one using cross-validation \cite{psymeth}.
+According to \citeA{bernard2008forest} a greedy search or choosing one of
 the values discussed above is the usual approach in the literature.
 The same paper shows, that this doesn't have to be the case, by demonstrating
 a "push-button" method that automatically derives a suitable value for
-\texttt{mtry} and "is at least as statistically significant as the original".
+\texttt{mtry} and "is at least as statistically significant as the original"
+\cite{bernard2008forest}.
 
 \subsubsection{Out-of-bag Data}
 Because random forests are based on bagging and use bootstrapped samples,
@@ -822,7 +821,7 @@ that has not been used to grow the tree.
 This set can be used to test the prediction accuracy of each tree,
 and the prediction accuracy of all trees can then be averaged to give an
 error estimation of the entire random forest.
-This out-of-bag error estimation is more precise than the standard error
+This out-of-bag error estimation is more precise than the naive error
 estimate, which is using all of the dataset \cite{strobl2009introduction}.
 This said, one should not forget that out-of-bag data isn't the
 same thing as a genuine test dataset.
@@ -833,7 +832,7 @@ the prediction accuracy.
 
 \subsubsection{Variable Importance}
 As has been mentioned above, random forests have a built in variable
-importance measure, which is calculated, by permutating one input variable
+importance measure, which is calculated by permutating one input variable
 in the out-of-bag data of every tree, and calculating a new error estimate.
 The difference between the out-of-bag error estimates with and without
 randomly permutated input variable is the variable importance.
@@ -854,11 +853,11 @@ on the prediction would be modified too.
 By randomly permutating the values of an input variable,
 the variable's characteristics don't change, but the connection to the
 output variable is broken.
-However, according to \cite{strobl2007bias} the variable importance might
+However, according to \citeA{strobl2007bias} the variable importance might
 still depend on which variable is being measured, because the
 variable importance measure is biased towards variables with many categories
 and variables with many missing values.
-Numeric variable usually have as many different values as there are records
+Numeric variables usually have as many different values as there are records
 in the dataset, meaning that their importance measure is greatly biased due
 to the large number of “categories”.
 Fortunately, this can be fixed, but “Only when subsamples drawn without
@@ -868,14 +867,15 @@ resulting permutation importance be interpreted reliably”
 \cite{strobl2007bias}, and correlated input variables still are
 problematic.
 The R package \texttt{party} includes two functions, \texttt{ctree} and
-\texttt{cforest}, that are not affected by this bias, due to their use
-yet another variable importance termed “conditional variable importance”
-\cite{strobl2008conditional}.
+\texttt{cforest}, that use a different method for split selection and aren't
+affected by this bias.
+Therefore, \texttt{cforest} actually uses another variable importance termed
+“conditional variable importance” \cite{strobl2008conditional}.
 Correlated variables can be problematic, because trees that include a
 pair of correlated input variables are less affected by the random
 permutation of one of them.
 Conditional variable importance considers these correlations.
-However, \cite{gromping2009variable} argues, that this problem can't be avoided
+However, \citeA{gromping2009variable} argues, that this problem can't be avoided
 as long as \texttt{mtry} is smaller than the number of input variables,
 and that considering all input variables, i.e. bagging,
 “might already go a long way” towards remedying the problem,
@@ -892,8 +892,8 @@ The latter is called the XOR problem.
 It is important to note, that random forests with a different split selection
 algorithm don't have to be affected by this, e.g. PERT \cite{cutler2001pert}.
 
-Last but no least, both \cite{strobl2009introduction} and
-\cite{gromping2009variable} see one of the advantages of random forests in
+Last but no least, both \citeA{strobl2009introduction} and
+\citeA{gromping2009variable} see one of the advantages of random forests in
 their variable importance measure.
 \cite{gromping2009variable} compares linear variable importance measures
 with the one built into random forests, and finds that the latter are
@@ -905,7 +905,7 @@ forest of decision trees \cite{strobl2009introduction}.
 Variable importance measures also are the probably only simple way to
 “shed some light into the black box of random forests”
 \cite{gromping2009variable}.
-A alternative, but rather naive way to estimate variable importance is to count
+An alternative, but rather naive way to estimate variable importance is to count
 the occurrence of a variable over all trees \cite{strobl2009introduction}.
 Other imaginable ways to estimate variable importance would be to use
 algorithms that analyse the structure of each decision tree.
@@ -933,7 +933,7 @@ end up covering the middle range of values of output variable.
 This means that the prediction accuracy is good in the middle of the range
 of values, but that the predictions for extremer values become more and more
 inaccurate \cite{zhang2012bias}.
-The same paper also suggests five ways to estimate and reduce this bias.
+The same paper also suggests five ways to estimate and reduce this problem.
 
 \subsubsection{Overfitting}
 Overfitting \cite{wpOF} is the situation where an algorithm learns the
@@ -954,20 +954,20 @@ However, this also means that there is an upper bound on how accurate
 random forests can become depending on the noise present in the dataset.
 Of course, this only applies if the trees in an ensemble are reasonably
 diverse, i.e. uncorrelated \cite{breiman2001random}.
-An analysis by \cite{liu2005maximizing} showed that the generalisation error
+An analysis by \citeA{liu2005maximising} showed that the generalisation error
 is at its lowest when the tree ensemble is maximally diverse,
 and that bootstrapping tends to limit tree diversity.
 
 Different variants of random forests try to grow random forests on data
 that is less prone to noise.
 FRF stands for \emph{Fuzzy random forests}, and is a method described by
-\cite{bonissone2008fuzzy}.
+\citeA{bonissone2008fuzzy}.
 FRF use what are called \emph{fuzzy sets} to represent the data in the dataset,
 and to build their decision trees on top.
 The advantages of this approach are that the resulting FRF are more immune
-to noise, and \cite{cadenas2012extending} extend this framework to
+to noise, and \citeA{cadenas2012extending} extend this framework to
 handle missing data too.
-Another attempt at constructing random forests on higher quality data are
+Another attempt at constructing random forests from smoother data are
 rotation forests by \cite{rodriguez2006rotation}, which use
 principal component analysis, or PCA, to find derived input variables that
 represent the input dimensions better.
