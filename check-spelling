@@ -1,1 +1,1 @@
-ispell -t -d british-insane main.tex
+ispell -d british-insane -t main.tex
