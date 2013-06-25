@@ -314,7 +314,7 @@ variants that have been derived from the original forests, e.g.
 Forest-rk \cite{bernard2008forest}, RFW \cite{maudes2012random},
 DRF \cite{bernard2012dynamic}, Fuzzy random forests \cite{bonissone2008fuzzy},
 Rotation forest \cite{rodriguez2006rotation}, random forests that are
-more random, e.g. \citeA{geurts2006extremely}, \citeA{liu2005maximizing},
+more random, e.g. \citeA{geurts2006extremely}, \citeA{liu2005maximising},
 \citeA{cutler2001pert}, and various other improvements, e.g. by
 \citeA{banfield2007comparison}, \citeA{robnik2004improving},
 \citeA{strobl2009introduction}, \citeA{zhang2012bias}, show that it
@@ -568,8 +568,8 @@ roughly following the original version by \citeA{breiman2001random}.
 I wrote this implementation to illustrate the simplicity of random forests,
 as well as its components.
 The implementation uses entropy instead of the Gini index as
-optimality criterion, a naive stop criterion only capabable of handling
-perfecly partitionable data, and lacks variable importance measures.
+optimality criterion, a naive stop criterion only capable of handling
+perfectly partition-able data, and lacks variable importance measures.
 In reference to the higher level programming languages mentioned
 in the introduction, the following source code is written in a Lisp
 dialect called Clojure \cite{wpCLOJURE}, and uses a functional data structure
@@ -609,7 +609,7 @@ and a split value as input, and returns lists of the matching and the not matchi
 \end{minted}
 \end{figure}
 
-For each node the algorithm then progesses to check whether the node should be split,
+For each node the algorithm then progresses to check whether the node should be split,
 and if so, selects the best split out of a random selection of split variables.
 The \texttt{splits} function takes a dataset and \texttt{mtry} as parameters and
 returns all splits as tuples of variable name and split value.
@@ -617,7 +617,7 @@ The \texttt{best-split} function calculates the entropy for every split and appl
 the best split to two datasets simultaneously (sample data and out-of-bag data).
 This is done because both sample and out-of-bag data are stored in each node to
 simplify the decision tree construction and the error estimate calculation.
-Since Clojure features immutable data structures this increases memory usage only negligably.
+Since Clojure features immutable data structures this increases memory usage only negligibly.
 
 \begin{figure}[H]
 \caption{The functions \texttt{splits} and \texttt{best-split}.}
@@ -663,7 +663,7 @@ hands down the appropriate datasets to the child nodes.
 \end{minted}
 \end{figure}
 
-The following \texttt{rf-train} function is the top-level function resposible for
+The following \texttt{rf-train} function is the top-level function responsible for
 building the ensemble of decision trees.
 It creates \texttt{ntree} decision tree root nodes, each with its own sample
 and out-of-bag datasets, walks through each tree using a zipper,
@@ -1317,11 +1317,10 @@ traditional methods.
 
 \newpage
 \section{Appendix}
-The following Clojure source code is a complete example implementation
-of random forests.
-Parts of it are explained earlier in this paper.
+The following Clojure source code is the complete version of the
+exemplary implementation of random forests discussed earlier in this paper.
 To run the examples, install the \texttt{Leiningen} build system
-\cite{leiningen}, save the following source code the indicated files,
+\cite{leiningen}, save the following source code to the indicated files,
 and start up the interactive \emph{REPL} (read eval print loop).
 
 \begin{figure}[H]
@@ -1334,7 +1333,8 @@ $ lein repl
 
 Once this is done, provided no unexpected errors have occurred,
 the random forest implementation can be used as follows.
-Please refer to the source code for the format of the dataset.
+Please refer to the source code below for information on the
+format of the dataset.
 
 \begin{figure}[H]
 \begin{minted}[baselinestretch=1]{clojure}
