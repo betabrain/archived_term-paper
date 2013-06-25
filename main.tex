@@ -11,6 +11,8 @@
 \usepackage{todonotes}
 \usepackage{minted}
 
+\usemintedstyle{vim}
+
 \floatstyle{boxed}
 \restylefloat{figure}
 
@@ -361,10 +363,10 @@ For illustration purposes I include a source code example taken from
 \begin{figure}[H]
 \caption{R example using the party package.}
 \begin{minted}{r}
-> load("dat_genes.rda")
-> library("party")
-> mycontrols <- cforest_unbiased(ntree=1000, mtry=20, minsplit=5)
-> mycforest <- cforest(status ~ ., data=dat_genes, controls=mycontrols)
+ load("dat_genes.rda")
+ library("party")
+ mycontrols <- cforest_unbiased(ntree=1000, mtry=20, minsplit=5)
+ mycforest <- cforest(status ~ ., data=dat_genes, controls=mycontrols)
 \end{minted}
 \end{figure}
 
