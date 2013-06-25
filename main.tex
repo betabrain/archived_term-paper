@@ -59,6 +59,7 @@ Tobias Ammann\\Datum: \today
 \listoftodos
 \todo{Remove list of todos}
 \todo{cite vs citeA}
+\todo{input, output names}
 
 \newpage
 \section{Introduction}
@@ -171,6 +172,17 @@ on past observations, and is therefore close to predictive statistics
 \subsection{The Machine Learning Life Cycle}
 This section discusses the difference between machine learning and traditional
 statistical methods, and commonly used terminology.
+The following section relies on knowledge gained from personal projects a few
+years back, a university course \cite{psymeth}, as well as \citeA{barberMLC}
+and \citeA{wpML}.
+
+Authors differ in how they call the different parts of a dataset.
+Common names for the parts used to derive other parts are generic statistical
+and machine learning names, such as variables, input variables, input, input data, features, or
+problem specific names, such as economic indicators, genes, and more.
+The part of a dataset that is being derived or analysed is commonly called outcome,
+output, output variable, output data, class, or whatever it represents, e.g. likelihood of smoking or cancer risk.
+This paper will try to be consistent in the names used, but doesn't give any guarantees.
 
 Traditionally, the statistical methods used in psychology
 take a model (or a family of models) of how the world works, and a set of data, and return one of
@@ -288,20 +300,20 @@ Leo Breiman developed random forests with Adele Cutler, building on work
 by Ho, Amit, Geman, and Dietterich \cite{wpRF}.
 
 Although the name random forests is usually taken to refer to the random
-forests as defined by \cite{breiman2001random}, the large number of
+forests as defined by \citeA{breiman2001random}, the large number of
 variants that have been derived from the original forests, e.g.
 Forest-rk \cite{bernard2008forest}, RFW \cite{maudes2012random},
 DRF \cite{bernard2012dynamic}, Fuzzy random forests \cite{bonissone2008fuzzy},
 Rotation forest \cite{rodriguez2006rotation}, random forests that are
-more random \cite{geurts2006extremely}, \cite{liu2005maximizing},
-\cite{cutler2001pert}, and various other improvements, e.g. by
-\cite{banfield2007comparison}, \cite{robnik2004improving},
-\cite{strobl2009introduction}, \cite{zhang2012bias}, make it so that it
+more random, e.g. \citeA{geurts2006extremely}, \citeA{liu2005maximizing},
+\citeA{cutler2001pert}, and various other improvements, e.g. by
+\citeA{banfield2007comparison}, \citeA{robnik2004improving},
+\citeA{strobl2009introduction}, \citeA{zhang2012bias}, show that it
 is better to think of random forests as being a framework instead of being
 a single method \cite{wpRF}.
 To understand this framework, it is best to look at the different aspects
 of random forests, first in a top-down view, and later part by part.
-The top-down view is strictly based on \cite{breiman2001random},
+The top-down view is strictly based on \citeA{breiman2001random},
 while the part by part discussion will also go into tweaking random forests.
 
 Random forests are ensemble learning methods where the ensemble consists
@@ -324,8 +336,8 @@ the bootstrap aggregation, and make up approximately one third of the dataset.
 Random forests also feature variable importance measures,
 which are calculated by reclassifying the out-of-bag data,
 but randomising the variable under consideration.
-The variable importance of the randomised variable is the increase of
-misclassifications.
+The variable importance of the randomised variable is the increase in
+prediction error.
 
 The reference implementation of random forests is written in Fortran,
 but a package for the statistical software framework R \cite{rproject2012},
@@ -337,32 +349,31 @@ importance measures is available under the name \texttt{party}
 A third implementation using Java is available in the WEKA machine learning
 suite \cite{hall2009weka}.
 For illustration purposes I include a source code example taken from
-\cite{strobl2008conditional}:
+\citeA{strobl2008conditional}:
 
 \begin{figure}[H]
 \caption{R example using the party package.}
 \begin{verbatim}
-> load("dat_smoking.rda")
+> load("dat_genes.rda")
 > library("party")
-> myctree <- ctree(intention_to_smoke ~ ., data = dat_smoking)
-> class(dat_smoking$intention_to_smoke)
-> plot(myctree)
+> mycontrols <- cforest_unbiased(ntree=1000, mtry=20, minsplit=5)
+> mycforest <- cforest(status ~ ., data=dat_genes, controls=mycontrols)
 \end{verbatim}
 \end{figure}
 
-The use case for random forests is quite wide.
+Random forests suitable for a wide range of applications.
 Random forests have been used in applications from psychology and
-computational biology as is outlined in \cite{strobl2009introduction},
+computational biology as is outlined in \citeA{strobl2009introduction},
 to customer churn prediction \cite{xie2009customer},
 to software testing \cite{guo2004robust} and internet security
-\cite{zhang2005network}, to natural language applications \cite{xu2004random}
-and \cite{kobylinski2008definition}.
+\cite{zhang2005network}, to natural language applications
+\cite{xu2004random, kobylinski2008definition}.
 The reasons why random forests are such a widely used method,
 are their prediction accuracy, which is comparable to other state-of-the-art
 machine learning algorithms like Adaboost as demonstrated
-in \cite{breiman2001random},
+by \citeA{breiman2001random},
 their ability to handle “small n large p” datasets \cite{strobl2009introduction},
-their practical built in error estimate, and their variable importance measures.
+their practical built-in error estimate, and their variable importance measures.
 The last of which, random forests' variable importance measures,
 might be its most useful feature.
 Many domains don't require accurate predictions as much as a model that can
@@ -370,7 +381,7 @@ be understood by humans.
 While ensemble methods are unsuitably complex,
 random forests' variable importance measures can be used to select variables
 for use in simpler models, e.g.
-generalised linear models, logit and probit models,
+generalised linear models such as logit and probit models,
 which are more easily interpreted \cite{strobl2009introduction}.
 
 \subsection{Ensemble Learning Methods}
