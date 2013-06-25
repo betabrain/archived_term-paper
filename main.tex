@@ -568,14 +568,17 @@ roughly following the original version by \citeA{breiman2001random}.
 I wrote this implementation to illustrate the simplicity of random forests,
 as well as its components.
 The implementation uses entropy instead of the Gini index as
-optimality criterion, a naive stop criterion only capable of handling
-perfectly partition-able data, and lacks variable importance measures.
+optimality criterion, a naive stop criterion only capabable of handling
+perfecly partitionable data, and lacks variable importance measures.
 In reference to the higher level programming languages mentioned
 in the introduction, the following source code is written in a Lisp
 dialect called Clojure \cite{wpCLOJURE}, and uses a functional data structure
 called \emph{zipper} \cite{huet1997zipper} for efficient tree construction.
 
-The first part...
+For every tree in a random forest ensemble, the algorithm first draws a
+bootstrap sample from the dataset.
+The following \texttt{bootstrap} function takes a vector of rows as input
+and returns an equally large bootstrap sample and the corresponding out-of-bag data.
 
 \begin{figure}[H]
 \caption{The \texttt{bootstrap} function.}
@@ -589,7 +592,10 @@ The first part...
 \end{minted}
 \end{figure}
 
-To select...
+For each node in a tree the algorithm first has to select the rows in the dataset
+that match all criteria up to the given node.
+The following \texttt{select} function takes a vector of rows, and a tuple of a variable name
+and a split value as input, and returns lists of the matching and the not matching rows.
 
 \begin{figure}[H]
 \caption{The \texttt{select} function.}
@@ -603,10 +609,18 @@ To select...
 \end{minted}
 \end{figure}
 
-The following...
+For each node the algorithm then progesses to check whether the node should be split,
+and if so, selects the best split out of a random selection of split variables.
+The \texttt{splits} function takes a dataset and \texttt{mtry} as parameters and
+returns all splits as tuples of variable name and split value.
+The \texttt{best-split} function calculates the entropy for every split and applies
+the best split to two datasets simultaneously (sample data and out-of-bag data).
+This is done because both sample and out-of-bag data are stored in each node to
+simplify the decision tree construction and the error estimate calculation.
+Since Clojure features immutable data structures this increases memory usage only negligably.
 
 \begin{figure}[H]
-\caption{The functions to select the best split.}
+\caption{The functions \texttt{splits} and \texttt{best-split}.}
 \begin{minted}[baselinestretch=1]{clojure}
 (defn splits [dataset mtry]
   (let [vs (filter (partial not= :class) (keys (first dataset)))
@@ -627,10 +641,12 @@ The following...
 \end{minted}
 \end{figure}
 
-To train...
+The \texttt{extend-node} function uses \texttt{leaf?} to check whether the node
+should be split, does so if necessary using the \texttt{best-split} function, and
+hands down the appropriate datasets to the child nodes.
 
 \begin{figure}[H]
-\caption{BALABLAlBLABLABLAB}
+\caption{The stop criterion \texttt{leaf?} and the node splitting function \texttt{extend-node}.}
 \begin{minted}[baselinestretch=1]{clojure}
 (defn leaf? [dataset] (= (entropy dataset) 0.0))
 
@@ -647,10 +663,16 @@ To train...
 \end{minted}
 \end{figure}
 
-To train...
+The following \texttt{rf-train} function is the top-level function resposible for
+building the ensemble of decision trees.
+It creates \texttt{ntree} decision tree root nodes, each with its own sample
+and out-of-bag datasets, walks through each tree using a zipper,
+and invokes the \texttt{extend-node} for each node in every tree.
+The different trees in the ensemble are constructed in parallel using \texttt{pmap},
+distributing the work among all available processor cores.
 
 \begin{figure}[H]
-\caption{BALABLAlBLABLABLAB}
+\caption{The \texttt{rf-train} function.}
 \begin{minted}[baselinestretch=1]{clojure}
 (defn rf-train [dataset ntree mtry]
   (set (pmap (fn [sample]
@@ -672,10 +694,12 @@ To train...
 \end{minted}
 \end{figure}
 
-Blabla...
+The \texttt{rf-predict} is another top-level function.
+It takes a random forest and a row of input values, and returns the outcome as
+predicted by the random forest.
 
 \begin{figure}[H]
-\caption{asdfasdfasdfasdfasdf}
+\caption{The \texttt{rf-predict} function.}
 \begin{minted}[baselinestretch=1]{clojure}
 (defn rf-predict [forest features]
   (let [eval-tree
@@ -693,10 +717,15 @@ Blabla...
 \end{minted}
 \end{figure}
 
-Blabla...
+The following top-level function \texttt{rf-error} calculates the random forest's
+error estimate by invoking \texttt{tree-error} for each tree in the ensemble.
+The \texttt{tree-error} function uses the out-of-bag data stored in each leaf node
+and compares it to the predicted outcome of that leaf.
+Since this implementation only handles noiseless datasets, the error estimate
+returned by \texttt{rf-error} will only every be zero.
 
 \begin{figure}[H]
-\caption{asdfasdfasdfasdfasdf}
+\caption{The \texttt{rf-error} and \texttt{tree-error} functions calculate the error estimate.}
 \begin{minted}[baselinestretch=1]{clojure}
 (defn tree-error [tree]
   (let [cls (:class tree)]
@@ -713,19 +742,8 @@ Blabla...
 \end{minted}
 \end{figure}
 
-Blabla...
-
-\begin{figure}[H]
-\caption{asdfasdfasdfasdfasdf}
-\begin{minted}[baselinestretch=1]{clojure}
-(def rf (rf-train sample 1 3))
-
-(every? #(= (rf-predict rf (dissoc % :class)) (:class %))
-        sample)
-
-(rf-error rf)
-\end{minted}
-\end{figure}
+For information on how to use this implementation of random forests,
+see example and instructions in the appendix.
 
 \subsubsection{Parameters}
 The two parameters random forests depends on, the size of the forest
@@ -1306,16 +1324,19 @@ To run the examples, install the \texttt{Leiningen} build system
 \cite{leiningen}, save the following source code the indicated files,
 and start up the interactive \emph{REPL} (read eval print loop).
 
+\begin{figure}[H]
 \begin{minted}[baselinestretch=1]{bash}
 $ cd rf/
 $ lein deps
 $ lein repl
 \end{minted}
+\end{figure}
 
 Once this is done, provided no unexpected errors have occurred,
 the random forest implementation can be used as follows.
 Please refer to the source code for the format of the dataset.
 
+\begin{figure}[H]
 \begin{minted}[baselinestretch=1]{clojure}
 user=> (require '[rf.core :as r])
 nil
@@ -1329,6 +1350,7 @@ user=> (r/rf-error rf)
 user=> (exit)
 Bye for now!
 \end{minted}
+\end{figure}
 
 \newpage
 \begin{minted}[baselinestretch=1]{clojure}
