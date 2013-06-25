@@ -9,6 +9,7 @@
 \usepackage{etoolbox}
 \usepackage{float}
 \usepackage{todonotes}
+\usepackage{minted}
 
 \floatstyle{boxed}
 \restylefloat{figure}
@@ -359,12 +360,12 @@ For illustration purposes I include a source code example taken from
 
 \begin{figure}[H]
 \caption{R example using the party package.}
-\begin{verbatim}
+\begin{minted}{r}
 > load("dat_genes.rda")
 > library("party")
 > mycontrols <- cforest_unbiased(ntree=1000, mtry=20, minsplit=5)
 > mycforest <- cforest(status ~ ., data=dat_genes, controls=mycontrols)
-\end{verbatim}
+\end{minted}
 \end{figure}
 
 Random forests suitable for a wide range of applications.
