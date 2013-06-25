@@ -182,7 +182,13 @@ and machine learning names, such as variables, input variables, input, input dat
 problem specific names, such as economic indicators, genes, and more.
 The part of a dataset that is being derived or analysed is commonly called outcome,
 output, output variable, output data, class, or whatever it represents, e.g. likelihood of smoking or cancer risk.
-This paper will try to be consistent in the names used, but doesn't give any guarantees.
+This paper will try to be consistent in the names used, and assumes datasets
+to be in table form, with columns representing variables and rows representing
+measurements or participants.
+The paper uses the word \emph{variable} to refer to columns, and \emph{data}
+to refer to the whole or parts of the dataset, i.e. rows and columns.
+In most cases these two terms are interchangable, but sometimes one is more
+illustrative or semantically nicer than the other.
 
 Traditionally, the statistical methods used in psychology
 take a model (or a family of models) of how the world works, and a set of data, and return one of
@@ -404,9 +410,9 @@ corresponds to new input data.
 In theory this problem can be solved by a construct called
 Bayes optimal classifier, which considers every possible hypothesis,
 but which unfortunately can't be implemented except for trivial problems.
-However, the principle that the combination of possible hypotheses becomes
-a stronger hypothesis, because the ensemble can represent more functions
-than every component hypothesis could holds.
+The principle behind this is, that the combination of hypotheses becomes
+a stronger hypothesis, because it can represent more functions
+than every component hypothesis could.
 In short, ensemble methods rely on the principle that the ensemble is more
 than the sum of its parts.
 The usual wording of this is, that ensemble learning turns a set of
@@ -416,7 +422,7 @@ susceptible to even small variations in the input data.
 Ensemble learning methods can be called meta algorithms,
 because they rely on other simpler classifier algorithms,
 and it is theoretically possible to create an ensemble learner for any
-supervised learning algorithm. \cite{wpEL} \cite{Polikar:2009}
+supervised learning algorithm. \cite{wpEL, Polikar:2009}
 
 \subsubsection{Bagging}
 
@@ -431,13 +437,13 @@ essentially simulating drawing additional samples from the population.
 Bootstrap aggregation is an ensemble learning algorithm,
 which trains each of its underlying weak classifiers on a different set
 of input data created by bootstrapping.
-It is another algorithm developed by Leo Breiman \cite{breiman1996bagging}.
+It is another algorithm developed by \citeA{breiman1996bagging}.
 
 Bagging typically uses bootstrapping with replacement,
 which leads to the inclusion of on average two thirds of the original sample
 in the derived sample.
-Random forests use the remaining third as out-of-bag data
-\cite{breiman2001random}.
+The remaining third is then used as out-of-bag data.
+This is a common feature of bagging and random forests \cite{breiman2001random}.
 
 \subsubsection{Boosting}
 
@@ -452,14 +458,14 @@ another, until all data is being classified correctly,
 or a targeted ensemble size is reached.
 This behavior makes boosting algorithms very fast learners,
 but susceptible to errors in the dataset \cite{long2010random}.
-Boosting isn't used in random forests as introduced by \cite{breiman2001random},
+Boosting isn't used in random forests as introduced by \citeA{breiman2001random},
 but there are variants who do, e.g.
 dynamic random forests \cite{bernard2012dynamic}.
 
 Adaboost \cite{freund1995decision} is probably the most popular
 boosting algorithm, and the algorithm random forests are most commonly
-compared to in terms of performance, e.g. \cite{breiman2001random},
-\cite{banfield2007comparison} and \cite{rodriguez2006rotation}.
+compared to in terms of performance, e.g. \citeA{breiman2001random},
+\citeA{banfield2007comparison} and \citeA{rodriguez2006rotation}.
 The latter compared eight ensemble of decision tree classifiers in a
 large study on 57 publicly available datasets and concluded
 “[...] that boosting, random forests and randomised trees are
@@ -514,10 +520,10 @@ called \texttt{class}.
 The decision trees used by random forests are constructed by randomly
 selecting a certain number of input variables as configured by the parameter
 \texttt{mtry} for each node.
-The algorithm then selects the best threshold among these input
+The algorithm then selects the best split on one of these input
 variables as the node's criterion, using what is called an optimality criterion.
 This process is repeated for every child node until a node is reached
-which only matches records in the dataset with the same output value.
+which only matches records in the dataset satisfying a stop criterion.
 This node becomes a leaf node.
 This is described as growing a tree maximally.
 It ensures that each decision tree has a high strength,
@@ -535,13 +541,13 @@ of random forests depends on. \cite{breiman2001random}
 
 The procedure by which decision trees are grown is modified in some
 variants of random forests.
-The PERT algorithm \cite{cutler2001pert} for example doesn't perform a
+The PERT (perfect random tree) algorithm \cite{cutler2001pert} for example doesn't perform a
 search for the best split on a random selection of input variables,
 but selects variable and threshold at random.
-RFW \cite{maudes2012random} searches all variables but attaches random
-weights to them, and DRF \cite{bernard2012dynamic} influences the
+The RFW (random feature weights) algorithm \cite{maudes2012random} searches all variables but attaches random
+weights to them, and the DRF (dynamic random forests) algorithm \cite{bernard2012dynamic} influences the
 decision tree creation by a procedure inspired by boosting.
-Other variants, e.g. \cite{van2012accelerating}, change this procedure to
+Other variants, e.g. \citeA{van2012accelerating}, change this procedure to
 grow smaller or more balanced trees, to meet performance or
 hardware requirements.
 
