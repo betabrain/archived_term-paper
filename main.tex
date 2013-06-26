@@ -318,20 +318,21 @@ Forest-rk \cite{bernard2008forest}, RFW \cite{maudes2012random},
 DRF \cite{bernard2012dynamic}, Fuzzy random forests \cite{bonissone2008fuzzy},
 Rotation forest \cite{rodriguez2006rotation}, random forests that are
 more random, e.g. \citeA{geurts2006extremely}, \citeA{liu2005maximising},
-\citeA{cutler2001pert}, and various other improvements, e.g. by
-\citeA{banfield2007comparison}, \citeA{robnik2004improving},
-\citeA{strobl2009introduction}, \citeA{zhang2012bias}, show that it
+\citeA{cutler2001pert}, and various other improvements by
+\citeA{banfield2007comparison, robnik2004improving, strobl2009introduction, zhang2012bias},
+show that it
 is better to think of random forests as being a framework instead of being
 a single method \cite{wpRF}.
 To understand this framework, it is best to look at the different aspects
 of random forests, first in a top-down view, and later part by part.
-The top-down view is strictly based on \citeA{breiman2001random},
-while the part by part discussion will also go into tweaking random forests.
+The top-down view is based on \citeA{breiman2001random},
+while the part by part discussion will also go into tweaking random forests,
+which is where the work of other authors will be discussed.
 
-Random forests are ensemble learning methods where the ensemble consists
-of decision trees.
+Random forests are \emph{ensemble learning} methods where the ensemble consists
+of \emph{decision trees}.
 Every decision tree is constructed on a sample of the input dataset,
-that has been selected using bootstrapping with replacement from the original
+that has been drawn using bootstrapping with replacement from the original
 dataset and is equally large.
 Every node split in the decision tree is an optimal two-way split selected
 from a random subset of all input variables.
@@ -343,12 +344,12 @@ The decision trees are grown maximally without pruning,
 and new trees are generated until the ensemble of decision trees reaches its
 target size, usually called \texttt{ntree}.
 Random forests feature error estimates using out-of-bag data.
-Out-of-bag data are the records in the dataset that were not selected during
+Out-of-bag data are the records in the dataset that were not included during
 the bootstrap aggregation, and make up approximately one third of the dataset.
 Random forests also feature variable importance measures,
 which are calculated by reclassifying the out-of-bag data,
-but randomising the variable under consideration.
-The variable importance of the randomised variable is the increase in
+but shuffling the variable under consideration.
+The variable importance of the shuffled variable is the increase in
 prediction error.
 
 The reference implementation of random forests is written in Fortran,
@@ -377,8 +378,8 @@ Random forests are suitable for a wide range of applications.
 Random forests have been used in applications from psychology and
 computational biology as is outlined in \citeA{strobl2009introduction},
 to customer churn prediction \cite{xie2009customer},
-to software testing \cite{guo2004robust} and internet security
-\cite{zhang2005network}, to natural language applications
+to software testing \cite{guo2004robust}, to internet security
+\cite{zhang2005network}, and to natural language applications
 \cite{xu2004random, kobylinski2008definition}.
 The reasons why random forests are such a widely used method,
 are their prediction accuracy, which is comparable to other state-of-the-art
@@ -387,7 +388,7 @@ by \citeA{breiman2001random},
 their ability to handle “small n large p” datasets \cite{strobl2009introduction},
 their practical built-in error estimate, and their variable importance measures.
 The last of which, random forests' variable importance measures,
-might be its most useful feature.
+might be their most useful feature.
 Many domains don't require accurate predictions as much as a model that can
 be understood by humans.
 While ensemble methods are unsuitably complex,
