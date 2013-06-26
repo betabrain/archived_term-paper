@@ -35,11 +35,11 @@
 \keywords{bagging, boosting, decision trees, ensemble methods, error estimates, fuzzy random forests, introduction, optimality criterion, out-of-bag data, overfitting, PERT, random forests, regression, rotation forests, statistics, variable importance}
 
 \abstract{This report discusses a family of machine learning algorithms called
-random forests, their structure, problems, and a number of suggested
-improvements, to give the reader a general introduction, starting with the motivation,
+random forests, their structure, their problems, and a number of suggested
+improvements, in order to give the reader a general introduction, starting with the motivation
 for machine learning, and the statistical as well as historical background to machine learning and random forests. 
 The aim of this work is to introduce the different parts of random forest algorithms
-by giving an overview over their limitations and suggestions on overcoming these limitations.
+by giving an overview over their limitations and existing suggestions on overcoming these limitations.
 These components are illustrated with source code snippets and comparisons between
 various variants of the random forest algorithms are being made.
 This report also puts forward a few ideas on how to make random forests better
@@ -55,21 +55,20 @@ and more user-friendly.}
 
 \newpage
 \section{Declaration of Independence}
-Hiermit versichere ich, dass ich die vorgelegte Arbeit selbständig und
-ohne  unerlaubte Hilfsmittel verfasst habe.
-Andere als die angegebenen Hilfsmittel habe ich nicht verwendet.
+"Hiermit versichere ich, dass ich die vorgelegte Arbeit selbständig und
+ohne unerlaubte Hilfsmittel verfasst habe.
+Andere als die angegebenen Hilfsmittel habe ich nicht verwendet."
 \\[3cm]
 
-Tobias Ammann\\Datum: \today
+Tobias Ammann\\Date: \today
 
 \newpage
 \section{Introduction}
 
 \subsection{Motivation}
 Psychology has come a long way as a science, with psychological research
-more and more following
-the \emph{scientific method}.
-Research works by the assumption that if we only disprove just enough
+more and more following the \emph{scientific method}.
+Research works by the assumption that if we disprove just enough
 alternative theories, we can eventually tell which theory is probably
 true, despite positive proof being impossible without complete knowledge.
 So, the scientific method really is nothing but the use of countless
@@ -77,10 +76,10 @@ attempts to disprove alternative theories, until only a single such theory
 remains.
 
 Since there is a large number of theories to disprove, and every
-researcher likes to see the result of his work as soon as possible, a
+researcher likes to see the results of their work as soon as possible, a
 more speedy method is usually employed, although this comes with a caveat.
-The speedier method has the researcher compare his favoured theory against
-the null hypothesis and show the superiority of his favoured theory.
+The speedier method makes the researcher compare his favoured theory against
+the null hypothesis to show the superiority of his favoured theory.
 The null hypothesis is either an alternative theory or a chance effect.
 This is way more efficient than comparing the thousands of
 theories that researchers have come up with, and continue to come up with.
@@ -92,7 +91,7 @@ On the greater scale of things, i.e. reality, the results might well be
 completely bogus.
 Nonetheless, most of the subjects being studied are sufficiently constant
 or change predictably enough to allow researchers to generalise from the
-results of an experiment to the world at large, and likely remain correct.
+results of an experiment to the world at large while likely remaining correct.
 This likelihood depends on the size of the effects measured in the
 experiment, the amount of experimental data collected,
 and on the properties of the statistical methods involved.
@@ -108,18 +107,18 @@ statistical methods is called \emph{machine learning}.
 
 In this paper, I aim to introduce the reader to \emph{random forests},
 which are just one family of machine learning algorithms.
-I first give the reader some context to random forests, in hope that a
-broader view will help developing an intuition for random forests.
+I first give the reader some context to random forests in hope that a
+broader view will help in developing an intuition for random forests.
 
 In the next sections I introduce the reader to machine learning,
 the differences between the traditional statistical approach and the
 machine learning approach, and random forests in particular.
 I then delve into some improvements to random forests that have been
-suggested in the literature, call for a new random forest variant, and finish
+suggested in the literature, call for a more user-friendly random forest variant, and finish
 with a few words on the method of writing this paper, and a discussion.
 
 \subsection{Machine Learning}
-In order to understand random forests, it might be useful to set
+In order to understand random forests, it helps to set
 the stage by briefly discussing machine learning in general.
 Machine Learning is both a part of predictive statistics and the
 artificial intelligence branch of computer science.
@@ -127,15 +126,15 @@ artificial intelligence branch of computer science.
 \emph{Predictive statistics} is the sub-field of statistics that is
 concerned with making predictions based on past observations.
 It's probably most widely known method is \emph{linear regression}
-\cite{borzlinreg} that associates two variables \(y\) and \(x\) in such a way
+that associates two variables \(y\) and \(x\) in such a way
 that they describe a straight line: \(y = \alpha \cdot x + \beta \), but
-linear regression isn't limited to two variables.
+linear regression isn't limited to two variables \cite{borzlinreg}.
 Linear regression is widely used in psychology because it
 allows the researcher to tease apart the influence of a number of variables on an
 outcome variable by making assumptions of the form
 \( Y = \alpha + \beta \cdot X + \epsilon \), where \(Y\) is a vector of
-the outcomes for participants, \(\alpha\) is a constant,
-\(\beta\) is a vector of weights, \(X\) is a matrix of influence variables for
+the outcomes for all participants, \(\alpha\) is a constant,
+\(\beta\) is a vector of weights, \(X\) is a matrix with the values of each influence variable for
 every participant, and \(\epsilon\) is a vector of random differences.
 Sometimes this is written as an equation for a single participant:
 \( y_{i} = \beta_{0} + \beta_{1} \cdot x_{i1} + \dotsb + \beta_{n} \cdot x_{in} + \epsilon \).
@@ -149,7 +148,7 @@ so that they can assist us with human intelligence, better rationality
 and knowledge that surpasses that of every human being.
 It includes things like \emph{logic programming} \cite{wpLP, qai},
 \emph{expert systems} \cite{wpES, qai}, \emph{database management systems} \cite{wpDB} and
-\emph{neural networks} \cite{haykin, qai}, that all represent some form of
+\emph{neural networks} \cite{haykin, qai}, which all represent some form of
 storing and querying knowledge.
 Unfortunately, early computers back then didn't have the speed and memory
 required for artificial intelligence to solve many real problems.
@@ -158,16 +157,16 @@ and the field has been largely dormant since, a state widely called \emph{AI win
 Only the rather recent coexistence of powerful computers and massive amounts
 of stored data, sometimes called \emph{big data}, revived artificial
 intelligence as an important field of research.
-In fact, the revival and spread of machine learning has made their application
+In fact, the revival and spread of machine learning has made its application
 commonplace enough that I could listen to a banker telling a friend how
 he uses random forests for algorithmic Bitcoin trading in his leisure time
 in Starbucks.
 
 \emph{Machine learning} is the part of artificial intelligence which
 is concerned with the computer's learning of facts about the world.
-These facts can then be stored and subsequently queried later on.
+These facts can then be stored and queried later on.
 As such, machine learning is concerned with making statements based
-on past observations, and is therefore close to predictive statistics
+on past observations and is therefore close to predictive statistics
 \cite{wpML}.
 
 \subsection{The Machine Learning Life Cycle}
