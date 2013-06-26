@@ -1,4 +1,5 @@
 rf/target/
+main.pdf
 *.lein-repl-history
 *.acn
 *.acr
