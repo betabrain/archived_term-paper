@@ -171,58 +171,63 @@ on past observations and is therefore close to predictive statistics
 
 \subsection{The Machine Learning Life Cycle}
 This section discusses the difference between machine learning and traditional
-statistical methods, and commonly used terminology.
+statistical methods, as well as commonly used terminology.
 The following section relies on knowledge gained from personal projects a few
 years back, a university course \cite{psymeth}, as well as \citeA{barberMLC}
 and \citeA{wpML}.
 
 Authors differ in how they call the different parts of a dataset.
-Common names for the parts used to derive other parts are generic statistical
-and machine learning names, such as variables, input variables, input, input data, features, or
-problem specific names, such as economic indicators, genes, and more.
-The part of a dataset that is being derived or analysed is commonly called outcome,
-output, output variable, output data, class, or whatever it represents, e.g. likelihood of smoking or cancer risk.
-This paper will try to be consistent in the names used, and assumes datasets
+The part of a dataset that is being derived or partitioned is commonly called \emph{outcome},
+\emph{output}, \emph{output variable}, \emph{output data}, \emph{class}, or \emph{response}.
+Some authors also use names that reflect the type of data represented,
+e.g. \emph{likelihood of smoking} or \emph{cancer risk}.
+Common names for the parts used to derive output variables are either
+generic names, such as \emph{variables}, \emph{input variables}, \emph{input}, \emph{input data}, \emph{features}, or
+problem specific names, such as \emph{median income} or \emph{skin conductance}.
+This paper will try to be consistent in the names being used.
+It assumes datasets
 to be in table form, with columns representing variables and rows representing
 measurements or participants.
 The paper uses the word \emph{variable} to refer to columns, and \emph{data}
 to refer to the whole or parts of the dataset, i.e. rows and columns.
 In most cases these two terms are interchangeable, but sometimes one is more
-illustrative or semantically nicer than the other.
+illustrative or more commonly used in a particular context.
 
 Traditionally, the statistical methods used in psychology
-take a model (or a family of models) of how the world works, and a set of data, and return one of
+take a model (or a family of models) of how the world works, a set of data, and return one of
 the following things.
 They either return a probability of how likely an improvement in prediction
 can be observed at random, or how likely a difference in measurement can be
 observed at random, or an estimate of what might be observed in different data,
 or, building on the first two, the model in a family of models that best fits the data.
+Notice, that these methods don't derive the model on their own.
 
 \emph{Regression methods} try to derive the values of
-one variable from the other variables in the dataset using a formula the
+one variable in the dataset from the other variables in the dataset using a formula the
 researcher specifies.
-They then compare the actual values and the prediction of the model with
-different inputs, and calculate how probable an improvement in this
+They then compare the actual values and the prediction of the model under
+different assumptions, and calculate how probable an improvement in this
 comparison is to show up due to random variations.
 These calculations are called \emph{tests}, and can be calculated for the
 entire model, as well as for individual coefficients. \cite{wpRA}
 
 \emph{Analysis of variance methods} partition the dataset
-according to all but one variable. They then calculate the probability with
+according to all but one variable.
+They then calculate the probability with
 which the variation in the one variable among the groups could be due to
 random variations in the dataset.
 The aim is of course to show that a difference in the values of the outcome
 variable is unlikely due to chance, and hence dependent on certain
-input values \cite{wpAOV}.
+input variables \cite{wpAOV}.
 
-The probabilities the methods output are usually called \(p\).
+The probabilities that the methods output are usually called \(p\).
 Statisticians usually define a target \emph{significance level},
 e.g. 5\%, and compare it with \(p\).
 If \(p\) is less than the targeted significance level, then
 the outcomes predicted by the model and the outcomes predicted by chance
 differ significantly.
 For example, a model with \(p \le 5\%\) is better than chance and its
-predictions will only show up at random in 5\% of all experiments.
+predictions will only show up by chance in 5\% of all experiments.
 However, it is important to distinguish between \(p\) and \(\hat{p}\).
 The first denotes the probability found in the dataset, while the latter
 indicates an estimation for \(p\).
@@ -231,24 +236,25 @@ population itself, thus the error probability can only be estimated,
 hence \(\hat{p}\).
 
 The most striking difference between traditional statistical methods and
-machine learning methods is that the researcher can't specify his model of
+machine learning methods is that the researcher can't specify their model of
 how the world works, other than through the selection of a machine learning
 algorithm.
 Because of this, machine learning algorithms are sometimes described as
-\emph{black boxes}, meaning that the user can only see what's going into the
+\emph{black boxes}, meaning that the user can only see what is going into the
 algorithm, and what is coming out.
 This is unlike the statistical methods, where the researcher supplies a
-formula, because in machine learning, algorithms derive the formula on their own.
-This is what "learning" in machine learning means.
+formula or model.
+In machine learning, algorithms derive the formula on their own.
+This is what the "learning" in machine learning means.
 The second difference is what the algorithms return.
 Since machine learning algorithms build their models,
-they don't just output coefficients and probabilities for a given model,
+they can't just output coefficients and probabilities for a given model,
 but also the model itself.
 In short, machine learning provides the researcher with a generic model
 that adapts to the world.
-The prediction of such a model can then be calculated for data for which
-the values of the output variable are known, but that haven't
-been included during the learning phase,
+The predictions of such a model can then be calculated for data for which
+the values of the output variable are known, but which haven't
+been included during the \emph{learning phase},
 to calculate the \emph{prediction accuracy}.
 The problem with this flexibility is, that one cannot really tell what the
 model looks like, that is, the model is not in a human-readable form.
@@ -258,14 +264,14 @@ consist of dozens to thousands of such trees, so that a human can hardly
 tell what they mean.
 It is therefore very important to find ways to condense this complexity
 into something that can be more easily interpreted.
-The variable importance measure of random forests, which will be introduced
+The \emph{variable importance measure} of random forests, which will be introduced
 later, is one such way.
 
 \subsection{Classification and Regression}
 The \emph{classification problem} is the problem of classifying new data,
 i.e. grouping it based on some criteria.
 It is called a "problem", because in statistics and machine learning the
-rules to do so are unknown, and have to be inferred from an example dataset.
+rules to do so are unknown and have to be inferred from an example dataset.
 The \emph{regression problem} is the related problem, where an
 \emph{output variable} has to be calculated based on \emph{input variables}.
 For practical purposes, the difference is just the type of the output variable.
@@ -274,8 +280,8 @@ while regression returns a numeric value of arbitrary precision.
 One might describe classification as regression with discreet output values,
 and regression as classification with an infinite number of labels.
 Output variables are commonly called \emph{classes}, while input variables
-are called \emph{features}.
-Other descriptions are also common, but usually depend on what the dataset
+are called \emph{features}, as has already been discussed above, but
+other descriptions are also common, sometimes depending on what the dataset
 represents \cite{strobl2009introduction}.
 
 \subsection{Randomness}
