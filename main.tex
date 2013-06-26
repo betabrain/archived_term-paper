@@ -85,7 +85,7 @@ The caveat is commonly called confirmation bias, because researchers focus
 on immunising their theory instead of disproving those of others.
 Therefore, the result only has significance in the experimental set-up
 being tested.
-In the greater scale of things, i.e. reality, the results might well be
+On the greater scale of things, i.e. reality, the results might well be
 completely bogus.
 Nonetheless, most of the subjects being studied are sufficiently constant
 or change predictably enough to allow researchers to generalise from the
@@ -160,7 +160,7 @@ commonplace enough that I could listen to a banker telling a friend how
 he uses random forests for algorithmic Bitcoin trading in his leisure time
 in Starbucks.
 
-\emph{Machine learning} is that part of artificial intelligence that
+\emph{Machine learning} is the part of artificial intelligence which
 is concerned with the computer's learning of facts about the world.
 These facts can then be stored and subsequently queried later on.
 As such, machine learning is concerned with making statements based
@@ -365,7 +365,7 @@ For illustration purposes I include a source code example taken from
 \end{minted}
 \end{figure}
 
-Random forests suitable for a wide range of applications.
+Random forests are suitable for a wide range of applications.
 Random forests have been used in applications from psychology and
 computational biology as is outlined in \citeA{strobl2009introduction},
 to customer churn prediction \cite{xie2009customer},
@@ -479,14 +479,14 @@ while regression trees output a continuous numeric value.
 For classification the most commonly chosen output value among an ensemble
 of decision trees is assumed to be the right prediction.
 For regression purposes the output of the ensemble is calculated by averaging
-the outcomes the single trees.
+the outcomes of all trees.
 As the name indicates, a decision tree is a tree data structure, i.e.
 a set of nodes that are connected in a forward manner allowing branching
 but not cross links and circles.
 Decision trees usually are binary trees, meaning that each node either has
 two child nodes, or is a leaf node.
 Each node represents a decision criterion, each edge a criterion match or
-mismatch, and each leaf node an outcome of the represented decision tree.
+a mismatch, and each leaf node represents an outcome of the decision tree.
 Tree data structures are typically drawn from top to bottom.
 For example, the following decision tree takes two numeric features
 \texttt{a}, and \texttt{b} to predict two values of a discreet output variable
@@ -717,7 +717,7 @@ error estimate by invoking \texttt{tree-error} for each tree in the ensemble.
 The \texttt{tree-error} function uses the out-of-bag data stored in each leaf node
 and compares it to the predicted outcome of that leaf.
 Since this implementation only handles noiseless datasets, the error estimate
-returned by \texttt{rf-error} will only every be zero.
+returned by \texttt{rf-error} will only ever be zero.
 
 \begin{figure}[H]
 \caption{The \texttt{rf-error} and \texttt{tree-error} functions calculate the error estimate.}
@@ -741,7 +741,7 @@ For information on how to use this implementation of random forests,
 see example and instructions in the appendix.
 
 \subsubsection{Parameters}
-The two parameters random forests depends on, the size of the forest
+The two parameters random forests depend on, the size of the forest
 \texttt{ntree} and the number of randomly selected variables at each node
 \texttt{mtry}, are problematic,
 in that users set them according to one recommendation or another,
@@ -766,8 +766,8 @@ random forests with the randomisation parameter set to the
 binary logarithm of the number of input variables were the best methods.
 The study by \citeA{banfield2007comparison} also suggests a mechanism
 to determine the best size of the ensemble automatically.
-Methodologically, this would be a welcome improvement, because it takes
-away one way researchers can fiddle with the outcome of their calculations,
+Methodologically, this would be a welcome improvement, because it eliminates
+one way researchers can fiddle with the outcome of their calculations,
 and because it would ensure better results due to the usually larger
 ensemble sizes.
 In defense of older studies, like those by \citeA{breiman2001random} and
@@ -1162,7 +1162,7 @@ To increase the reach of random forests in general, and particularly in
 the social sciences, the parameter situation needs to be resolved, because
 not every researcher can include a simulation study just to show that his
 methods are not flawed.
-A accepted solution to this problem is to tune the parameters using cross-validation.
+An accepted solution to this problem is to tune the parameters using cross-validation.
 While this is a good solution for most applications, it does lead to an
 underestimation of the error estimate, which can be problematic in some cases.
 Obviously this can be fixed by setting aside a dedicated test dataset, but
@@ -1309,8 +1309,8 @@ Researchers are very careful when selecting theories from their own field,
 but sometimes flagrantly refer to "default settings" with no further detail,
 when they use an implementation of a method,
 just because software or random forests are not their field.
-Default values in implementations do change, and this change sometimes
-happens for a reason.
+Default values in implementations do change, and these changes sometimes
+happen for a reason.
 It should be possible to check if a study is affected by this change,
 and reevaluate it if necessary.
 In keeping with the artificial intelligence origins of machine learning,
