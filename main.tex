@@ -32,17 +32,17 @@
 \keywords{ensemble methods, introduction, random forests}
 \affiliation{Literature Study at the Workgroup for Psychological Methods,\\Evaluation and Statistics, Department of Psychology.\\Supervised by Prof. Dr. Carolin Strobl}
 \note{DRAFT Version: \today}
-\keywords{ensemble methods, introduction, random forests}
+\keywords{bagging, boosting, decision trees, ensemble methods, error estimates, fuzzy random forests, introduction, optimality criterion, out-of-bag data, overfitting, PERT, random forests, regression, rotation forests, statistics, variable importance}
 
-\abstract{\todo{Rewrite} This report looks at a machine learning algorithms called
+\abstract{This report discusses a family of machine learning algorithms called
 random forests, their structure, problems, and a number of suggested
-improvements, to give the reader a more big-picture introduction.
-The topics discussed are the origins of machine learning, machine learning
-vs traditional statistics, ensemble learning, bagging, boosting, 
-decision trees, random forests, parameters, out-of-bag data, error estimates,
-variable importance, regression, overfitting, optimality criterion,
-the random forest variants PERT, fuzzy random forests, and rotation forests.
-This report puts forward a few ideas on how to make random forests better
+improvements, to give the reader a general introduction, starting with the motivation,
+for machine learning, and the statistical as well as historical background to machine learning and random forests. 
+The aim of this work is to introduce the different parts of random forest algorithms
+by giving an overview over their limitations and suggestions on overcoming these limitations.
+These components are illustrated with source code snippets and comparisons between
+various variants of the random forest algorithms are being made.
+This report also puts forward a few ideas on how to make random forests better
 and more user-friendly.}
 
 \begin{document}
@@ -54,15 +54,10 @@ and more user-friendly.}
 \section{Declaration of Independence}
 Hiermit versichere ich, dass ich die vorgelegte Arbeit selbständig und
 ohne  unerlaubte Hilfsmittel verfasst habe.
-Andere als die angegebenen Hilfsmittel habe ich nicht verwendet. \todo{Sign}
+Andere als die angegebenen Hilfsmittel habe ich nicht verwendet.
 \\[3cm]
 
 Tobias Ammann\\Datum: \today
-
-\listoftodos
-\todo{Remove list of todos}
-\todo{cite vs citeA}
-\todo{input, output names}
 
 \newpage
 \section{Introduction}
