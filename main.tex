@@ -1019,16 +1019,15 @@ in terms of its prediction accuracy.
 
 \subsection{In Search of the Super-Forest}
 The following section will look at some of the random forest variants that
-have already been mentioned above. It concludes by calling for a more
+have been mentioned above. It concludes by calling for a more
 user-friendly random forest variant, which combines many of the features of
-the proposed variants, and is tailored to the less technically adept users
+the proposed variants, and is tailored to the less statistically adept users
 in the social sciences.
 
 \subsubsection{Alternative: PERT}
-PERT, a variant in the random forests framework was developed
-by \citeA{cutler2001pert}.
+PERT, or perfect random tree (ensemble), was developed by \citeA{cutler2001pert}.
 The nice feature of PERT is that its strong reliance on randomness gives
-it a simple structure that is easier to describe and implement than the
+it a simple structure that is easier to describe and implement than
 classical random forests by \citeA{breiman2001random}.
 In fact, PERT is simple enough that its algorithm is completely described
 in the following quote from \citeA{cutler2001pert}:
@@ -1062,7 +1061,8 @@ from the training data and these classifiers are combined by voting.
 \end{quotation}
 
 On the one hand, bagging is not required, because PERT does not depend on
-randomness introduced through bootstrapping.
+randomness introduced through bootstrapping, which means that PERT can
+avoid the problems associated with bootstrapping.
 On the other hand, bagging can be used if one requires out-of-bag
 error estimates or variable importance measures, and as a way to deal
 with ties in the dataset.
@@ -1070,33 +1070,33 @@ As \citeA{liu2005maximising} have indicated, bootstrapping might lead
 to less diverse trees, thus it should not be used unless one requires
 these features.
 
-The advantage of PERT over random forests is speed.
-\citeA{cutler2001pert} compare the different runtimes of classical random
-forests construction, as described in \citeA{breiman2001random}, and PERT
+The main advantage of PERT over random forests is speed.
+\citeA{cutler2001pert} compare the different run times of random
+forest construction, as described in \citeA{breiman2001random}, and PERT
 to find the latter to be faster by two orders of magnitude,
 while providing similar accuracy in prediction.
 Of course, there are other advantages too:
 The absence of a variable selection criterion means that PERT does not suffer
-from the bias introduced by it, thus, variable importance estimates are less
-affected.
+from the bias introduced by it, and, that variable importance estimates are less
+biased.
 An instance where the use of a selection criterion is especially problematic
 is the XOR problem mentioned above in the section on variable importance.
 Since PERT forests do not depend on an optimality criterion to select their
-splits, PERT has the advantage of being able to deal with perfect
+splits, they are able to deal with perfect
 interaction effects.
 A disadvantage is that PERT forests are even more difficult to interpret than
-the classical random forests, but since this is rarely tried anyway,
-it probably does not matter much in practice.
+classical random forests, but since this is rarely tried anyway,
+it does not matter much in practice.
 It is important to mention however, that PERT can only be used for
 classification,
 since its base learner fits the training data perfectly, applying PERT to
 regression would “drastically overfit the data” \cite{cutler2001pert}.
 
-PERT is not the only random forest variant that emphasises randomness in its
-algorithm for growing trees.
+PERT is not the only random forest variant that emphasises randomness
+when growing trees.
 \citeA{geurts2006extremely} suggested what they call \emph{extremely randomised trees}.
 Despite their name, extremely randomised trees are actually closer to the
-trees of random forests by \citeA{breiman2001random} than PERT, 
+trees of random forests by \citeA{breiman2001random} than to PERT trees, 
 in that they do select the best split from a random subset variables of size \texttt{mtry},
 although the actual split value for each variable is generated randomly.
 Furthermore, they do not fit the data perfectly, but allow the user to
@@ -1104,7 +1104,7 @@ choose a "minimum sample size for splitting a node" \cite{geurts2006extremely}.
 This parameter, called \emph{smoothing strength} by \citeA{geurts2006extremely},
 prevents overfitting in noisy datasets, and allows the user to configure the
 behaviour of the algorithm in order to adapt
-the random forest algorithm to dataset at hand.
+it to dataset at hand.
 
 \subsubsection{Alternative: Fuzzy random forests}
 Fuzzy random forests by \citeA{bonissone2008fuzzy} use input variables
@@ -1128,13 +1128,13 @@ an orthogonal transformation to convert a set of observations of possibly
 correlated variables into a set of values of linearly uncorrelated variables
 called principal components." \cite{wpPCA}
 Rotation forests have been suggested by \citeA{rodriguez2006rotation}.
-Rotation forests are created by calculating a PCA (principal component analysis)
-on the bootstrap sample of each tree prior to building the tree.
+Rotation forests are created by applying PCA
+to the bootstrap sample of each tree prior to building the tree.
 To apply PCA, the input variables are split into subsets and rows matching
 randomly selected values of the output variable are removed.
 The PCA coefficients for each subset are then arranged into the rotation matrix
 used to transform the sample before building the tree.
-This means that another parameter, the size of input variable subsets, is required.
+This means that another parameter, the number of input variable subsets, is required.
 Rotation forests significantly outperform random forests, bagging, and
 boosting on many datasets, but due to the transformation of the dataset,
 rotation forests do not provide variable importance measures \cite{rodriguez2006rotation}.
@@ -1149,13 +1149,13 @@ iteratively, with each improvement or variation picking up one problem to
 improve on.
 The criterion for success has been beating the base algorithm.
 Similar to how the scientific method has become a competition between
-researcher and randomness, the field of research on random forests seems
+researcher and null hypothesis, the field of research on random forests seems
 to be plagued by comparisons between the old and the new forests.
 It might be worth the effort to step back from the specifics for a moment
 and look at the principle behind random forests.
 
 Every variant in the random forests framework is an ensemble of trees.
-Beyond that there seems to be nothing that may not be changed.
+Beyond that there seems to be little that may not be changed.
 Two questions that naturally follow from this are:
 
 \begin{APAenumerate}
@@ -1165,7 +1165,7 @@ Two questions that naturally follow from this are:
 
 Most of the suggested improvements and variants have taken the original
 random forest algorithm and changed some part of it. Since the changes of
-the different variants discussed in this report do not overlap, combining
+the different variants discussed in this report mostly do not overlap, combining
 them should certainly be possible.
 The more interesting question is the second.
 This report has mentioned many problems of random forests, for example the
@@ -1176,7 +1176,7 @@ not every researcher can include a simulation study just to show that his
 methods are not flawed.
 An accepted solution to this problem is to tune the parameters using cross-validation.
 While this is a good solution for most applications, it does lead to an
-underestimation of the error estimate, which can be problematic in some cases.
+underestimation of the error estimate.
 Obviously this can be fixed by setting aside a dedicated test dataset, but
 compiling an even larger dataset is often unpractical, since real world datasets
 are not cheap to compile.
