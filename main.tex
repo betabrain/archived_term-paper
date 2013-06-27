@@ -754,7 +754,7 @@ see the example and the instructions in the appendix.
 \subsubsection{Parameters}
 The two parameters random forests depend on, the size of the forest
 \texttt{ntree} and the number of randomly selected variables at each node
-\texttt{mtry}, are problematic,
+\texttt{mtry}, are problematic
 in that users set them according to one recommendation or another,
 or just use the default settings, which again can differ from implementation
 to implementation.
@@ -785,7 +785,7 @@ In defense of older studies, like those by \citeA{breiman2001random} and
 \citeA{dietterich2000ensemble}, one has to mention that
 computers back then were not as powerful.
 \citeA{breiman2001random} mentions run times for random forests of 4 minutes
-and 3 hours for Adaboost when building ensembles of size 100,
+and 3 hours for Adaboost when building ensembles of size 100
 while I can execute all examples in the paper by \citeA{strobl2009introduction}
 in well under 10 seconds on one core running at 3.40 GHz, consuming about 180 Mb
 of memory.
@@ -808,11 +808,11 @@ needs to be chosen differently.
 For example in studies of genetics, where the dataset often includes many
 irrelevant input variables in addition to the dataset being a
 “small n large p case”, it is necessary to use a larger value
-for \texttt{mtry}, else some variables might never be used in the ensemble
+for \texttt{mtry}, because otherwise some variables might never be used in the ensemble
 at all \cite{strobl2009introduction}.
 It might be interesting to consider choosing \texttt{mtry} automatically.
 One way to do this, is to systematically try different values for \texttt{mtry}
-and choose the best one using cross-validation \cite{psymeth}.
+and choose the best value using cross-validation \cite{psymeth}.
 According to \citeA{bernard2008forest} a greedy search or choosing one of
 the values discussed above is the usual approach in the literature.
 The same paper shows, that this does not have to be the case, by demonstrating
@@ -826,12 +826,12 @@ each tree has a set of approximately one third of the original dataset
 that has not been used to grow the tree.
 This set can be used to test the prediction accuracy of each tree,
 and the prediction accuracy of all trees can then be averaged to give an
-error estimation of the entire random forest.
+error estimation for the entire random forest.
 This out-of-bag error estimation is more precise than the naive error
-estimate, which is using all of the dataset \cite{strobl2009introduction}.
+estimate, which uses all of the dataset \cite{strobl2009introduction}.
 This said, one should not forget that out-of-bag data is not the
 same thing as a genuine test dataset.
-Depending on the size of the dataset, and the size of the ensemble,
+Depending on the size of the training dataset and the size of the ensemble,
 the downsides
 of bootstrapping might shine through, and lead to an underestimation of
 the prediction accuracy.
@@ -857,10 +857,10 @@ Obviously, one cannot ignore all trees that incorporate a variable,
 because each tree incorporates multiple input variables, and their impact
 on the prediction would be modified too.
 By randomly permutating the values of an input variable,
-the variable's characteristics do not change, but the connection to the
+the variable's distribution characteristics do not change, but the connection to the
 output variable is broken.
 However, according to \citeA{strobl2007bias} the variable importance might
-still depend on which variable is being measured, because the
+still depend on the type of the variable being measured, because the
 variable importance measure is biased towards variables with many categories
 and variables with many missing values.
 Numeric variables usually have as many different values as there are rows
@@ -875,7 +875,7 @@ problematic.
 The R package \texttt{party} includes two functions, \texttt{ctree} and
 \texttt{cforest}, that use a different method for split selection and are not
 affected by this bias.
-Therefore, \texttt{cforest} actually uses another variable importance termed
+Thus, \texttt{cforest} actually calculates another variable importance measure termed
 “conditional variable importance” \cite{strobl2008conditional}.
 Correlated variables can be problematic, because trees that include a
 pair of correlated input variables are less affected by the random
@@ -888,13 +888,13 @@ and that considering all input variables, i.e. bagging,
 although due to the “large p small n case”, “unbiased estimation of all
 coefficients is impossible” in any case.
 
-Another problem that the variable importance measure can be affected by,
+Another problem that affects the variable importance measure
 is that some variables might not be well represented in a random forest.
 This can be due to a small setting for \texttt{mtry} and or \texttt{ntree}
 in the presence of many irrelevant input variables, as often is the case
 in genetics datasets, or if variables show perfect higher order effects,
 i.e. interaction effects, but no main effects.
-The latter is called the XOR problem.
+The latter is called the \emph{XOR problem}.
 It is important to note, that random forests with a different split selection
 algorithm do not have to be affected by this, e.g. PERT \cite{cutler2001pert}.
 
@@ -905,10 +905,10 @@ their variable importance measure.
 with the one built into random forests, and finds that the latter are
 heavily dependent on the mtry parameter.
 The larger \texttt{mtry} is, the better the importance estimates become.
-Variable importance measures are used to select input variables for a simpler
+Variable importance measures can be used to select input variables for a simpler
 model, e.g. a generalised liner model, which is more interpretable than a
 forest of decision trees \cite{strobl2009introduction}.
-Variable importance measures also are the probably only simple way to
+Variable importance measures are probably the only simple way to
 “shed some light into the black box of random forests”
 \cite{gromping2009variable}.
 An alternative, but rather naive way to estimate variable importance is to count
@@ -923,7 +923,7 @@ many other complex models are similarly difficult to tease apart, e.g.
 neural networks.
 
 The way variable selection based on variable importance measures is
-being done, is by finding variables whose randomisation led to an improvement
+being done, is to find variables whose randomisation led to an improvement
 in prediction accuracy.
 These improvements are just random effects, and function as an indicator
 for which variable importances are within the band of random fluctuations,
@@ -933,13 +933,16 @@ and which are true indicators for important variables.
 Random forest can not only be used for classification, but also for regression.
 To produce the numeric output values necessary for regression,
 the vote on the most popular output class in the forest is replaced by the
-calculation of an average over all tree outputs.
+average over all tree outputs.
 One problem with regression using random forests is that more decision trees
-end up covering the middle range of values of output variable.
+end up covering the middle range of the output variable,
+and few trees encode extreme output values.
 This means that the prediction accuracy is good in the middle of the range
 of values, but that the predictions for extremer values become more and more
 inaccurate \cite{zhang2012bias}.
-The same paper also suggests five ways to estimate and reduce this problem.
+The predictions for large values tend to be too low, while the predictions for
+small values tend to be too high.
+\citeA{zhang2012bias} also suggests five ways to estimate and reduce this problem.
 
 \subsubsection{Overfitting}
 Overfitting \cite{wpOF} is the situation where an algorithm learns the
@@ -951,11 +954,10 @@ Random forests grow optimal decision trees, meaning they try to represent
 each bootstrapped sample perfectly.
 Except for the case where different rows in the sample have the same
 values in their input variables, but different values in their output variable,
-this leads to decision trees which represent the sample perfectly,
-including all errors.
+this leads to decision trees which represent the sample including all of its errors perfectly.
 The advantage of ensemble learning is that by combining decision trees grown
-for different samples, and constructed using different random split selections,
-these errors are cancelled out.
+for different samples and constructed using different random split selections,
+these errors cancel out.
 However, this also means that there is an upper bound on how accurate
 random forests can become depending on the noise present in the dataset.
 Of course, this only applies if the trees in an ensemble are reasonably
@@ -965,20 +967,20 @@ is at its lowest when the tree ensemble is maximally diverse,
 and that bootstrapping tends to limit tree diversity.
 
 Different variants of random forests try to grow random forests on data
-that is less prone to noise.
+that is less noisy, thus limiting the risk of generalisation errors.
 FRF stands for \emph{Fuzzy random forests}, and is a method described by
 \citeA{bonissone2008fuzzy}.
 FRF use what are called \emph{fuzzy sets} to represent the data in the dataset,
 and to build their decision trees on top.
 The advantages of this approach are that the resulting FRF are more immune
 to noise, and \citeA{cadenas2012extending} extend this framework to
-handle missing data too.
+handle missing data.
 Another attempt at constructing random forests from smoother data are
 rotation forests by \cite{rodriguez2006rotation}, which use
-principal component analysis, or PCA, to find derived input variables that
+\emph{PCA} (principal component analysis) to find derived input variables that
 represent the input dimensions better.
 Although linear combinations of input dimensions are not the same thing
-as noise, since datasets are of a limited size, and decision trees
+as noise, since datasets are of a limited size and decision trees
 might well fail to tease out the interactions between all pairs of input
 variables, they will look like noisy input data if the decision trees
 do not catch on.
@@ -1002,19 +1004,18 @@ is problematic.
 Another common optimality criterion is entropy, although it suffers from
 the same bias towards variables with many different values.
 The point of using an optimality criterion in the first place is,
-to grow trees using an impurity reduction algorithm, i.e. to select the split
-which returns the least dispersed subsets is selected recursively at each node.
+to grow trees using an impurity reduction algorithm, i.e. to recursively select the split
+which returns the least dispersed subsets at each node.
 
 A huge disadvantage of using an optimality criterion is the computational cost
 one has to pay.
 Trees which use random splits are much faster to grow, e.g. PERT ensembles
-are claimed to be two orders of magnitude faster than the classical
+are claimed to be two orders of magnitude faster than classical
 random forests \cite{cutler2001pert}.
 \citeA{cutler2001pert} indicate that despite its simplicity,
 "[...] PERT falls within the range of the other three methods.", meaning
 Adaboost and two random forest variants (different \texttt{mtry}),
 in terms of its prediction accuracy.
-
 
 \subsection{In Search of the Super-Forest}
 The following section will look at some of the random forest variants that
