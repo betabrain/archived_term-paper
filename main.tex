@@ -128,7 +128,7 @@ concerned with making predictions based on past observations.
 It's probably most widely known method is \emph{linear regression}
 that associates two variables \(y\) and \(x\) in such a way
 that they describe a straight line: \(y = \alpha \cdot x + \beta \), but
-linear regression isn't limited to two variables \cite{borzlinreg}.
+linear regression is not limited to two variables \cite{borzlinreg}.
 Linear regression is widely used in psychology because it
 allows the researcher to tease apart the influence of a number of variables on an
 outcome variable by making assumptions of the form
@@ -150,7 +150,7 @@ It includes things like \emph{logic programming} \cite{wpLP, qai},
 \emph{expert systems} \cite{wpES, qai}, \emph{database management systems} \cite{wpDB} and
 \emph{neural networks} \cite{haykin, qai}, which all represent some form of
 storing and querying knowledge.
-Unfortunately, early computers back then didn't have the speed and memory
+Unfortunately, early computers back then did not have the speed and memory
 required for artificial intelligence to solve many real problems.
 This and overly optimistic predictions led to disappointment and the abandonment of AI research,
 and the field has been largely dormant since, a state widely called \emph{AI winter} \cite{qai, wpHOAI}.
@@ -200,7 +200,7 @@ They either return a probability of how likely an improvement in prediction
 can be observed at random, or how likely a difference in measurement can be
 observed at random, or an estimate of what might be observed in different data,
 or, building on the first two, the model in a family of models that best fits the data.
-Notice, that these methods don't derive the model on their own.
+Notice, that these methods do not derive the model on their own.
 
 \emph{Regression methods} try to derive the values of
 one variable in the dataset from the other variables in the dataset using a formula the
@@ -236,7 +236,7 @@ population itself, thus the error probability can only be estimated,
 hence \(\hat{p}\).
 
 The most striking difference between traditional statistical methods and
-machine learning methods is that the researcher can't specify their model of
+machine learning methods is that the researcher cannot specify their model of
 how the world works, other than through the selection of a machine learning
 algorithm.
 Because of this, machine learning algorithms are sometimes described as
@@ -248,12 +248,12 @@ In machine learning, algorithms derive the formula on their own.
 This is what the "learning" in machine learning means.
 The second difference is what the algorithms return.
 Since machine learning algorithms build their models,
-they can't just output coefficients and probabilities for a given model,
+they cannot just output coefficients and probabilities for a given model,
 but also the model itself.
 In short, machine learning provides the researcher with a generic model
 that adapts to the world.
 The predictions of such a model can then be calculated for data for which
-the values of the output variable are known, but which haven't
+the values of the output variable are known, but which have not
 been included during the \emph{learning phase},
 to calculate the \emph{prediction accuracy}.
 The problem with this flexibility is, that one cannot really tell what the
@@ -290,7 +290,7 @@ While computer generated random numbers are not truly random, they still
 cause the outcome of the algorithm to change slightly between different
 executions, due to the fact that random number generators are customarily
 initialised with the current time at the start of the program.
-These changes might unnerve a novice, but don't change the outcome of the
+These changes might unnerve a novice, but do not change the outcome of the
 algorithm systematically, as long as the algorithm is used correctly.
 Still, for publication purposes it can make sense to set and publish the
 random number generator's \emph{seed}, i.e. the value the generator is being
@@ -298,7 +298,7 @@ initialised with.
 However, doing so during the experiment
 is a serious mistake.
 Indeed, it is good practice to run the analysis multiple times to ensure
-that these random variations don't change the outcome unexpectedly.
+that these random variations do not change the outcome unexpectedly.
 
 \newpage
 \section{Random Forests}
@@ -314,9 +314,9 @@ by Ho, Amit, Geman, and Dietterich \cite{wpRF}.
 Although the name random forests is usually taken to refer to the random
 forests as defined by \citeA{breiman2001random}, the large number of
 variants that have been derived from the original forests, e.g.
-Forest-rk \cite{bernard2008forest}, RFW \cite{maudes2012random},
-DRF \cite{bernard2012dynamic}, Fuzzy random forests \cite{bonissone2008fuzzy},
-Rotation forest \cite{rodriguez2006rotation}, random forests that are
+\emph{Forest-rk} \cite{bernard2008forest}, \emph{RFW} \cite{maudes2012random},
+\emph{DRF} \cite{bernard2012dynamic}, \emph{Fuzzy random forests} \cite{bonissone2008fuzzy},
+\emph{Rotation forests} \cite{rodriguez2006rotation}, random forests that are
 more random, e.g. \citeA{geurts2006extremely}, \citeA{liu2005maximising},
 \citeA{cutler2001pert}, and various other improvements by
 \citeA{banfield2007comparison, robnik2004improving, strobl2009introduction, zhang2012bias},
@@ -344,7 +344,7 @@ The decision trees are grown maximally without pruning,
 and new trees are generated until the ensemble of decision trees reaches its
 target size, usually called \texttt{ntree}.
 Random forests feature error estimates using out-of-bag data.
-Out-of-bag data are the records in the dataset that were not included during
+Out-of-bag data are the rows in the dataset that were not included during
 the bootstrap aggregation, and make up approximately one third of the dataset.
 Random forests also feature variable importance measures,
 which are calculated by reclassifying the out-of-bag data,
@@ -389,7 +389,7 @@ their ability to handle “small n large p” datasets \cite{strobl2009introduct
 their practical built-in error estimate, and their variable importance measures.
 The last of which, random forests' variable importance measures,
 might be their most useful feature.
-Many domains don't require accurate predictions as much as a model that can
+Many domains do not require accurate predictions as much as a model that can
 be understood by humans.
 While ensemble methods are unsuitably complex,
 random forests' variable importance measures can be used to select variables
@@ -406,20 +406,18 @@ random subspaces \cite{ho1998random} and bagging \cite{breiman1996bagging}.
 Although detailed knowledge of these methods is not a requirement to
 understand random forests, it is important to understand what
 ensemble learning is.
-Again, this paper will first give an abstract definition and then look at
-examples in detail.
 
 Ensemble learning is a supervised learning algorithm: its task is to take
-an example of input and output data, and find a hypothesis that connects
+input and output data, and find a hypothesis that connects
 the two.
 This hypothesis can then be used to predict the output data that
 corresponds to new input data.
 In theory this problem can be solved by a construct called
 Bayes optimal classifier, which considers every possible hypothesis,
-but which unfortunately can't be implemented except for trivial problems.
+but which unfortunately cannot be implemented except for trivial problems.
 The principle behind this is, that the combination of hypotheses becomes
 a stronger hypothesis, because it can represent more functions
-than every component hypothesis could.
+than every component hypothesis alone could.
 In short, ensemble methods rely on the principle that the ensemble is more
 than the sum of its parts.
 The usual wording of this is, that ensemble learning turns a set of
@@ -455,25 +453,25 @@ This is a common feature of bagging and random forests \cite{breiman2001random}.
 \subsubsection{Boosting}
 
 Boosting is an ensemble method, where every weak classifiers gets to train
-on the original sample, but the sample is improved with importance weights.
+on the original sample, but the sample is extended with importance weights.
 These weights are different for every instance of the weak classifier.
-They are lower for records in the dataset that are correctly predicted by
+They are lower for rows in the dataset that are correctly predicted by
 the classifiers already in the ensemble,
-and higher for records that are classified wrongly.
+and higher for rows that are classified wrongly.
 In short, boosting focuses on eliminating one classification error after
-another, until all data is being classified correctly,
+another, until all data is being classified correctly
 or a targeted ensemble size is reached.
 This behavior makes boosting algorithms very fast learners,
 but susceptible to errors in the dataset \cite{long2010random}.
-Boosting isn't used in random forests as introduced by \citeA{breiman2001random},
-but there are variants who do, e.g.
+Boosting is not used in random forests as introduced by \citeA{breiman2001random},
+but there are variants that do use boosting, e.g.
 dynamic random forests \cite{bernard2012dynamic}.
 
 Adaboost \cite{freund1995decision} is probably the most popular
 boosting algorithm, and the algorithm random forests are most commonly
 compared to in terms of performance, e.g. \citeA{breiman2001random},
 \citeA{banfield2007comparison} and \citeA{rodriguez2006rotation}.
-The latter compared eight ensemble of decision tree classifiers in a
+The second study compared eight ensemble of decision tree classifiers in a
 large study on 57 publicly available datasets and concluded
 “[...] that boosting, random forests and randomised trees are
 statistically significantly better than bagging.”
@@ -483,7 +481,7 @@ statistically significantly better than bagging.”
 The underlying algorithm of random forests is the decision tree classifier,
 which can be either a regression tree, or a classification tree.
 The difference between the two types of trees is the type of output produced.
-Classifications trees work with discreet output values,
+Classifications trees work with discreet output values
 while regression trees output a continuous numeric value.
 For classification the most commonly chosen output value among an ensemble
 of decision trees is assumed to be the right prediction.
@@ -524,13 +522,14 @@ called \texttt{class}.
 \end{center}
 \end{figure}
 
-The decision trees used by random forests are constructed by randomly
+The decision trees used in random forests are constructed by randomly
 selecting a certain number of input variables as configured by the parameter
 \texttt{mtry} for each node.
 The algorithm then selects the best split on one of these input
 variables as the node's criterion, using what is called an optimality criterion.
 This process is repeated for every child node until a node is reached
-which only matches records in the dataset satisfying a stop criterion.
+which satisfies a stop criterion, e.g.
+only matches rows in the dataset with equal output values.
 This node becomes a leaf node.
 This is described as growing a tree maximally.
 It ensures that each decision tree has a high strength,
@@ -539,7 +538,7 @@ it matches. \cite{breiman2001random}
 
 As a component classifier to an ensemble learning algorithm,
 every decision tree should be different from the other decision trees in
-the ensemble, i.e. the decision trees should be diverse,
+the ensemble, i.e. the decision trees should be diverse enough
 to cover a wide range of possible interactions between the input data,
 i.e. hypotheses.
 This is commonly described as the trees being uncorrelated.
@@ -548,14 +547,14 @@ of random forests depends on. \cite{breiman2001random}
 
 The procedure by which decision trees are grown is modified in some
 variants of random forests.
-The PERT (perfect random tree) algorithm \cite{cutler2001pert} for example doesn't perform a
+The PERT (perfect random tree) algorithm \cite{cutler2001pert} for example does not perform a
 search for the best split on a random selection of input variables,
 but selects variable and threshold at random.
 The RFW (random feature weights) algorithm \cite{maudes2012random} searches all variables but attaches random
 weights to them, and the DRF (dynamic random forests) algorithm \cite{bernard2012dynamic} influences the
 decision tree creation by a procedure inspired by boosting.
 Other variants, e.g. \citeA{van2012accelerating}, change this procedure to
-grow smaller or more balanced trees, to meet performance or
+grow smaller or more balanced trees to meet performance or
 hardware requirements.
 
 \subsection{Random Forests}
@@ -565,7 +564,7 @@ This process depends on two parameters: the ensemble size, commonly called
 \texttt{ntree}, and the randomisation parameter \texttt{mtry}.
 Actually, random forests depend on another parameter,
 the state of a random number generator, but being random,
-it doesn't and usually shouldn't be specified.
+it does not and usually should not be specified.
 
 The following is an exemplary implementation of the random forest algorithm
 roughly following the original version by \citeA{breiman2001random}.
@@ -781,7 +780,7 @@ and because it would ensure better results due to the usually larger
 ensemble sizes.
 In defense of older studies, like those by \citeA{breiman2001random} and
 \citeA{dietterich2000ensemble}, one has to mention that
-computers back then weren't as powerful.
+computers back then were not as powerful.
 \citeA{breiman2001random} mentions run times for random forests of 4 minutes
 and 3 hours for Adaboost when building ensembles of size 100,
 while I can execute all examples in the paper by \citeA{strobl2009introduction}
@@ -813,7 +812,7 @@ One way to do this, is to systematically try different values for \texttt{mtry}
 and choose the best one using cross-validation \cite{psymeth}.
 According to \citeA{bernard2008forest} a greedy search or choosing one of
 the values discussed above is the usual approach in the literature.
-The same paper shows, that this doesn't have to be the case, by demonstrating
+The same paper shows, that this does not have to be the case, by demonstrating
 a "push-button" method that automatically derives a suitable value for
 \texttt{mtry} and "is at least as statistically significant as the original"
 \cite{bernard2008forest}.
@@ -827,7 +826,7 @@ and the prediction accuracy of all trees can then be averaged to give an
 error estimation of the entire random forest.
 This out-of-bag error estimation is more precise than the naive error
 estimate, which is using all of the dataset \cite{strobl2009introduction}.
-This said, one should not forget that out-of-bag data isn't the
+This said, one should not forget that out-of-bag data is not the
 same thing as a genuine test dataset.
 Depending on the size of the dataset, and the size of the ensemble,
 the downsides
@@ -851,17 +850,17 @@ problematic comparisons across studies \cite{strobl2009introduction}.
 The idea behind this way of calculating variable importances is,
 that one would like to compare a prediction model with and without a
 particular input variable to measure the variable's impact.
-Obviously, one can't ignore all trees that incorporate a variable,
+Obviously, one cannot ignore all trees that incorporate a variable,
 because each tree incorporates multiple input variables, and their impact
 on the prediction would be modified too.
 By randomly permutating the values of an input variable,
-the variable's characteristics don't change, but the connection to the
+the variable's characteristics do not change, but the connection to the
 output variable is broken.
 However, according to \citeA{strobl2007bias} the variable importance might
 still depend on which variable is being measured, because the
 variable importance measure is biased towards variables with many categories
 and variables with many missing values.
-Numeric variables usually have as many different values as there are records
+Numeric variables usually have as many different values as there are rows
 in the dataset, meaning that their importance measure is greatly biased due
 to the large number of “categories”.
 Fortunately, this can be fixed, but “Only when subsamples drawn without
@@ -871,7 +870,7 @@ resulting permutation importance be interpreted reliably”
 \cite{strobl2007bias}, and correlated input variables still are
 problematic.
 The R package \texttt{party} includes two functions, \texttt{ctree} and
-\texttt{cforest}, that use a different method for split selection and aren't
+\texttt{cforest}, that use a different method for split selection and are not
 affected by this bias.
 Therefore, \texttt{cforest} actually uses another variable importance termed
 “conditional variable importance” \cite{strobl2008conditional}.
@@ -879,7 +878,7 @@ Correlated variables can be problematic, because trees that include a
 pair of correlated input variables are less affected by the random
 permutation of one of them.
 Conditional variable importance considers these correlations.
-However, \citeA{gromping2009variable} argues, that this problem can't be avoided
+However, \citeA{gromping2009variable} argues, that this problem cannot be avoided
 as long as \texttt{mtry} is smaller than the number of input variables,
 and that considering all input variables, i.e. bagging,
 “might already go a long way” towards remedying the problem,
@@ -894,7 +893,7 @@ in genetics datasets, or if variables show perfect higher order effects,
 i.e. interaction effects, but no main effects.
 The latter is called the XOR problem.
 It is important to note, that random forests with a different split selection
-algorithm don't have to be affected by this, e.g. PERT \cite{cutler2001pert}.
+algorithm do not have to be affected by this, e.g. PERT \cite{cutler2001pert}.
 
 Last but no least, both \citeA{strobl2009introduction} and
 \citeA{gromping2009variable} see one of the advantages of random forests in
@@ -916,7 +915,7 @@ algorithms that analyse the structure of each decision tree.
 Another interesting point to make is, that random perturbation of an input
 variable could in theory be used as part of many other models, including but
 not limited to generalised linear models, because although
-this isn't very useful in the case of generalised linear models,
+this is not very useful in the case of generalised linear models,
 many other complex models are similarly difficult to tease apart, e.g.
 neural networks.
 
@@ -947,7 +946,7 @@ This is also called \emph{generalisation error}, since the algorithm
 generalises errors in the data by deriving rules for them.
 Random forests grow optimal decision trees, meaning they try to represent
 each bootstrapped sample perfectly.
-Except for the case where different records in the sample have the same
+Except for the case where different rows in the sample have the same
 values in their input variables, but different values in their output variable,
 this leads to decision trees which represent the sample perfectly,
 including all errors.
@@ -975,11 +974,11 @@ Another attempt at constructing random forests from smoother data are
 rotation forests by \cite{rodriguez2006rotation}, which use
 principal component analysis, or PCA, to find derived input variables that
 represent the input dimensions better.
-Although linear combinations of input dimensions aren't the same thing
+Although linear combinations of input dimensions are not the same thing
 as noise, since datasets are of a limited size, and decision trees
 might well fail to tease out the interactions between all pairs of input
 variables, they will look like noisy input data if the decision trees
-don't catch on.
+do not catch on.
 Because better input dimensions lead to better splits, and to more
 uncorrelated random variable selections, rotation forests are often more
 accurate than random forests \cite{rodriguez2006rotation}.
@@ -1058,7 +1057,7 @@ In this case, the PERT base learner is fit to many bootstrap samples
 from the training data and these classifiers are combined by voting.
 \end{quotation}
 
-On the one hand, bagging is not required, because PERT doesn't depend on
+On the one hand, bagging is not required, because PERT does not depend on
 randomness introduced through bootstrapping.
 On the other hand, bagging can be used if one requires out-of-bag
 error estimates or variable importance measures, and as a way to deal
@@ -1073,30 +1072,30 @@ forests construction, as described in \citeA{breiman2001random}, and PERT
 to find the latter to be faster by two orders of magnitude,
 while providing similar accuracy in prediction.
 Of course, there are other advantages too:
-The absence of a variable selection criterion means that PERT doesn't suffer
+The absence of a variable selection criterion means that PERT does not suffer
 from the bias introduced by it, thus, variable importance estimates are less
 affected.
 An instance where the use of a selection criterion is especially problematic
 is the XOR problem mentioned above in the section on variable importance.
-Since PERT forests don't depend on an optimality criterion to select their
+Since PERT forests do not depend on an optimality criterion to select their
 splits, PERT has the advantage of being able to deal with perfect
 interaction effects.
 A disadvantage is that PERT forests are even more difficult to interpret than
 the classical random forests, but since this is rarely tried anyway,
-it probably doesn't matter much in practice.
+it probably does not matter much in practice.
 It is important to mention however, that PERT can only be used for
 classification,
 since its base learner fits the training data perfectly, applying PERT to
 regression would “drastically overfit the data” \cite{cutler2001pert}.
 
-PERT isn't the only random forest variant that emphasises randomness in its
+PERT is not the only random forest variant that emphasises randomness in its
 algorithm for growing trees.
 \citeA{geurts2006extremely} suggested what they call \emph{extremely randomised trees}.
 Despite their name, extremely randomised trees are actually closer to the
 trees of random forests by \citeA{breiman2001random} than PERT, 
 in that they do select the best split from a random subset variables of size \texttt{mtry},
 although the actual split value for each variable is generated randomly.
-Furthermore, they don't fit the data perfectly, but allow the user to
+Furthermore, they do not fit the data perfectly, but allow the user to
 choose a "minimum sample size for splitting a node" \cite{geurts2006extremely}.
 This parameter, called \emph{smoothing strength} by \citeA{geurts2006extremely},
 prevents overfitting in noisy datasets, and allows the user to configure the
@@ -1162,7 +1161,7 @@ Two questions that naturally follow from this are:
 
 Most of the suggested improvements and variants have taken the original
 random forest algorithm and changed some part of it. Since the changes of
-the different variants discussed in this report don't overlap, combining
+the different variants discussed in this report do not overlap, combining
 them should certainly be possible.
 The more interesting question is the second.
 This report has mentioned many problems of random forests, for example the
@@ -1176,7 +1175,7 @@ While this is a good solution for most applications, it does lead to an
 underestimation of the error estimate, which can be problematic in some cases.
 Obviously this can be fixed by setting aside a dedicated test dataset, but
 compiling an even larger dataset is often unpractical, since real world datasets
-aren't cheap to compile.
+are not cheap to compile.
 By including the suggestions of \citeA{banfield2007comparison} regarding
 \texttt{ntree} and \citeA{bernard2008forest} regarding \texttt{mtry}
 a new random forest variant could be completely parameterless.
@@ -1185,7 +1184,7 @@ parameter \texttt{mtry} and some of the bias in the variable importance
 measure.
 Both approaches do not require additional data.
 
-Obviously, there is no single best solution, but this doesn't make unifying
+Obviously, there is no single best solution, but this does not make unifying
 random forest variants a futile task.
 The simpler and safer a method is to use, the wider it will spread, and by
 spreading a good default method, all of scientific research will benefit.
@@ -1221,12 +1220,12 @@ downloadable PDF-file, which thanks to \emph{Google Scholar} often turned
 out to be no problem at all, and my decision on the topic of
 this report.
 It turned out, that while Google Scholar is convenient to find freely
-downloadable PDF-files, its citations aren't up to par.
+downloadable PDF-files, its citations are not up to par.
 
 A lot of the information in the fields of computer science, artificial
 intelligence, machine learning, databases, and especially programming
 I acquired through different means in the last ten years.
-As I can't remember the original sources, I include the pages
+As I cannot remember the original sources, I include the pages
 on Wikipedia and a few books, e.g. \citeA{borzlinreg, barberMLC, haykin, qai},
 which I used to refresh my memories.
 
@@ -1240,7 +1239,7 @@ differences in the understanding of random forests among researchers,
 and even among designers of improved variants.
 A study comparing different decision tree ensemble techniques also confirmed
 this expression by saying that many of the commonly used methods of comparison
-weren't robust enough for use with random forests \cite{banfield2007comparison}.
+were not robust enough for use with random forests \cite{banfield2007comparison}.
 
 Because of this fuzziness, I decided on a different focus, to write
 a very broad - big picture - introduction to random forests.
@@ -1257,7 +1256,7 @@ The way a random forest is grown lends itself to be run on multiple processor
 cores at once, as the
 small exemplary implementation demonstrates, which is an important criterion
 for anyone who wants to analyse large datasets.
-On top of that, they are easy to implement and don't require a sophisticated
+On top of that, they are easy to implement and do not require a sophisticated
 mathematical understanding.
 In fact, a lot of the random forest variants have been developed by combining
 known concepts and later proving the viability using  a comparison of methods
@@ -1266,11 +1265,11 @@ study on real-world and simulated datasets.
 However, it has to be said that random forests can be problematic,
 because they appear to be easy to use, but expose a lot of their
 inner workings to the user.
-The user shouldn't have to worry about parameters, and how they interact
+The user should not have to worry about parameters, and how they interact
 with a dataset to introduce bias in error estimates and
 variable importance measures.
 In studies where only small ensembles are used, one has to wonder if the
-researcher didn't just get lucky with his random number generator's seed value.
+researcher did not just get lucky with his random number generator's seed value.
 In some ways \citeA{banfield2007comparison} can be seen to ask the same question,
 since the claimed significant improvement in prediction accuracy of many methods
 disappear when the comparisons are conducted more rigorously.
@@ -1289,7 +1288,7 @@ and testing of new algorithms.
 If the datasets and protocols for measuring and comparing algorithms were
 developed first and standardised, new algorithms could be measured by the
 push of a button.
-Authors wouldn't have to use half of their publication
+Authors would not have to use half of their publication
 to describe the datasets used in a comparison.
 Furthermore, by combining the knowledge of the particularities of a dataset,
 especially real-world datasets, authors would have access to immediate
@@ -1297,10 +1296,10 @@ indications on why their method might be particularly good or bad when applied
 to a certain type of data.
 Such a standardised test repository would also lighten the load of all the
 researchers just using random forests as a tool.
-They wouldn't have to explain why they choose a particular variant based on
+They would not have to explain why they choose a particular variant based on
 their incomplete knowledge of machine learning, but could just refer to
 a standard.
-This would certainly be beneficial for research in general, but one doesn't have
+This would certainly be beneficial for research in general, but one does not have
 to stop there.
 By standardising research methods, their development and comparison
 in general, it also becomes easier to replicate a study's results using
@@ -1311,7 +1310,7 @@ One of the more well-known repositories of datasets is the \emph{UCI Machine Lea
 datasets to such a repository.
 
 The “Methods” section of a study and the research methods mentioned in it,
-shouldn't be separate, because relying on a particular version of a particular
+should not be separate, because relying on a particular version of a particular
 tool to decide over the significance of findings is not very scientific.
 Unfortunately, this happens:
 Researchers are very careful when selecting theories from their own field,
@@ -1335,12 +1334,12 @@ Obviously, this is quite a different topic than random forests, but the
 field of research on random forests nicely illustrates how some of the
 problems play out.
 Just because \citeA{breiman2001random} uses certain parameters for the
-comparison, this doesn't mean that the parameters are a good choice when
+comparison, this does not mean that the parameters are a good choice when
 demonstrating the powers of a new random forest variant.
 Since random forests all roughly take the same format of input data and
 parameters, it should be trivial to cross-validate all findings with all
 datasets and all variants, but as it stands this is still difficult to do in practice.
-One doesn't know if another study like \citeA{banfield2007comparison}
+One does not know if another study like \citeA{banfield2007comparison}
 overturns random forests in the near future by finding another method to be
 superior.
 For most researchers in other fields it's thus a safer bet to stick to
