@@ -125,7 +125,7 @@ artificial intelligence branch of computer science.
 
 \emph{Predictive statistics} is the sub-field of statistics that is
 concerned with making predictions based on past observations.
-It's probably most widely known method is \emph{linear regression}
+Its probably most widely known method is \emph{linear regression}
 that associates two variables \(y\) and \(x\) in such a way
 that they describe a straight line: \(y = \alpha \cdot x + \beta \), but
 linear regression is not limited to two variables \cite{borzlinreg}.
@@ -566,7 +566,7 @@ Actually, random forests depend on another parameter,
 the state of a random number generator, but being random,
 it does not and usually should not be specified.
 
-The following is an exemplary implementation of the random forest algorithm
+The following is an example implementation of the random forest algorithm
 roughly following the original version by \citeA{breiman2001random}.
 I wrote this implementation to illustrate the simplicity of random forests,
 as well as its components.
@@ -846,7 +846,7 @@ The more important a variable is, the more drastically the prediction error
 increases when the variable is being randomised.
 The variable importance measure is sometimes scaled, i.e. z-standardised,
 but because it strongly depends on the parameter of random forests,
-it's not possible to compare these variable importances across studies,
+it is not possible to compare these variable importances across studies,
 hence there is little use in doing so, and the practice only encourages
 problematic comparisons across studies \cite{strobl2009introduction}.
 
@@ -1256,21 +1256,22 @@ There is no “the random forest” method, but rather a wide spectrum of
 methods that all use similar principles.
 Random forests are accurate and very powerful, because they can be used
 on almost any dataset.
-The way a random forest is grown lends itself to be run on multiple processor 
+The way a random forest is grown lends itself to be implemented to run on multiple processor 
 cores at once, as the
-small exemplary implementation demonstrates, which is an important criterion
+small example implementation demonstrates.
+This is an important criterion
 for anyone who wants to analyse large datasets.
 On top of that, they are easy to implement and do not require a sophisticated
 mathematical understanding.
 In fact, a lot of the random forest variants have been developed by combining
-known concepts and later proving the viability using  a comparison of methods
-study on real-world and simulated datasets.
+known concepts and later demonstrating their viability using a comparative
+study with simulated and real-world datasets.
 
 However, it has to be said that random forests can be problematic,
 because they appear to be easy to use, but expose a lot of their
 inner workings to the user.
 The user should not have to worry about parameters, and how they interact
-with a dataset to introduce bias in error estimates and
+with a dataset introducing bias in error estimates and
 variable importance measures.
 In studies where only small ensembles are used, one has to wonder if the
 researcher did not just get lucky with his random number generator's seed value.
@@ -1279,13 +1280,13 @@ since the claimed significant improvement in prediction accuracy of many methods
 disappear when the comparisons are conducted more rigorously.
 
 The very ease with which random forests can be implemented and changed,
-should lead to a more thorough study of their qualities,
-and the qualities of random forest variants, but this seems not to be the case.
-Most comparisons pitch a specific variant against the random forests
+should lead to a more thorough research of their qualities,
+but this seems not to be the case.
+Most studies just compare a specific variant against the random forests
 of \citeA{breiman2001random}, bagging \cite{breiman1996bagging}
 and Adaboost \cite{freund1995decision}.
 One of the factors for this I believe to be the lack of a standardised
-and automatic testing infrastructure, which would simplify the development
+and automated testing infrastructure, which would simplify the development
 and testing of new algorithms.
 
 \subsection{Methods research}
@@ -1298,7 +1299,7 @@ Furthermore, by combining the knowledge of the particularities of a dataset,
 especially real-world datasets, authors would have access to immediate
 indications on why their method might be particularly good or bad when applied
 to a certain type of data.
-Such a standardised test repository would also lighten the load of all the
+Such a standardised test repository would also lighten the load of all
 researchers just using random forests as a tool.
 They would not have to explain why they choose a particular variant based on
 their incomplete knowledge of machine learning, but could just refer to
@@ -1319,7 +1320,7 @@ tool to decide over the significance of findings is not very scientific.
 Unfortunately, this happens:
 Researchers are very careful when selecting theories from their own field,
 but sometimes flagrantly refer to "default settings" with no further detail,
-when they use an implementation of a method,
+when they use a particular implementation of a method,
 just because software or random forests are not their field.
 Default values in implementations do change, and these changes sometimes
 happen for a reason.
@@ -1340,22 +1341,22 @@ problems play out.
 Just because \citeA{breiman2001random} uses certain parameters for the
 comparison, this does not mean that the parameters are a good choice when
 demonstrating the powers of a new random forest variant.
-Since random forests all roughly take the same format of input data and
-parameters, it should be trivial to cross-validate all findings with all
+Since random forests all roughly take the same format of input data,
+it should be trivial to cross-validate all findings with all
 datasets and all variants, but as it stands this is still difficult to do in practice.
 One does not know if another study like \citeA{banfield2007comparison}
 overturns random forests in the near future by finding another method to be
 superior.
-For most researchers in other fields it's thus a safer bet to stick to
+For most researchers in other fields it is a safer bet to stick to
 traditional methods.
-Unfortunately, this often means to ignore problems with many input variables,
+Unfortunately, this often means to ignore problems with many input variables
 or not daring to invent models with complex interactions,
-which are difficult to represent using traditional methods.
+which are difficult to analyse using traditional methods.
 
 \newpage
 \section{Appendix}
 The following Clojure source code is the complete version of the
-exemplary implementation of random forests discussed earlier in this paper.
+example implementation of a random forest discussed earlier in this paper.
 To run the examples, install the \texttt{Leiningen} build system
 \cite{leiningen}, save the following source code to the indicated files,
 and start up the interactive \emph{REPL} (read eval print loop).
@@ -1370,7 +1371,7 @@ $ lein repl
 \end{figure}
 
 Once this is done, provided no unexpected errors have occurred,
-the random forest implementation can be used as follows.
+the random forest implementation can be used shown below.
 Please refer to the source code below for information on the
 format of the dataset.
 
@@ -1396,7 +1397,7 @@ Bye for now!
 ; file: rf/project.clj
 
 (defproject rf "1.0.0-SNAPSHOT"
-  :description "An examplary random forest implementation."
+  :description "An example random forest implementation."
   :dependencies [[org.clojure/clojure "1.5.1"]])
 \end{minted}
 
