@@ -570,7 +570,7 @@ The following is an exemplary implementation of the random forest algorithm
 roughly following the original version by \citeA{breiman2001random}.
 I wrote this implementation to illustrate the simplicity of random forests,
 as well as its components.
-The implementation uses entropy instead of the Gini index as
+The implementation uses entropy instead of the Gini index as the
 optimality criterion, a naive stop criterion only capable of handling
 perfectly partition-able data, and lacks variable importance measures.
 In reference to the higher level programming languages mentioned
@@ -615,9 +615,9 @@ and a split value as input, and returns lists of the matching and the not matchi
 For each node the algorithm then progresses to check whether the node should be split,
 and if so, selects the best split out of a random selection of split variables.
 The \texttt{splits} function takes a dataset and \texttt{mtry} as parameters and
-returns all splits as tuples of variable name and split value.
+returns all splits as tuples with a variable name and a split value.
 The \texttt{best-split} function calculates the entropy for every split and applies
-the best split to two datasets simultaneously (sample data and out-of-bag data).
+the best split to two datasets at that node (sample data and out-of-bag data) simultaneously.
 This is done because both sample and out-of-bag data are stored in each node to
 simplify the decision tree construction and the error estimate calculation.
 Since Clojure features immutable data structures this increases memory usage only negligibly.
@@ -668,10 +668,10 @@ hands down the appropriate datasets to the child nodes.
 
 The following \texttt{rf-train} function is the top-level function responsible for
 building the ensemble of decision trees.
-It creates \texttt{ntree} decision tree root nodes, each with its own sample
+It creates \texttt{ntree} decision tree root nodes, each with its own bootstrapped sample
 and out-of-bag datasets, walks through each tree using a zipper,
 and invokes the \texttt{extend-node} for each node in every tree.
-The different trees in the ensemble are constructed in parallel using \texttt{pmap},
+The different trees in the ensemble are constructed in parallel using the Clojure built-in \texttt{pmap},
 distributing the work among all available processor cores.
 
 \begin{figure}[H]
@@ -700,6 +700,9 @@ distributing the work among all available processor cores.
 The \texttt{rf-predict} is another top-level function.
 It takes a random forest and a row of input values, and returns the outcome as
 predicted by the random forest.
+Note that part of this function also runs in parallel, distributing the work among all
+available processor cores.
+In fact, the ability to be parallelised is one of the advantages of random forests.
 
 \begin{figure}[H]
 \caption{The \texttt{rf-predict} function.}
@@ -746,7 +749,7 @@ returned by \texttt{rf-error} will only ever be zero.
 \end{figure}
 
 For information on how to use this implementation of random forests,
-see example and instructions in the appendix.
+see the example and the instructions in the appendix.
 
 \subsubsection{Parameters}
 The two parameters random forests depend on, the size of the forest
